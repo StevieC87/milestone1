@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
 
 const app = express();
+const fileUpload = require("express-fileupload");
+
 
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin');
@@ -20,7 +22,7 @@ app.set('views', 'views');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(fileUpload());
 
 app.use('/', shopRoutes);
 app.use('/admin', adminRoutes);

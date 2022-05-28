@@ -7,6 +7,15 @@ body{
     margin: 20px auto 50px;
 }
 
+input {
+    max-width: 300px;
+    display: block;
+    margin: 5px 5px 5px 0px;
+}
+textarea {
+    max-width: 300px;
+}
+
 input, textarea{
     font-weight: 500;
 }
@@ -20,6 +29,10 @@ textarea{
     height: 270px;
     resize: none;
     padding: 10px 20px;
+}
+
+#tags {
+  min-width: 600px;  
 }
 
 .product-info{
@@ -36,11 +49,12 @@ textarea{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
+    background: #ffff80;
     background-size: cover;
     border-radius: 10px;
     grid-row: span 2;
     text-shadow: 0 0 10px #fff;
+    border: 1px solid #ffff80;
 }
 
 .text{

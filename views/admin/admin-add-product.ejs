@@ -1,12 +1,13 @@
 <%- include('../includes/head.ejs') %>
     <link rel="stylesheet" href="/css/add-product.css">
+
     </head>
 
     <body>
         <%- include('../includes/nav.ejs') %>
             <h1>ADMIN PAGE - ADD PRODUCTS</h1>
             <div class="form">
-                <form action="/admin/add-product" method="POST">
+                <form action="/admin/add-productA" method="POST" >
 
                     <input type="text" name="name" id="product-name" placeholder="product name">
                     <input type="text" name="short_des" id="short_des" placeholder="short line about the product">
@@ -29,8 +30,25 @@
                                 <label for="third-file-upload-btn" class="upload-image"></label>
                                 <input name="img4" type="file" class="fileupload" id="fourth-file-upload-btn" hidden>
                                 <label for="fourth-file-upload-btn" class="upload-image"></label>
+
+                                <input type="text" name="" id="hiddeninput">
                             </div>
                         </div>
+                        <script>
+                         /*    function imagething() {
+                            let test = [];
+                            let inputs = document.querySelectorAll('.fileupload');
+                           // console.log(inputs);
+                            inputs.forEach(function(input, index) {
+                                console.log(input.value + index );
+                             if(input.value) {  test.push(input.value);} 
+                            });
+                            console.log(test);
+                        } */
+                         
+                           
+                        </script>
+                      <!--   <div  onclick="imagething()">CLICK FOR UPLOAD TEST DEV </div> -->
 
 
                         <div class="select-sizes">
@@ -55,16 +73,24 @@
 
                     <input name="stock" type="number" id="stock" min="20" placeholder="item in stocks (minimum 20)">
 
-                    <textarea name="categories" id=" tags" placeholder="Enter categories here"></textarea>
+                    <textarea name="categories" id="tags" placeholder="Enter categories here"></textarea>
 
                     <input name="tac" type="checkbox" class="checkbox" id="tac" checked>
                     <label for="tac">Agree to terms & conditions</label>
 
+                    <input type="submit" id="submit">Submit
+<!-- 
                     <div class="buttons">
                         <button class="btn" id="add-btn">add product</button>
-                    </div>
+                    </div> -->
             </div>
             </form>
+            <script>
+                document.querySelector('#submit').addEventListener("click", function(event) {
+                    
+                    evt.preventDefault();
+                });
+            </script>
     </body>
 
     </html>

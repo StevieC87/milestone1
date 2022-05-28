@@ -1,7 +1,7 @@
 @import 'nav.css';
 @import 'footer.css';
 .hero-section{
-    width: 100%;
+    width: 100vw;
     height: calc(100vh - 120px);
     background-image: url('../img/dummy-image-portrait.jpg');
     background-size: cover;
@@ -11,7 +11,7 @@
 }
 
 .hero-section .logo{
-    height: 150px;
+    height: 100%;
     display: block;
     margin: auto;
 }

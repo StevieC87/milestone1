@@ -1,13 +1,26 @@
 const Product = require("../models/product");
 
+const fileUpload = require("express-fileupload");
+
 exports.addProductPage = (req, res, next) => {
     //function to get all products
     res.render('admin/admin-add-product', {
         pageTitle: 'Add New Product',
         path: '/',
-
     });
 
+}
+
+exports.testRoute = (req, res, next) => {
+    console.log( req.body, 'body');
+    console.log(req.files, 'files');
+    console.log('heellooo');
+    res.render('afteradd', {
+        pageTitle: 'Add New Product',
+        path: '/',
+        data: req.body,
+        files: req.files
+    });
 }
 
 exports.addProductSave = (req, res, next) => {
@@ -24,6 +37,8 @@ exports.addProductSave = (req, res, next) => {
     const size = req.body.size;
     const stock = req.body.stock;
     const categories = req.body.categories;
+    const files = req.files;
+    console.log(files, 'files');
 
     const product = new Product(name, short_des, description, price, discount, selling_price, imageUrl, size, stock, categories)
 
