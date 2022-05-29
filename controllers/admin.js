@@ -1,6 +1,6 @@
 const Product = require("../models/product");
 
-const fileUpload = require("express-fileupload");
+// const fileUpload = require("express-fileupload");
 
 exports.addProductPage = (req, res, next) => {
     //function to get all products
@@ -51,6 +51,38 @@ exports.addProductSave = (req, res, next) => {
         path: '/',
     });
 }
+
+exports.getEditProduct = (req, res, next) => {
+  
+    //const editcreate = req.query.editcreate; //from inpujt
+    const prodId = req.params.productId; //from url
+    const intprod = parseInt(prodId);
+    
+    if(prodId) {
+        console.log(prodId,'prodId');
+        //then we are trying to edit the product
+        Product.findById(intprod, product => {
+             if(!product) {
+                return res.redirect('/');
+              //  console.log('fail');
+              } 
+             // else  console.log('sucesss');
+            //  console.log(product,'product');
+            res.render('admin/admin-edit-product', {
+                pageTitle: 'Edit title',
+                path: '/admin/edit-product', 
+                editing: true, 
+                product: product
+            })
+          });
+         
+    }
+ 
+    }
+    exports.postEditProduct = (req, res, next) => {
+    
+
+    }
 /* 
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;
