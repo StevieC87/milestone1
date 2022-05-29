@@ -1,7 +1,7 @@
 @import 'nav.css';
 @import 'footer.css';
 .hero-section{
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 120px);
     background-image: url('../img/dummy-image-portrait.jpg');
     background-size: cover;
@@ -19,7 +19,7 @@
 .hero-section .sub-heading{
     margin-top: 10px;
     text-align: center;
-    color: #fff;
+    color: rgb(247, 160, 47);
     text-transform: capitalize;
     font-size: 35px;
     font-weight: 300;

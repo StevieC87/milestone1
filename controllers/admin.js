@@ -22,8 +22,15 @@ exports.testRoute = (req, res, next) => {
         files: req.files
     });
 }
-
+/* exports.test = (req, res, next) => {
+    console.log('alkasdjflksajdalk');
+    res.render('success', {
+        pageTitle: 'success',
+        path: '/success',
+    });
+} */
 exports.addProductSave = (req, res, next) => {
+    console.log('hellooooooooo');
     const name = req.body.name;
     const short_des = req.body.short_des;
     const description = req.body.description;
@@ -46,9 +53,9 @@ exports.addProductSave = (req, res, next) => {
 
     // console.log(req.body);
 
-    res.render('admin/admin-add-product', {
-        pageTitle: 'Add New Product',
-        path: '/',
+    res.render('success', {
+        pageTitle: 'Success',
+        path: 'success',
     });
 }
 

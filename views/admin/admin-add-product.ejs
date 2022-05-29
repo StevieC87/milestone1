@@ -5,24 +5,24 @@
 
     <body>
         <%- include('../includes/nav.ejs') %>
-            <h1>ADMIN PAGE - ADD PRODUCTS</h1>
-            <div class="form">
-                <form action="/admin/add-productA" method="POST" >
-
-                    <input type="text" name="name" id="product-name" placeholder="product name">
-                    <input type="text" name="short_des" id="short_des" placeholder="short line about the product">
-                    <textarea name="description" id="des" placeholder="detail description"></textarea>
+            
+            <div class="formdiv" >
+                <form action="/admin/productsave" method="POST" class="form">
+                    <h1 class="centeringrid" style="margin-top: 20px">Add a new product</h1>
+                    <input class="form-control centeringrid" type="text" name="name" id="product-name" placeholder="product name">
+                    <input class="form-control centeringrid" type="text" name="short_des" id="short_des" placeholder="short line about the product">
+                    <textarea class="form-control centeringrid"  name="description" id="des" placeholder="detail description"></textarea>
 
                     <!-- product image -->
                     <div class="product-info">
-                        <div class="product-image">
+                      <!--   <div class="product-image">
                             <p class="text">product image</p>
-                        </div>
+                        </div> -->
                         <div class="upload-image-sec">
                             <!-- upload inputs -->
                             <p class="text"><img src="/img/camera.png" alt="">upload image</p>
                             <div class="upload-catalouge">
-                                <input name="img1" type="file" class="fileupload" id="first-file-upload-btn" hidden>
+                                <input name="img1" type="file" class="fileupload " id="first-file-upload-btn" hidden>
                                 <label for="first-file-upload-btn" class="upload-image"></label>
                                 <input name="img2" type="file" class="fileupload" id="second-file-upload-btn" hidden>
                                 <label for="second-file-upload-btn" class="upload-image"></label>
@@ -31,24 +31,13 @@
                                 <input name="img4" type="file" class="fileupload" id="fourth-file-upload-btn" hidden>
                                 <label for="fourth-file-upload-btn" class="upload-image"></label>
 
-                                <input type="text" name="" id="hiddeninput">
+                           <!--      <input type="text" name="" id="hiddeninput"> -->
                             </div>
                         </div>
                         <script>
-                         /*    function imagething() {
-                            let test = [];
-                            let inputs = document.querySelectorAll('.fileupload');
-                           // console.log(inputs);
-                            inputs.forEach(function(input, index) {
-                                console.log(input.value + index );
-                             if(input.value) {  test.push(input.value);} 
-                            });
-                            console.log(test);
-                        } */
-                         
-                           
+                        
                         </script>
-                      <!--   <div  onclick="imagething()">CLICK FOR UPLOAD TEST DEV </div> -->
+                  
 
 
                         <div class="select-sizes">
@@ -66,19 +55,29 @@
                     </div>
 
                     <div class="product-price">
-                        <input name="actualprice" type="number" id="actual-price" placeholder="actual price">
-                        <input name="discount" type="number" id="discount" placeholder="discount percentage">
-                        <input name="sellingprice" type="number" id="sell-price" placeholder="selling price">
+                        <input class="form-control" name="actualprice" type="number" id="actual-price" placeholder="actual price">
+                        <input class="form-control" name="discount" type="number" id="discount" placeholder="discount percentage">
+                        <input class="form-control" name="sellingprice" type="number" id="sell-price" placeholder="selling price">
                     </div>
 
-                    <input name="stock" type="number" id="stock" min="20" placeholder="item in stocks (minimum 20)">
+                    <input class="form-control" name="stock" type="number" id="stock" min="20" placeholder="item in stocks (minimum 20)">
 
-                    <textarea name="categories" id="tags" placeholder="Enter categories here"></textarea>
+                    <textarea class="form-control"  name="categories" id="tags" placeholder="Enter categories here"></textarea>
 
-                    <input name="tac" type="checkbox" class="checkbox" id="tac" checked>
-                    <label for="tac">Agree to terms & conditions</label>
+                   
+                  
 
-                    <input type="submit" id="submit">Submit
+                    <div class="form-check">
+                       <!--  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> -->
+                        <input  name="tac" type="checkbox" class=" form-check-input" id="tac" checked> <!-- checkbox -->
+                        <label class="form-check-label" for="tac">
+                            Agree to terms & conditions
+                        </label>
+                      </div>
+
+
+
+                    <input class="form-control" type="submit" id="submit">
 <!-- 
                     <div class="buttons">
                         <button class="btn" id="add-btn">add product</button>
