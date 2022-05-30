@@ -4,29 +4,36 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
-// for error pages
+// import module for 404 errors
 const errorController = require('./controllers/error');
 
 const app = express();
-const fileUpload = require("express-fileupload");
 
+//IMPORT ROUTE MODULES
 const shopRoutes = require('./routes/shop');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 
+//SET TEMPLATE ENGINE
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+//
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
 
-/* SET ROUTERS FOR PATHS (e.g. router for all sites under mysite.com/admin or /shop  */
+
+// SET ROUTE FOR EACH PATHS (/admin or /shop /user etc 
 app.use('/', shopRoutes);
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
 
-/* set controller method here  */
+/* 404 error handling */
 app.use(errorController.get404);
 
 app.listen(3000);
+
+/* 
+const fileUpload = require("express-fileupload");
+app.use(fileUpload());
+ */
