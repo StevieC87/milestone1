@@ -1,7 +1,7 @@
 const Product = require("../models/product");
 const Wish = require("../models/wish");
 
-// products = ['hello', 'world'];
+
 exports.listProducts = (req, res, next) => {
     //function to get all products
     Product.fetchAll(products => {
