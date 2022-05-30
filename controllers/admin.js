@@ -30,28 +30,22 @@ exports.testRoute = (req, res, next) => {
     });
 } */
 exports.addProductSave = (req, res, next) => {
-    console.log('hellooooooooo');
     const name = req.body.name;
     const short_des = req.body.short_des;
     const description = req.body.description;
-    const price = req.body.price;
-    const discount = req.body.discount;
-    const selling_price = req.body.sellingprice;
+    const price = req.body.actualprice * 1;
+    const discount = req.body.discount * 1;
+    const selling_price = req.body.sellingprice  * 1;
     const imageUrl = req.body.img1;
-    // const imageUrl2 = req.body.img2;
-    // const imageUrl3 = req.body.img3;
-    // const imageUrl4 = req.body.img4;
     const size = req.body.size;
-    const stock = req.body.stock;
+    const stock = req.body.stock * 1;
     const categories = req.body.categories;
     const files = req.files;
-    console.log(files, 'files');
+    const id = Math.random();
 
-    const product = new Product(name, short_des, description, price, discount, selling_price, imageUrl, size, stock, categories)
+    const product = new Product(id, name, short_des, description, price, discount, selling_price, imageUrl, size, stock, categories)
 
     product.save();
-
-    // console.log(req.body);
 
     res.render('success', {
         pageTitle: 'Success',
