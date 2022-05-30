@@ -1,54 +1,54 @@
 <%- include('./includes/head.ejs') %>
-    </head>
+</head>
 
-    <body>
+<body>
+<%- include('./includes/nav.ejs') %>
 
-        <%- include('./includes/nav.ejs') %>
+<!-- HERO SECTION WITH IMAGE BACKGROUND -->
+<header class="hero-section">
+    <div class="content">
+        <!--  <img src="img/cover.jpeg" class="logo" alt=""> -->
+        <p class="sub-heading">Flash Summer Sale!</p>
+    </div>
+</header>
 
-            <header class="hero-section">
-                <div class="content">
-                   <!--  <img src="img/cover.jpeg" class="logo" alt=""> -->
-                    <p class="sub-heading">Flash Summer Sale!</p>
-                </div>
-            </header>
-            <% if (prods.length> 0) { %>
-                <div>
-
-
-                    <% } %>
-                </div>
-
-                <section class="product">
-                    <h2 class="product-category">best selling</h2>
-                </section>
-                <div class="product-container">
+     
 
 
-                    <%for (let product of prods) { %>
-                        <div class="product-card">
-                            <div class="product-image">
-                                <span class="discount-tag">50% off</span>
-                                <img src="<%= product.image %>" class="product-thumb" alt="">
-                                <!-- INCLUDE 'PARTIAL' BUTTON FOR 'ADD TO WISHLIST, and pass productid' -->
-                                <%- include('./includes/add-to-wishlist.ejs', {product: product}) %>
-                            </div>
-                            <div class="product-info">
-                                <h2 class="product-name">
-                                    <%= product.name %>
-                                </h2>
-                                <p class="product-short-des">
-                                    <%= product.description %>
-                                </p>
-                                <span class="price">
-                                    <%= Math.round(product.price * 0.5) %>
-                                </span><span class="actual-price">
-                                    <%= product.price %>
-                                </span>
-                            </div>
-                        </div>
-                        <% } %>
-                           
-                <%- include('./includes/footer.ejs') %>
+                    
+<div>           
+<% if (prods.length> 0) { %>
+<section class="product">
+    <h2 class="product-category">best selling</h2>
+</section>
+
+<div class="product-container">
+    <%for (let product of prods) { %>
+        <div class="product-card">
+            <div class="product-image">
+                <span class="discount-tag">50% off</span>
+                <img src="<%= product.image %>" class="product-thumb" alt="">
+                <!-- INCLUDE 'PARTIAL' BUTTON FOR 'ADD TO WISHLIST, and pass productid' -->
+                <%- include('./includes/add-to-wishlist.ejs', {product: product}) %>
+            </div>
+            <div class="product-info">
+                <h2 class="product-name">
+                    <%= product.name %>
+                </h2>
+                <p class="product-short-des">
+                    <%= product.description %>
+                </p>
+                <span class="price">
+                    <%= Math.round(product.price * 0.5) %>
+                </span><span class="actual-price">
+                    <%= product.price %>
+                </span>
+            </div>
+        </div>
+        <% } %>
+</div>
+<% } %>
+<%- include('./includes/footer.ejs') %>
 
     </body>
 

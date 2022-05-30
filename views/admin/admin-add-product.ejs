@@ -8,19 +8,22 @@
             
             <div class="formdiv" >
                 <form action="/admin/productsave" method="POST" class="form">
-                    <h1 class="centeringrid" style="margin-top: 20px">Add a new product</h1>
-                    <input class="form-control centeringrid" type="text" name="name" id="product-name" placeholder="product name">
-                    <input class="form-control centeringrid" type="text" name="short_des" id="short_des" placeholder="short line about the product">
-                    <textarea class="form-control centeringrid"  name="description" id="des" placeholder="detail description"></textarea>
+                    <h1 class="centeringrid pagetitle" style="margin-top: 20px">Add a new product</h1>
+                    <label for="name" class="inputlabel">Product Name</label>
+                    <input class="form-control " type="text" name="name" id="product-name" placeholder="">
+                    <label for="short_des" class="inputlabel">Short Description</label>
+                    <input class="form-control " type="text" name="short_des" id="short_des" placeholder="">
+                    <label for="description" class="inputlabel">Detailed Description</label>
+                    <textarea class="form-control "  name="description" id="des" placeholder=""></textarea>
 
                     <!-- product image -->
                     <div class="product-info">
                       <!--   <div class="product-image">
                             <p class="text">product image</p>
                         </div> -->
-                        <div class="upload-image-sec">
+                        <div class="">
                             <!-- upload inputs -->
-                            <p class="text"><img src="/img/camera.png" alt="">upload image</p>
+                            <label class="inputlabel" style="margin-bottom: 5px;"><img src="/img/camera.png" alt="">Upload Image</label>
                             <div class="upload-catalouge">
                                 <input name="img1" type="file" class="fileupload " id="first-file-upload-btn" hidden>
                                 <label for="first-file-upload-btn" class="upload-image"></label>
@@ -34,14 +37,9 @@
                            <!--      <input type="text" name="" id="hiddeninput"> -->
                             </div>
                         </div>
-                        <script>
-                        
-                        </script>
-                  
-
 
                         <div class="select-sizes">
-                            <p class="text">Product Detail</p>
+                            <label class="inputlabel" style="margin-bottom: 5px;"><img src="/img/camera.png" alt="">Product Detail</label>
                             <div class="sizes">
                                 <input name="size" type="checkbox" class="size-checkbox" id="xs" value="xs">
                                 <input name="size" type="checkbox" class="size-checkbox" id="s" value="s">
@@ -55,13 +53,34 @@
                     </div>
 
                     <div class="product-price">
-                        <input class="form-control" name="actualprice" type="number" id="actual-price" placeholder="actual price">
-                        <input class="form-control" name="discount" type="number" id="discount" placeholder="discount percentage">
-                        <input class="form-control" name="sellingprice" type="number" id="sell-price" placeholder="selling price">
+                        
+                        <div>
+                            <label for="actualprice" class="inputlabel">Actual Price</label>
+                            <input class="form-control pricebuttons" name="actualprice" type="number" id="actual-price" placeholder="">
+                        </div>
+                        <div>
+                            <label for="discount" class="inputlabel">Discount in %</label>
+                            <input class="form-control pricebuttons" name="discount" type="number" id="discount" placeholder="e.g. 25">
+                        </div>
+                        <div >
+                            <label for="sellingprice" class="inputlabel">Selling price</label>
+                            <input class="form-control pricebuttons" name="sellingprice" type="number" step="any" id="sell-price" placeholder="">
+                        </div>
+                        <div>
+                            
+                        </div>
+                        <div>
+                            
+                        </div>
+                        <div>
+                            <a  class="btn btn-primary" id="calcdiscount">Calculate</a>
+                        </div>
                     </div>
-
-                    <input class="form-control" name="stock" type="number" id="stock" min="20" placeholder="item in stocks (minimum 20)">
-
+                  
+                   
+                    <label for="stock" class="inputlabel">Items in Stock (min 20)</label>
+                    <input class="form-control" name="stock" type="number" id="stock" min="20" placeholder="">
+                    <label for="categories" class="inputlabel">Categories</label>
                     <textarea class="form-control"  name="categories" id="tags" placeholder="Enter categories here"></textarea>
 
                    
@@ -77,7 +96,7 @@
 
 
 
-                    <input class="form-control" type="submit" id="submit">
+                    <input class="form-control btn btn-primary" type="submit" id="submit">
 <!-- 
                     <div class="buttons">
                         <button class="btn" id="add-btn">add product</button>
@@ -89,6 +108,27 @@
                     
                     evt.preventDefault();
                 });
+        
+            // TO CALCULATE FINAL PRICE AFTER DISCOUNT
+                document.querySelector('#calcdiscount').addEventListener("click", function(event) {
+                //    alert('hello');
+                    //evt.preventDefault();
+                    let actualprice = document.querySelector('#actual-price').value;
+                    console.log(actualprice);
+                    let discount = document.querySelector('#discount').value;
+                    console.log(discount);
+                   // let sellpricecalculated = actualprice * 
+                 //   let sellingprice = document.querySelector('#sell-pruce').value;
+                    let percentage = discount / 100;
+                    console.log(percentage, 'percentage');
+                    let discountinsum = actualprice * percentage;
+                    console.log(discountinsum,'discountinsum');
+                    let sellprice = actualprice - discountinsum;
+                    console.log(sellprice,'sellprice');
+                    document.querySelector('#sell-price').value = sellprice;
+
+                    });
+
             </script>
     </body>
 

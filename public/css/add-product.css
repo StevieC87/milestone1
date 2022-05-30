@@ -28,12 +28,12 @@ body{
 }
 
 input {
-    max-width: 300px;
+    max-width: 400px;
     display: block;
     margin: 5px 5px 5px 0px;
 }
 textarea {
-    max-width: 300px;
+    max-width: 400px;
 }
 
 input, textarea{
@@ -44,6 +44,15 @@ input:not(input[type="checkbox"]){
     width: 100%;
 }
 
+.pagetitle {
+    padding: 30px;
+}
+.inputlabel {
+    font-weight: bold;
+}
+.inputlabel::after {
+    content: ':';
+}
 textarea{
     width: 100%;
     height: 270px;
@@ -53,6 +62,10 @@ textarea{
 
 #tags {
   min-width: 600px;  
+}
+
+.pricebuttons {
+    padding-right: 5px;
 }
 
 .product-info{
@@ -79,13 +92,13 @@ textarea{
     text-transform: capitalize;
     color: #383838;
     font-size: 20px;
-    font-weight: 500;
+    /* font-weight: 500; */
 }
 
 .upload-image-sec, .select-sizes{
     background: #fff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 0px;
 }
 .sizes {
     display: flex;
@@ -100,7 +113,7 @@ textarea{
 
 .upload-catalouge{
     width: 100%;
-    margin: 20px 0;
+    margin: 0px 0;
     display: grid;
     grid-template-columns: repeat(4, 100px);
     grid-gap: 10px;
@@ -161,20 +174,20 @@ input::-webkit-inner-spin-button{
 .product-price{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-gap: 0px;
 }
 
 .product-price input{
-    margin: 0;
+   /*  margin: 0; */
 }
 
 .buttons{
     margin: 20px 0 50px;
 }
 
-.btn{
+/* .btn{
     padding: 10px 30px;
-    text-transform: capitalize;
+    text-transform: capitalize; 
     color: #fff;
     background: #383838;
     border-radius: 5px;
@@ -182,7 +195,7 @@ input::-webkit-inner-spin-button{
     outline: none;
     margin-right: 10px;
     cursor: pointer;
-}
+} */
 
 #save-btn{
     background: #a9a9a9;

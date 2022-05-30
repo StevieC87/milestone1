@@ -106,5 +106,17 @@
     "stock": "",
     "categories": "",
     "id": "0.2585334692107095"
+  },
+  {
+    "name": "POTATO PEELER",
+    "short_des": "peels potatoes",
+    "description": "best in market",
+    "discount": "5",
+    "selling_price": "23.75",
+    "imageUrl": "",
+    "size": ["xs", "s"],
+    "stock": "99",
+    "categories": "kitchen\r\npotato peeler\r\nfinds",
+    "id": "0.21650859788550436"
   }
 ]
