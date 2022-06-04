@@ -27,13 +27,15 @@
         <div class="product-card">
             <div class="product-image">
                 <span class="discount-tag"><%= product.discount %>% off</span>
-                <img src="<%= product.image %>" class="product-thumb" alt="">
+                <%= product.image %>PRODUCT IMAGE <%= product.image1 %>
+                <img src="<%= product.name %>" class="product-thumb" alt="">
                 <!-- INCLUDE 'PARTIAL' BUTTON FOR 'ADD TO WISHLIST, and pass productid' -->
                 <%- include('./includes/add-to-wishlist.ejs', {product: product}) %>
             </div>
             <div class="product-info">
                 <h2 class="product-name">
                     <%= product.name %>
+                    <%= product.image %>
                 </h2>
                 <p class="product-short-des">
                     <%= product.description %>

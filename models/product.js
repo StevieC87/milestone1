@@ -1,52 +1,52 @@
-const fs = require('fs');
-const path = require('path');
-const rootDir = require('../util/path');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const p = path.join(rootDir, 'data', 'products.json');
-
-const getProductsFromFile = cb => {
-    fs.readFile(p, (err, fileContent) => {
-        if (err) {
-            cb([]);
-            console.log('no work');
-
-        }
-        else {
-            cb(JSON.parse(fileContent));
-        }
-    });
-};
-
-module.exports = class Product {
-    constructor(id, name, short_des, description, price, discount, selling_price, imageUrl, size, stock, categories) {
-        this.id = id;
-        this.name = name;
-        this.short_des = short_des;
-        this.description = description;
-        this.price = price;
-        this.discount = discount;
-        this.selling_price = selling_price;
-        this.imageUrl = imageUrl;
-        this.size = size;
-        this.stock = stock;
-        this.categories = categories;
-    }
-    save() {
-        getProductsFromFile(products => {
-            products.push(this);
-            fs.writeFile(p, JSON.stringify(products), err => {
-                console.log(err);
-            })
-        });
-    }
-    static fetchAll(cb) {
-        getProductsFromFile(cb);
-    }
-    static findById(id, cb) {
-        getProductsFromFile(products => {
-            const product = products.find(p => p.id === id);
-            cb(product)
-        })
-    }
-
-};
+const ProductSchema = new Schema({
+  // title: String,
+  id: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  short_des: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  discount: {
+    type: String,
+    required: true
+  },
+  selling_price: {
+    type: String,
+    required: true
+  },
+  imageUrl: {
+    type: String,
+    required: false
+  },
+  size: {
+    type: Array,
+    required: false
+  },
+  stock: {
+    type: String,
+    required: false
+  },
+  categories: {
+    type: Array,
+    required: false
+  },
+  
+})
+module.exports = mongoose.model('Product', ProductSchema);

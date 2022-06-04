@@ -43,15 +43,38 @@ exports.addProductSave = (req, res, next) => {
     const files = req.files;
     const id = Math.random();
 
-    const product = new Product(id, name, short_des, description, price, discount, selling_price, imageUrl, size, stock, categories)
-
-    product.save();
-
-    res.render('success', {
-        pageTitle: 'Success',
-        path: 'success',
+    const product = new Product({
+        id: id,
+        name: name,
+        short_des: short_des,
+        description: description,
+        price: price,
+        discount: discount,
+        selling_price: selling_price,
+        imageUrl: imageUrl,
+        size: size,
+        stock: stock,
+        categories: categories,
+        files: files,
     });
+
+    //const product = new Product(id, name, short_des, description, price, discount, selling_price, imageUrl, size, stock, categories)
+
+    product
+        .save()
+        .then(result => {
+            res.render('success', {
+                pageTitle: 'Success',
+                path: 'success',
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+
+   
 }
+
 
 exports.getEditProduct = (req, res, next) => {
   

@@ -4,13 +4,16 @@ const Wish = require("../models/wish");
 
 exports.listProducts = (req, res, next) => {
     //function to get all products
-    Product.fetchAll(products => {
+    Product.find()
+    .then(products => {
+        console.log(products);
         res.render('index', {
             pageTitle: 'List Products',
             path: '/',
             prods: products,
-        })
+        });
     })
+    .catch(err => {console.log(err)})
 }
 
 exports.addToWishlist = (req, res, next) => {
