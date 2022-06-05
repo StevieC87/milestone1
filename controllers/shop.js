@@ -27,9 +27,12 @@ exports.addToWishlist = (req, res, next) => {
 }
 
 exports.spellingBee = (req, res, next) => {
+    const word = 'chewing'
+    const wordarray = word.split('');
     res.render('spelling2', {
         pageTitle: 'List Products',
         path: '/spelling',
-      
+        word: word,
+        wordarray: wordarray,
     });
 }

@@ -1,18 +1,4 @@
 
-<!-- <div class="sb-hive">
-    <div class="hive">
-        <svg class="hive-cell center" >
-            
-            <polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon>
-            <text style="color: white" class="cell-letter" x="50%" y="50%" dy="0.35em">G</text>
-        </svg>
-       <svg class="hive-cell outer" viewBox="0 0 120 103.92304845413263">
-            <polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon>
-        </svg> -->
-   <!--          <svg class="hive-cell outer" viewBox="0 0 120 103.92304845413263"><polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon><text class="cell-letter" x="50%" y="50%" dy="0.35em">n</text></svg><svg class="hive-cell outer" viewBox="0 0 120 103.92304845413263"><polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon><text class="cell-letter" x="50%" y="50%" dy="0.35em">c</text></svg><svg class="hive-cell outer" viewBox="0 0 120 103.92304845413263"><polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon><text class="cell-letter" x="50%" y="50%" dy="0.35em">h</text></svg><svg class="hive-cell outer" viewBox="0 0 120 103.92304845413263"><polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon><text class="cell-letter" x="50%" y="50%" dy="0.35em">w</text></svg><svg class="hive-cell outer" viewBox="0 0 120 103.92304845413263"><polygon class="cell-fill" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="7.5"></polygon><text class="cell-letter" x="50%" y="50%" dy="0.35em">i</text></svg> -->
-        
-        <!-- </div>
-    </div> -->
 
 <style>
     /* .outerdiv {
@@ -42,12 +28,11 @@
         width: 400px;
     } */
     .center {
-       fill: red;
+       fill: #F6D921;
 
     }
-    .outer1 {
-        padding:0;
-        margin:0;
+    .outer {
+        fill: #E6E6E6;
         
     }
     .svg:nth-child(1) {
@@ -73,27 +58,39 @@
     }
     
 </style>
+<%= word %>
+<%-wordarray%>
+<%-wordarray[1]%>
+<script>
+    const wordarray = '<%-wordarray%>';
+    //const chars = word.split('');
+    console.log(chars);
+    document.getElementById('test').innerHTML = chars1;
+
+</script>
+<div id="test"></div>
 <div class="outerdiv gridouter">
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text class="letter" x="50%" y="50%" dy="0.35em"></text>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon class="polygon"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon class="polygon"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon class="polygon"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon class="polygon"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon class="polygon"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon class="polygon"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
     </svg>
     
     
