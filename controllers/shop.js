@@ -1,7 +1,6 @@
 const Product = require("../models/product");
 const Wish = require("../models/wish");
 
-
 exports.listProducts = (req, res, next) => {
     //function to get all products
     Product.find()
@@ -24,15 +23,4 @@ exports.addToWishlist = (req, res, next) => {
     res.render('wishlist', {
 
     })
-}
-
-exports.spellingBee = (req, res, next) => {
-    const word = 'chewing'
-    const wordarray = word.split('');
-    res.render('spelling2', {
-        pageTitle: 'List Products',
-        path: '/spelling',
-        word: word,
-        wordarray: wordarray,
-    });
 }
