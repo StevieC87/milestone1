@@ -57,6 +57,7 @@ module.exports = class SpellingBee {
   
  
   }
+ 
 
   static fetchAll(cb) {
     getwordsFromFile(cb);
@@ -67,4 +68,48 @@ module.exports = class SpellingBee {
       cb(product);
     })
   }
+  static fetchAll2 = cb => {
+    let asdf = ['asf', 'asdf', 'asdf'];
+   // console.log('adsflkjasld;jf');
+      cb(asdf);
+  }
+    //static findmin72(cb) {
+  static findmin72(cb) {
+    /* getwordsFromFile(words => {
+      const wordlist = words.find(p => p.length > 7);
+      cb(wordlist);
+    }) */
+    let test = 'test';
+    return test;
+  }
+  static findmin71(cb) {
+    //findmin7(cb) => {
+      getwordsFromFile(words => {
+       let wordsa = words.words;
+       const wordlist = wordsa.filter(p => p.length >= 7);
+       let newarray = [];
+       const wordlist2 = wordlist.filter(check2 => {
+          const uniqueCount = new Set(check2).size;
+          // console.log(uniqueCount);
+          // const uniqueStr = [...new Set(uniqueCount)].join('');
+          // const withoutSpaces = uniqueStr.replaceAll(' ', '');
+            if(uniqueCount === 7) {
+              newarray.push(check2);
+            }
+       });
+       let rand = Math.floor(Math.random()*newarray.length);
+       let rValue = newarray[rand];
+       console.log(rValue, 'rValue');
+       cb(rValue);
+    
+      })
+
+  }
+  
+  /* static findmin7(cb) {
+    getwordsFromFile(words => {
+      const wordlist = words.find(p => p.length > 7);
+      cb(wordlist);
+    })
+  } */
 };

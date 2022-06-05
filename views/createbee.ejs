@@ -15,9 +15,27 @@
     <label for="centre letter">Pick the centre letter</label>
 
 </form>
-<script src="createbeetest.js"></script>
+
 <script>
   
+document.querySelector('#generatewordbutton').addEventListener('click', callback => {
+   // fetch('/miniwordlist.json')
+   fetch('/getwordsgenerate')
+    .then(res => {
+        //console.log(res.json());
+        console.log(res);
+    })
+    .catch(err => {
+        console.error(err);
+    });
+    /* .then(test => {
+        console.log(test,'test')
+    }) */
+
+    //.then(response => response.json())
+    //.then(data => console.log(data)); 
+
+});
 </script>
 
 
