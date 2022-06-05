@@ -1,0 +1,104 @@
+
+<!-- NOT FUNCTIONAL  -->
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/add-product.css">
+
+    </head>
+
+    <body>
+        <%- include('../includes/nav.ejs') %>
+            <h1>ADMIN PAGE - ADD PRODUCTS</h1>
+              <%=  JSON.stringify(product) %>
+
+            <div class="form">
+                <form action="/admin/productsave" method="POST" >
+                    
+                    <input type="text" name="editcreate" value="<% if(editing) { %>edit<% }  else {%>create<% } %>">
+                    
+                  <!--   <input type="hidden" name="editcreate" value="">
+                    -->
+                    <input type="text" name="name" id="product-name" placeholder="product name">
+                    <input type="text" name="short_des" id="short_des" placeholder="short line about the product">
+                    <textarea name="description" id="des" placeholder="detail description"></textarea>
+
+                    <!-- product image -->
+                    <div class="product-info">
+                        <div class="product-image">
+                            <p class="text">product image</p>
+                        </div>
+                        <div class="upload-image-sec">
+                            <!-- upload inputs -->
+                            <p class="text"><img src="/img/camera.png" alt="">upload image</p>
+                            <div class="upload-catalouge">
+                                <input name="img1" type="file" class="fileupload" id="first-file-upload-btn" hidden>
+                                <label for="first-file-upload-btn" class="upload-image"></label>
+                                <input name="img2" type="file" class="fileupload" id="second-file-upload-btn" hidden>
+                                <label for="second-file-upload-btn" class="upload-image"></label>
+                                <input name="img3" type="file" class="fileupload" id="third-file-upload-btn" hidden>
+                                <label for="third-file-upload-btn" class="upload-image"></label>
+                                <input name="img4" type="file" class="fileupload" id="fourth-file-upload-btn" hidden>
+                                <label for="fourth-file-upload-btn" class="upload-image"></label>
+
+                                <input type="text" name="" id="hiddeninput">
+                            </div>
+                        </div>
+                        <script>
+                         /*    function imagething() {
+                            let test = [];
+                            let inputs = document.querySelectorAll('.fileupload');
+                           // console.log(inputs);
+                            inputs.forEach(function(input, index) {
+                                console.log(input.value + index );
+                             if(input.value) {  test.push(input.value);} 
+                            });
+                            console.log(test);
+                        } */
+                         
+                           
+                        </script>
+                      <!--   <div  onclick="imagething()">CLICK FOR UPLOAD TEST DEV </div> -->
+
+
+                        <div class="select-sizes">
+                            <p class="text">Product Detail</p>
+                            <div class="sizes">
+                                <input name="size" type="checkbox" class="size-checkbox" id="xs" value="xs">
+                                <input name="size" type="checkbox" class="size-checkbox" id="s" value="s">
+                                <input name="size" type="checkbox" class="size-checkbox" id="m" value="m">
+                                <input name="size" type="checkbox" class="size-checkbox" id="l" value="l">
+                                <input name="size" type="checkbox" class="size-checkbox" id="xl" value="xl">
+                                <input name="size" type="checkbox" class="size-checkbox" id="xxl" value="xxl">
+                                <input name="size" type="checkbox" class="size-checkbox" id="xxxl" value="xxxl">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-price">
+                        <input name="actualprice" type="number" id="actual-price" placeholder="actual price">
+                        <input name="discount" type="number" id="discount" placeholder="discount percentage">
+                        <input name="sellingprice" type="number" id="sell-price" placeholder="selling price">
+                    </div>
+
+                    <input name="stock" type="number" id="stock" min="20" placeholder="item in stocks (minimum 20)">
+
+                    <textarea name="categories" id="tags" placeholder="Enter categories here"></textarea>
+
+                    <input name="tac" type="checkbox" class="checkbox" id="tac" checked>
+                    <label for="tac">Agree to terms & conditions</label>
+
+                    <input type="submit" id="submit">Submit
+<!-- 
+                    <div class="buttons">
+                        <button class="btn" id="add-btn">add product</button>
+                    </div> -->
+            </div>
+            </form>
+            <script>
+                document.querySelector('#submit').addEventListener("click", function(event) {
+                    
+                    evt.preventDefault();
+                });
+            </script>
+    </body>
+
+    </html>

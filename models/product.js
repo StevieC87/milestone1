@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new Schema({
   // title: String,
-  id: {
-    type: String,
+/*   id: {
+    type: Number,
     required: true
-  },
+  }, */
   name: {
     type: String,
     required: true
@@ -24,11 +24,11 @@ const ProductSchema = new Schema({
     required: true
   },
   discount: {
-    type: String,
+    type: Number,
     required: true
   },
   selling_price: {
-    type: String,
+    type: Number,
     required: true
   },
   imageUrl: {

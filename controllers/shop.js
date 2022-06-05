@@ -6,7 +6,7 @@ exports.listProducts = (req, res, next) => {
     //function to get all products
     Product.find()
     .then(products => {
-        console.log(products);
+        // console.log(products);
         res.render('index', {
             pageTitle: 'List Products',
             path: '/',

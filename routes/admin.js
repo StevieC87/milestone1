@@ -9,7 +9,7 @@ const adminController = require('../controllers/admin');
  router.post('/productsave', adminController.addProductSave);
 
 router.get('/edit-product/:productId?', adminController.getEditProduct); //use question mark here to make the id optional
-//router.post('/productsave',  adminController.postEditProduct);
+router.post('/productsave',  adminController.postEditProduct);
 
 module.exports = router;
 

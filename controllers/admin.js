@@ -11,24 +11,7 @@ exports.addProductPage = (req, res, next) => {
 
 }
 
-exports.testRoute = (req, res, next) => {
-    console.log( req.body, 'body');
-    console.log(req.files, 'files');
-    console.log('heellooo');
-    res.render('afteradd', {
-        pageTitle: 'Add New Product',
-        path: '/',
-        data: req.body,
-        files: req.files
-    });
-}
-/* exports.test = (req, res, next) => {
-    console.log('alkasdjflksajdalk');
-    res.render('success', {
-        pageTitle: 'success',
-        path: '/success',
-    });
-} */
+
 exports.addProductSave = (req, res, next) => {
     const name = req.body.name;
     const short_des = req.body.short_des;
@@ -75,38 +58,51 @@ exports.addProductSave = (req, res, next) => {
    
 }
 
-
+//NOT COMPLETED function
 exports.getEditProduct = (req, res, next) => {
-  
     //const editcreate = req.query.editcreate; //from inpujt
-    const prodId = req.params.productId; //from url
-    const intprod = parseInt(prodId);
-    
+    const prodId = req.params.productId; //get id from url
+    //const intprod = parseInt(prodId);
+    //console.log(prodId);
     if(prodId) {
         console.log(prodId,'prodId');
         //then we are trying to edit the product
-        Product.findById(intprod, product => {
-             if(!product) {
+        Product.findById(prodId)
+      .then(product => {
+            /* if(!product) {
+                console.log('fail');
                 return res.redirect('/');
-              //  console.log('fail');
-              } 
-             // else  console.log('sucesss');
-            //  console.log(product,'product');
+            } */
             res.render('admin/admin-edit-product', {
                 pageTitle: 'Edit title',
                 path: '/admin/edit-product', 
-                editing: true, 
-                product: product
-            })
-          });
+               // editing: true, 
+               // product: product
+            });
+        })
+            .catch(err => console.log(err));
+             // else  console.log('sucesss');
+            //  console.log(product,'product');
+            /*    */
+       
          
     }
  
     }
     exports.postEditProduct = (req, res, next) => {
-    
-
     }
+
+//DELETE METHOD NOT READY YET THIS COPY PASTE from other k
+    exports.postDeleteProduct = (req, res, next) => {
+        const prodId = req.body.productId; //because we pass it in the delete form button
+        Product.findByIdAndRemove(prodId)
+        .then(()=> {
+          console.log("Product removed");
+          res.redirect('/admin/products');
+        })
+        .catch(err => console.log(err));
+      }
+
 /* 
 exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;
@@ -117,3 +113,20 @@ exports.postAddProduct = (req, res, next) => {
     product.save();
     res.redirect('/');
   }; */
+
+
+
+
+  /* TEST */
+  /* exports.testRoute = (req, res, next) => {
+    console.log( req.body, 'body');
+    console.log(req.files, 'files');
+    console.log('heellooo');
+    res.render('afteradd', {
+        pageTitle: 'Add New Product',
+        path: '/',
+        data: req.body,
+        files: req.files
+    });
+}
+ */
