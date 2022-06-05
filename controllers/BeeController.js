@@ -1,4 +1,4 @@
-const Product = require("../models/BeeModel");
+const BeeModel = require("../models/BeeModel");
 //const Wish = require("../models/wish");
 const fs = require('fs');
 const path = require('path');
@@ -7,12 +7,17 @@ const rootDir = require('../util/path');
 const p = path.join(rootDir, 'data', 'miniwordlist.json');
 
 
-const getWordsFromFile = cb => {
+const getWordsFromFile2 = () => {
     fs.readFile(p, (err, fileContent) => {
       if (err) {
-        cb([]);
+      //  cb([]);
+      console.log('error');
+      
       } else {
-        cb(JSON.parse(fileContent));        
+        //console.log(JSON.parse(fileContent));
+        let resultsa = JSON.parse(fileContent);
+        return resultsa;
+       
       }
     });
   };
@@ -42,17 +47,54 @@ exports.newSpellingBeeform = (req, res, next) => {
         centerletter: centerletter, */
     });
 }
+//async
+exports.generate =  (req, res, next) => {
+  //const newfunction = () => {
+    BeeModel.fetchAll(products => {
+      console.log(products);
+    });
 
-exports.generate = async (req, res, next) => {
-    getWordsFromFile(words => {
-    
-        console.log(words, 'words');
-       
-        const word = words[Math.floor(Math.random() * words.length)];
-      
-        console.log(word, 'word');
-      
+
+   /*  getWordsFromFile2().then(results => {
+        console.log(results);
     })
+     */
+    /* result => {
+      
+     // result.filter(word => word.length > 6)
+      
+      
+      console.log(result);
+      console.log('hello');
+    }); */
+  //}
+  
+  
+  //console.log(words, 'words');
+ /*  getWordsFromFile(words => {
+      words.filter(checkAdult);
+
+    function checkAdult(word) {
+      return word.key == 'aa';
+    } */
+     /*  var hello = [ 
+        { id: 1, title: 'Apple', description: 'Description of post 1' }, 
+        { id: 2, title: 'Orange', description: 'Description of post 2' }, 
+        { id: 3, title: 'Guava', description: 'Description of post 3' }, 
+        { id: 4, title: 'Banana', description: 'Description of post 4' }
+      ]; */
+     /*  hello.find(function(wordsfound, index) {
+        if(words.key == 'abuser')
+          return true;
+      }); */
+     
+     //   console.log(words, 'words');
+       
+      //  const word = words[Math.floor(Math.random() * words.length)];
+      
+      
+      
+  //  })
     
   /*   try {
         const response = await axios.get(`${BASE_URL}/todos?_limit=5`);

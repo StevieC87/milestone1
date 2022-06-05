@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rootDir = require('../util/path');
 
-const p = path.join(rootDir, 'data', 'littlewordlist.json');
+const p = path.join(rootDir, 'data', 'samplenew.json');
 
 const getwordsFromFile = cb => {
   fs.readFile(p, (err, fileContent) => {
