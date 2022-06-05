@@ -26,3 +26,10 @@ exports.addToWishlist = (req, res, next) => {
     })
 }
 
+exports.spellingBee = (req, res, next) => {
+    res.render('spelling2', {
+        pageTitle: 'List Products',
+        path: '/spelling',
+      
+    });
+}

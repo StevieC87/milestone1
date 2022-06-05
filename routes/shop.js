@@ -9,6 +9,6 @@ router.get('/', shopController.listProducts);
 
 router.post('/add-to-wishlist', shopController.addToWishlist);
 
-// router.get('/spellingbee', shopController.spellingBee);
+ router.get('/spelling2', shopController.spellingBee);
 
 module.exports = router;
