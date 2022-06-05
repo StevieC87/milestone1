@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const dotetnv = require('dotenv').config();
 
 // import module for 404 errors
 const errorController = require('./controllers/error');
@@ -33,9 +34,7 @@ app.use('/user', userRoutes);
 app.use(errorController.get404);
 
 
-mongoose.connect(
-    'mongodb+srv://stevieMASTERp455:Mypass1234@cluster0.rcdac.azure.mongodb.net/eshop?retryWrites=true&w=majority'
-    )
+mongoose.connect(process.env.MONGOCONNECT)
     .then(app.listen(3000))
     .catch(err=> {
         console.log(err);

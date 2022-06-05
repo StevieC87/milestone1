@@ -25,3 +25,4 @@ exports.addToWishlist = (req, res, next) => {
 
     })
 }
+

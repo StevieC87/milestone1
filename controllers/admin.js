@@ -67,7 +67,8 @@ exports.getEditProduct = (req, res, next) => {
     if(prodId) {
         console.log(prodId,'prodId');
         //then we are trying to edit the product
-        Product.findById(prodId)
+        Product.findById(prodId) 
+        //here looks for the mongo _id value instread of our id 
       .then(product => {
             /* if(!product) {
                 console.log('fail');
@@ -76,8 +77,8 @@ exports.getEditProduct = (req, res, next) => {
             res.render('admin/admin-edit-product', {
                 pageTitle: 'Edit title',
                 path: '/admin/edit-product', 
-               // editing: true, 
-               // product: product
+                editing: true, 
+                product: product
             });
         })
             .catch(err => console.log(err));

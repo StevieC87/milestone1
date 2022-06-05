@@ -1,1 +1,142 @@
-hello
+hello<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/add-product.css">
+
+</head>
+
+<body>
+    <%- include('../includes/nav.ejs') %>
+        
+        <div class="formdiv" >
+            <form action="/admin/productsave" method="POST" class="form">
+                <!-- we are gonna target the same api endpoint, whether edit or new product -->
+                    
+                <!-- HIDDEN INPUT BOX for edit/save -->
+                <input type="text" name="editcreate" value="<% if(editing) { %>edit<% }  else {%>create<% } %>">
+
+
+                <h1 class="centeringrid pagetitle" style="margin-top: 20px">Add a new product</h1>
+                <label for="name" class="inputlabel">Product Name</label>
+                <input value="<% if(editing){ %><%= product.name %><% } %>" class="form-control " type="text" name="name" id="product-name" placeholder="">
+                <label for="short_des" class="inputlabel">Short Description</label>
+                <input value="<% if(editing){ %><%= product.short_des %><% } %>"class="form-control " type="text" name="short_des" id="short_des" placeholder="">
+                <label for="description" class="inputlabel">Detailed Description</label>
+                <textarea class="form-control "  name="description" id="des" placeholder=""><% if(editing){ %><%= product.description %><% } %></textarea>
+
+                <!-- product image -->
+                <div class="product-info">
+                  <!--   <div class="product-image">
+                        <p class="text">product image</p>
+                    </div> -->
+                    <div class="">
+                        <!-- SKIPPED UPLOAD FOR NOW -->
+                        <!-- upload inputs -->
+                        <label class="inputlabel" style="margin-bottom: 5px;"><img src="/img/camera.png" alt="">Upload Image</label>
+                        <div class="upload-catalouge">
+                            <input name="img1" type="file" class="fileupload " id="first-file-upload-btn" hidden>
+                            <label for="first-file-upload-btn" class="upload-image"></label>
+                            <input name="img2" type="file" class="fileupload" id="second-file-upload-btn" hidden>
+                            <label for="second-file-upload-btn" class="upload-image"></label>
+                            <input name="img3" type="file" class="fileupload" id="third-file-upload-btn" hidden>
+                            <label for="third-file-upload-btn" class="upload-image"></label>
+                            <input name="img4" type="file" class="fileupload" id="fourth-file-upload-btn" hidden>
+                            <label for="fourth-file-upload-btn" class="upload-image"></label>
+
+                       <!--      <input type="text" name="" id="hiddeninput"> -->
+                        </div>
+                    </div>
+
+                    <div class="select-sizes">
+                        <label class="inputlabel" style="margin-bottom: 5px;"><img src="/img/camera.png" alt="">Product Detail</label>
+                        <div class="sizes">
+                            <input name="size" type="checkbox" class="size-checkbox" id="xs" value="xs">
+                            <input name="size" type="checkbox" class="size-checkbox" id="s" value="s">
+                            <input name="size" type="checkbox" class="size-checkbox" id="m" value="m">
+                            <input name="size" type="checkbox" class="size-checkbox" id="l" value="l">
+                            <input name="size" type="checkbox" class="size-checkbox" id="xl" value="xl">
+                            <input name="size" type="checkbox" class="size-checkbox" id="xxl" value="xxl">
+                            <input name="size" type="checkbox" class="size-checkbox" id="xxxl" value="xxxl">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-price">
+                    
+                    <div>
+                        <label for="actualprice" class="inputlabel">Actual Price</label>
+                        <input class="form-control pricebuttons" name="actualprice" type="number" id="actual-price" placeholder="" step="any">
+                    </div>
+                    <div>
+                        <label for="discount" class="inputlabel">Discount in %</label>
+                        <input class="form-control pricebuttons" name="discount" type="number" id="discount" placeholder="e.g. 25" step="any">
+                    </div>
+                    <div >
+                        <label for="sellingprice" class="inputlabel">Selling price</label>
+                        <input class="form-control pricebuttons" name="sellingprice" type="number" step="any" id="sell-price" placeholder="">
+                    </div>
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                    <div>
+                        <a  class="btn btn-primary" id="calcdiscount">Calculate</a>
+                    </div>
+                </div>
+              
+               
+                <label for="stock" class="inputlabel">Items in Stock (min 20)</label>
+                <input class="form-control" name="stock" type="number" id="stock" min="20" placeholder="">
+                <label for="categories" class="inputlabel">Categories</label>
+                <textarea class="form-control"  name="categories" id="tags" placeholder="Enter categories here"></textarea>
+
+               
+              
+
+                <div class="form-check">
+                   <!--  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"> -->
+                    <input  name="tac" type="checkbox" class=" form-check-input" id="tac" checked> <!-- checkbox -->
+                    <label class="form-check-label" for="tac">
+                        Agree to terms & conditions
+                    </label>
+                  </div>
+
+
+
+                <input class="form-control btn btn-primary" type="submit" id="submit">
+<!-- 
+                <div class="buttons">
+                    <button class="btn" id="add-btn">add product</button>
+                </div> -->
+        </div>
+        </form>
+        <script>
+            document.querySelector('#submit').addEventListener("click", function(event) {
+                
+                evt.preventDefault();
+            });
+    
+        // TO CALCULATE FINAL PRICE AFTER DISCOUNT
+            document.querySelector('#calcdiscount').addEventListener("click", function(event) {
+            //    alert('hello');
+                //evt.preventDefault();
+                let actualprice = document.querySelector('#actual-price').value;
+                console.log(actualprice);
+                let discount = document.querySelector('#discount').value;
+                console.log(discount);
+               // let sellpricecalculated = actualprice * 
+             //   let sellingprice = document.querySelector('#sell-pruce').value;
+                let percentage = discount / 100;
+                console.log(percentage, 'percentage');
+                let discountinsum = actualprice * percentage;
+                console.log(discountinsum,'discountinsum');
+                let sellprice = actualprice - discountinsum;
+                console.log(sellprice,'sellprice');
+                document.querySelector('#sell-price').value = sellprice;
+
+                });
+
+        </script>
+</body>
+
+</html>
