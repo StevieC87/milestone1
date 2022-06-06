@@ -13,9 +13,9 @@ document.querySelector('#generatewordbutton').addEventListener('click', callback
     .then(response => response.json())
     .then(data => console.log(data)); */
     //fetch('/getwordsgenerate')
-    fetch('/miniwordlist.json')
-    .then(res => {
-        console.log(res);
+    fetch('/getwordsgenerate')
+    .then(word => {
+        console.log(word);
     })
    
     /* .then(test => {

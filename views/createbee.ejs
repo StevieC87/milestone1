@@ -18,12 +18,13 @@
 
 <script>
   
-document.querySelector('#generatewordbutton').addEventListener('click', callback => {
+document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    // fetch('/miniwordlist.json')
    fetch('/getwordsgenerate')
     .then(res => {
+        console.log(await 'hello');
         //console.log(res.json());
-        console.log(res);
+      //  console.log(await res);
     })
     .catch(err => {
         console.error(err);

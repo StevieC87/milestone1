@@ -99,8 +99,9 @@ module.exports = class SpellingBee {
        });
        let rand = Math.floor(Math.random()*newarray.length);
        let rValue = newarray[rand];
-       console.log(rValue, 'rValue');
+     //  console.log(rValue, 'rValue');
        cb(rValue);
+       
     
       })
 

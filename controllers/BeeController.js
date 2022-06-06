@@ -37,10 +37,20 @@ exports.generate = (req, res, next) => {
   //const newfunction = () => {
     //FETCHALL WORKS
     BeeModel.findmin71(word => {
-     console.log(word);
-      console.log('helloooo');
+      console.log(word);
+      res.send({word: word})
+    //  res.send(word)
+    })
+   
+   
+   //   BeeModel.findmin71(word => {
+    // console.log(word);
+    //  console.log('helloooo');
     //  res.word = word;
-     // res.send(word);
-    });
+      // res.send({word: word});
+    //  res.send(word)
+   // return word;
+   //    next();
+ //   });
 
 }
