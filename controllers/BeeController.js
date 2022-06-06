@@ -39,7 +39,7 @@ exports.centerlettermatch = async (req, res, next) => {
   //res.send({hello: 'hello world'});
   //get request stuff herte to send along word and letter 
   await BeeModel.getwordswithcenterletter(word, centerletter, wordlistnew => {
-    res.send({wordlistnew});
+    res.send({wordlistnew: wordlistnew});
     console.log(wordlistnew);
   })
 }

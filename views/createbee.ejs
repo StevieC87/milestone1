@@ -17,6 +17,9 @@
     background: blue;
 
 }
+.icircleselected {
+    background: blue;
+}
 </style>
 <body>
   
@@ -50,15 +53,18 @@
     <label for="centre letter">Pick the centre letter</label>
     <input type="radio" name="centreletter" value="1">1
     <div id="show total matches"></div>
-    <div id="show matching words">
+    <div id="showmatchtotal">
 
     </div>
-  
+    <div id="wordlistresults">
+
+    </div>
 </form>
 
 <script>
   let indexloop = 0;
   let wordwechose = '';
+  let worduniqueletters = '';
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    // fetch('/miniwordlist.json')
    
@@ -69,7 +75,7 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
       document.querySelector('#word').textContent = data.word;
       wordwechose = data.word;
       console.log(indexloop,'indexloop');
-      let worduniqueletters = data.matchingwords.uniqueStr;
+      worduniqueletters = data.matchingwords.uniqueStr;
       let arrayofuniqueletters = data.matchingwords.arrayofuniqueletters;
       console.log(worduniqueletters);
       console.log(data.matchingwords.arrayofuniqueletters,'arrayofuniqueletters');
@@ -108,15 +114,82 @@ console.log(wordwechose);
 document.querySelector('#looplettersdiv').addEventListener('click', async callback => {
     let input = event.target;
     let inputid = event.target.id;
+
+    
+//maybe get list of other letters, and remove the class of blue if it exists
+    console.log(wordwechose,'wordwechose');
+    let ourwordarray = worduniqueletters.split('');
+    console.log(ourwordarray, 'ourwordarray');
+    let minusourletter = ourwordarray.filter(letter => letter !== inputid);
+    console.log(minusourletter, 'minusourletter');
+
+    let removeblues = minusourletter.forEach(letter => {
+        let divtoedit = document.querySelector(`#${letter}`);
+        divtoedit.classList.remove("icircleselected");
+       // let divtodelete = document.querySelector(`#${letter}`);
+      //  divtodelete.classList.remove('icircleselected');
+    })
+
     let inputtagname = event.target.tagName; 
+    let mix = '#' + inputid;
+   // console.log(input.id, 'input');
+  
+     //find letters to remove circle selected, before putting it to our one
+
+
+     /* document.querySelectorAll('.icircle icircleselected').forEach(circleword => {
+       // circleword.className = 'icircle';
+       circleword.textContent = 'icircle';
+        console.log(circleword, 'circleword');
+     }); */
+   document.getElementById(inputid).className = 'icircle icircleselected';
+  
+   
+
     if(inputtagname !== 'SPAN'){
         return;
     }
     else{
    await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
-   .then(response => response.text())
+   .then(response => response.json())
    .then(data => {
-      console.log(data);
+      console.log(data)
+      console.log(data.wordlistnew.newarray.length, 'length');
+      document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
+      
+   //   if(indexloop > 0) {
+      //  let checkiftabs = document.querySelectorAll('.badge rounded-pill bg-primary');
+      //  console.log(checkiftabs.length,'checkiftabs1LENGTH');
+     // //  if(checkiftabs.length > 0){
+      //    console.log(checkiftabs,'checkiftabs')
+
+           
+      //  }
+     //   else {
+     //       console.log('no tabs');
+     //   }
+    //    document.querySelector('.badge rounded-pill bg-primary').remove();
+            
+      //  }
+      document.querySelectorAll('.badge').forEach(badge => {
+      // console.log('found badge');
+       let divtodelete = document.querySelector(`#${badge.id}`);
+      // console.log(divtodelete, 'divtodelete');
+       let parentappend = document.querySelector('#wordlistresults');
+       parentappend.removeChild(divtodelete);
+       })
+      data.wordlistnew.newarray.forEach((word, index) => {
+            let parentappend2 = document.querySelector('#wordlistresults');
+            let spanmake = document.createElement("span");
+            spanmake.className = "badge rounded-pill bg-primary";
+            spanmake.id = word;
+            // styled.setAttribute('style', 'color: red');
+            spanmake.appendChild(document.createTextNode(word));          
+            spanmake.appendChild(document.createElement('p'));  
+            parentappend2.appendChild(spanmake);
+            //BUT IF CLICK AGAIN REMOVE PREVIOUS 
+          
+        });
    })
         //alert( inputid);
         //alert(wordwechose);
