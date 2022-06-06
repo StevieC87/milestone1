@@ -20,17 +20,21 @@
   
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    // fetch('/miniwordlist.json')
-   fetch('/getwordsgenerate')
-    .then(res => {
+   await fetch('/getwordsgenerate')
+   .then(response => response.json())
+  .then(data => console.log(data));
+
+  /*   .then(res => {
        // console.log(await 'hello');
-      console.log(res.text());
+    //  console.log(res.text());
+      console.log(res.json());
       
         //console.log(res.json());
       //  console.log(await res);
     })
     .catch(err => {
         console.error(err);
-    });
+    }); */
     /* .then(test => {
         console.log(test,'test')
     }) */
