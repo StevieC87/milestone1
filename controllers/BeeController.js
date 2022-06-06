@@ -43,9 +43,22 @@ exports.generate = async (req, res, next) => {
     
     // res.send('word', {word: word});
     //  res.send(word)
-    res.send({word});
+    BeeModel.getwordsfromletters(word,matchingwords => {
+   //   console.log(matchingwords);
+      res.send({matchingwords, word});
+    });
+        
+    // res.send({word});
+//THEN BRING ALL WORDS THAT U CAN MAKE WITH THESE 7 LETTERS 
+    
+
+
+    
     //res.json(null)
     })
+  // await BeeModel.getwordsfromletters(word,matchingwords => {
+
+ //   });
     
    
    //   BeeModel.findmin71(word => {
