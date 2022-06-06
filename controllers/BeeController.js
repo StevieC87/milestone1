@@ -39,6 +39,7 @@ exports.newgamepostmethod = (req, res, next) => {
   const bodya = req.body;
   console.log(bodya,'bodya');
   let ourword = bodya.hiddenword;
+  let allmatchingwords = bodya.hiddenwords;
 
   let ourcenterletter = bodya.hiddencentreletter;
   let ourremaining = bodya.remaining;
@@ -57,7 +58,8 @@ exports.newgamepostmethod = (req, res, next) => {
     word: ourword,
     wordarray: remainingletterarraynew,
     remaining: ourremaining,
-    centerletter: ourcenterletter 
+    centerletter: ourcenterletter,
+    allmatchingwords: allmatchingwords
   });  
   let word = req.body.hiddenword;
   let centreletter = req.body.hiddencentreletter;
