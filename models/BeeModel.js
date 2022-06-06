@@ -201,6 +201,9 @@ module.exports = class SpellingBee {
     
     let officialtrySTATIC = `[${wordstaticminusalphabetTOstring}]`;
     let officialtry = `[${newalphabetstring}]`;
+    let centreletterstatic = `[t]`;
+    let centreletterhere = 'a';
+    let centreletter = `[${centreletterhere}]`;
    let part = '[cdfghijklopqrsuvwxyz]';
  
   let string7= `/[${newalphabetstring}]/`;
@@ -208,6 +211,8 @@ module.exports = class SpellingBee {
   //console.log(string6,'string6');
  //  console.log(word,'word');
  const regex = new RegExp(`${officialtry}`, 'g');
+ const regexSTATIC = new RegExp(`${partooo}`, 'g');
+ const regexCentreLetter = new RegExp(`${centreletterstatic}`, 'g');
  //  const regex = new RegExp(string3, 'g');
    // const regex1 = string4.test(check3);
    //const regex = new RegExp(string3, 'g');
@@ -215,13 +220,18 @@ module.exports = class SpellingBee {
  //  console.log(regex.test(check3), check3);
  
   // let testregexp = check3.match(regex1);
-
-  let testregexp = regex.test(check3);
+      let testregexpCentreletter = regexCentreLetter.test(check3);
+  //WORKS let testregexp = regex.test(check3);
+  let testregexp = regexSTATIC.test(check3); //test static
   //original let regezwhat = string.test(check3);
    //console.log(regezwhat, 'regezwhat');
    //   console.log(regezwhat);
       if (testregexp === false) {
         newarraya.push(check3);
+       /*  if (testregexpCentreletter == true) {
+          newarraya.push(check3);
+        } */
+     
       }
 
     //let myRegExp = /[^ ]/i;
@@ -284,7 +294,8 @@ module.exports = class SpellingBee {
      /*  const wordlist2 = wordlist.filter(check2 => {
         check2 => check2.length >= 5
       }); */
-     cb(newarraya);
+  //   cb(newarraya);
+    cb({newarray: newarraya, uniqueStr:uniqueStr})
       //filter words with these letters
     });
    /* 
