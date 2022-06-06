@@ -130,7 +130,50 @@ module.exports = class SpellingBee {
       }
     })
     const newalphabetstring = newalphabet.join('');
-    cb('hellaaao')
+
+    //get words and start processing 
+    getwordsFromFileReal(words => {
+      const wordsa = words.words;
+      const wordlist = wordsa.filter(p => p.length >= 4);
+      const wordlist2 = wordlist.filter(check2 => {
+        const uniqueCount = new Set(check2).size;
+        // console.log(uniqueCount);
+        // const uniqueStr = [...new Set(uniqueCount)].join('');
+        // const withoutSpaces = uniqueStr.replaceAll(' ', '');
+          if(uniqueCount <= 7) {
+            // newarray.push(check2);
+            return check2;
+          }
+      });
+
+      const newarraya = [];
+      const wordlist3 = wordlist2.filter(check3 => {
+          const currentwordtoarray = check3.split(''); 
+          let officialtry = `[${newalphabetstring}]`;
+          let centreletter = `[${centerletter}]`;
+          const regexwords = new RegExp(`${officialtry}`, 'g');
+          const regexCentreLetter = new RegExp(`${centerletter}`, 'g');
+          let testregexp = regexwords.test(check3);
+          let testregexpcenter = regexCentreLetter.test(check3);
+          if (testregexp === false) {
+              //   newarraya.push(check3);
+               if (testregexpcenter == true) {
+                 newarraya.push(check3);
+                } 
+              }
+
+ });
+  console.log(newarraya,'newarraya');
+  console.log(word,'word');
+  // console.log(wordstaticminusalphabetTOstring,'wordstaticminusalphabetTOstring');
+  console.log(newalphabetstring,'newalphabetstring');
+
+ cb({newarray: newarraya, uniqueStr:uniqueStr, arrayofuniqueletters: lettersarray})
+      //filter words with these letters
+    });
+  
+
+    // cb('hellaaao');
 
   }
   static getwordsfromletters(word, cb) {
