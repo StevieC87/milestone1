@@ -7,9 +7,15 @@
 .i-circle {
     background: #EEE;
     color: #000;
-    padding: 5px 20px;
+    padding: 4px 20px;
     border-radius: 50%;
     font-size: 35px;
+    height: 60px;
+    width: 60px;
+}
+.i-circle:hover {
+    background: blue;
+
 }
 </style>
 <body>
@@ -23,18 +29,18 @@
     <div class="flexcenter">
         <a class="btn btn-primary centertxt" id="generatewordbutton">Suggest</a>
     </div>
-    <div class="flexcenter" >
+    <div  >
         
-        <div id="word" style="height: 70px; font-size: 18pt;"></div>
+        <div class="flexcenter"  id="word" style="height: 70px; font-size: 18pt;"></div>
     </div>
     
     <!-- <input type="text" id="word" > -->
 
-    <div id="pickcentreletterloop">
+    <div id="pickcentreletterloop" class="flexcenter">
 
 
     </div>
-    <div id="loopletters">
+    <div class="flexcenter centertxt"  id="loopletters">
 
     </div>
   <!--   <span class="i-circle">i</span>
@@ -66,9 +72,12 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
       let parentappend = document.querySelector('#loopletters')
       arrayofuniqueletters.forEach((letter, index) => {
             console.log(letter, index);
+
             let spanmake = document.createElement("span");
             spanmake.className = "i-circle";
-            spanmake.appendChild(document.createTextNode(letter));
+            spanmake.id = letter;
+            // styled.setAttribute('style', 'color: red');
+            spanmake.appendChild(document.createTextNode(letter.toUpperCase()));
             parentappend.appendChild(spanmake);
         });
     })
