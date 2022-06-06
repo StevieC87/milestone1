@@ -33,6 +33,16 @@ exports.newSpellingBeeform = (req, res, next) => {
     });
 }
 //async
+exports.centerlettermatch = async (req, res, next) => {
+   let word = req.query.word;
+   let centerletter = req.query.centerletter;
+  //res.send({hello: 'hello world'});
+  //get request stuff herte to send along word and letter 
+  await BeeModel.getwordswithcenterletter(word, centerletter, wordlistnew => {
+    res.send({wordlistnew});
+    console.log(wordlistnew);
+  })
+}
 exports.generate = async (req, res, next) => {
   //const newfunction = () => {
     //FETCHALL WORKSZ
@@ -45,7 +55,7 @@ exports.generate = async (req, res, next) => {
     //  res.send(word)
     BeeModel.getwordsfromletters(word,matchingwords => {
    //   console.log(matchingwords);
-      res.send({matchingwords, word});
+      res.send({matchingwords, word });
     });
         
     // res.send({word});

@@ -12,6 +12,7 @@ router.post('/add-to-wishlist', shopController.addToWishlist);
 
 router.get('/spelling2', BeeController.spellingBee);
 router.get('/createbee', BeeController.newSpellingBeeform);
-router.get('/getwordsgenerate', BeeController.generate)
+router.get('/getwordsgenerate', BeeController.generate);
+router.get('/getwordswithcenterletter', BeeController.centerlettermatch)
 
 module.exports = router;

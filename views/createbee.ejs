@@ -40,6 +40,7 @@
 
 
     </div>
+    <h2 class="centertxt">Pick the Center Letter</h2>
     <div class="flexcenter centertxt"  id="looplettersdiv">
 
     </div>
@@ -57,6 +58,7 @@
 
 <script>
   let indexloop = 0;
+  let wordwechose = '';
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    // fetch('/miniwordlist.json')
    
@@ -65,14 +67,14 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
    .then(data => {
       console.log(data);
       document.querySelector('#word').textContent = data.word;
-      
+      wordwechose = data.word;
       console.log(indexloop,'indexloop');
       let worduniqueletters = data.matchingwords.uniqueStr;
       let arrayofuniqueletters = data.matchingwords.arrayofuniqueletters;
       console.log(worduniqueletters);
       console.log(data.matchingwords.arrayofuniqueletters,'arrayofuniqueletters');
       let parentappend = document.querySelector('#looplettersdiv');
-    
+        
       if(indexloop > 0) {
             document.querySelectorAll('.icircle').forEach(circle => {
         //alert(circle.id);
@@ -100,7 +102,7 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
     .then(after => {
         
     })
-
+console.log(wordwechose);
 });
 
 document.querySelector('#looplettersdiv').addEventListener('click', async callback => {
@@ -111,7 +113,13 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
         return;
     }
     else{
-        alert('letter clicked', inputid);
+   await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
+   .then(response => response.text())
+   .then(data => {
+      console.log(data);
+   })
+        //alert( inputid);
+        //alert(wordwechose);
         //create another fetch api to get words with also the center letter only 
 
     }

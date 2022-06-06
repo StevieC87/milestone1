@@ -116,7 +116,23 @@ module.exports = class SpellingBee {
       })
 
   }
+  static getwordswithcenterletter(word,centerletter, cb) {
+    const uniqueCount = new Set(word).size;
+    const uniqueStr = [...new Set(word)].join('');
+    const lettersarray = uniqueStr.split('');
+    //START PREPARING FOR REGEX
+    const alphabetarray = [
+      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+    ];
+    const newalphabet = alphabetarray.filter(letter => {
+      if(!lettersarray.includes(letter)) {
+        return letter;
+      }
+    })
+    const newalphabetstring = newalphabet.join('');
+    cb('hellaaao')
 
+  }
   static getwordsfromletters(word, cb) {
     //cb('hello');
    
