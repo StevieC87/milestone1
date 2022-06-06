@@ -6,3 +6,11 @@
 .bgrcolorgray {
     background-color: lightgray;
 }
+.flexcenter {
+    display: flex;
+    justify-content: center;
+}
+.centertxt {
+    text-align: center;
+    display:block;
+}

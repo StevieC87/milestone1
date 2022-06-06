@@ -5,7 +5,7 @@ const rootDir = require('../util/path');
 const p = path.join(rootDir, 'data', 'samplenew.json');
 const p2 = path.join(rootDir, 'data', 'littlelistnew.json');
 const getwordsFromFile = cb => {
-  fs.readFile(p, (err, fileContent) => {
+  fs.readFile(p2, (err, fileContent) => {
     if (err) {
       cb([]);
     } else {
@@ -295,7 +295,7 @@ module.exports = class SpellingBee {
         check2 => check2.length >= 5
       }); */
   //   cb(newarraya);
-    cb({newarray: newarraya, uniqueStr:uniqueStr})
+    cb({newarray: newarraya, uniqueStr:uniqueStr, arrayofuniqueletters: lettersarray})
       //filter words with these letters
     });
    /* 

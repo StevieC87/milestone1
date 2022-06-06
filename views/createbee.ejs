@@ -2,22 +2,44 @@
 <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
 </head>
 
+<style> 
+
+.i-circle {
+    background: #EEE;
+    color: #000;
+    padding: 5px 20px;
+    border-radius: 50%;
+    font-size: 35px;
+}
+</style>
 <body>
+  
 <%- include('./includes/nav.ejs') %>
 
 
 <form action="">
-
-    <label for="word">Choose a word  min 7 letters</label>
-    <a class="btn btn-primary" id="generatewordbutton">Suggest</a>
-    <input type="text" id="word" >
+    <h1 class="centertxt">Pick a word</h1>
+   <!--  <label for="word"></label> -->
+    <div class="flexcenter">
+        <a class="btn btn-primary centertxt" id="generatewordbutton">Suggest</a>
+    </div>
+    <div class="flexcenter" >
+        
+        <div id="word" style="height: 70px; font-size: 18pt;"></div>
+    </div>
+    
+    <!-- <input type="text" id="word" > -->
 
     <div id="pickcentreletterloop">
 
 
     </div>
-    
-     
+    <div id="loopletters">
+
+    </div>
+  <!--   <span class="i-circle">i</span>
+     -->
+
     <label for="centre letter">Pick the centre letter</label>
     <input type="radio" name="centreletter" value="1">1
     <div id="show total matches"></div>
@@ -35,8 +57,25 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
    .then(response => response.json())
   .then(data => {
       console.log(data);
-      document.querySelector('#word').value = data.word;
-  });
+      document.querySelector('#word').textContent = data.word;
+    
+      let worduniqueletters = data.matchingwords.uniqueStr;
+      let arrayofuniqueletters = data.matchingwords.arrayofuniqueletters;
+      console.log(worduniqueletters);
+      console.log(data.matchingwords.arrayofuniqueletters,'arrayofuniqueletters');
+      let parentappend = document.querySelector('#loopletters')
+      arrayofuniqueletters.forEach((letter, index) => {
+            console.log(letter, index);
+            let spanmake = document.createElement("span");
+            spanmake.className = "i-circle";
+            spanmake.appendChild(document.createTextNode(letter));
+            parentappend.appendChild(spanmake);
+        });
+    })
+    .then(after => {
+        
+    })
+	
 
   /*   .then(res => {d
        // console.log(await 'hello');
@@ -57,6 +96,7 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
     //.then(data => console.log(data)); 
 
 });
+
 </script>
 
 
