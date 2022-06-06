@@ -35,11 +35,15 @@ exports.newSpellingBeeform = (req, res, next) => {
 //async
 exports.generate = (req, res, next) => {
   //const newfunction = () => {
-    //FETCHALL WORKS
+    //FETCHALL WORKSZ
     BeeModel.findmin71(word => {
       console.log(word);
-      res.send({word: word})
+     // res.send({word: word})
+    // res.send(word);
+     res.send(word);
+    // res.send('word', {word: word});
     //  res.send(word)
+  
     })
    
    

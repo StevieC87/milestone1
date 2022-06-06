@@ -22,7 +22,9 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
    // fetch('/miniwordlist.json')
    fetch('/getwordsgenerate')
     .then(res => {
-        console.log(await 'hello');
+       // console.log(await 'hello');
+      console.log(res.text());
+      
         //console.log(res.json());
       //  console.log(await res);
     })

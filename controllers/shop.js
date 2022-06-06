@@ -3,6 +3,7 @@ const Wish = require("../models/wish");
 
 exports.listProducts = (req, res, next) => {
     //function to get all products
+    const test = '';
     Product.find()
     .then(products => {
         // console.log(products);

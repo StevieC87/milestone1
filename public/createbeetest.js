@@ -15,8 +15,10 @@ document.querySelector('#generatewordbutton').addEventListener('click', callback
     //fetch('/getwordsgenerate')
     fetch('/getwordsgenerate')
     .then(word => {
-        console.log(word);
-    })
+        await console.log(word, 'word');
+        // console.log('word', word);
+    }).
+   // next();
    
     /* .then(test => {
         console.log(test,'test')
