@@ -196,24 +196,34 @@ module.exports = class SpellingBee {
 
   //console.log(wordstaticminusalphabetTOstring);
    //'abatement'
-  let string2 = /[a]/;
-  let string3 = /[^cdfghijklopqrsuvwxyz]/;
-  let string4 = /[cdfghijklopqrsuvwxyz]/g;
+    let texto = 'cdfghijklopqrsuvwxyz';
+    let partooo = `[${texto}]`;
+    
+    let officialtrySTATIC = `[${wordstaticminusalphabetTOstring}]`;
+    let officialtry = `[${newalphabetstring}]`;
+   let part = '[cdfghijklopqrsuvwxyz]';
+ 
+  let string7= `/[${newalphabetstring}]/`;
+
+  //console.log(string6,'string6');
  //  console.log(word,'word');
-   
+ const regex = new RegExp(`${officialtry}`, 'g');
+ //  const regex = new RegExp(string3, 'g');
+   // const regex1 = string4.test(check3);
    //const regex = new RegExp(string3, 'g');
-   const regex = new RegExp(/[^cdfghijklopqrsuvwxyz]/, 'g');
+  // NO const regex = new RegExp(/[^cdfghijklopqrsuvwxyz]/, 'g');
  //  console.log(regex.test(check3), check3);
  
- //let testregexp = check3.match(/`[^${newalphabetstring}]/g/`);
+  // let testregexp = check3.match(regex1);
 
-   let regezwhat = string4.test(check3);
+  let testregexp = regex.test(check3);
+  //original let regezwhat = string.test(check3);
    //console.log(regezwhat, 'regezwhat');
    //   console.log(regezwhat);
-      if (regezwhat === false) {
+      if (testregexp === false) {
         newarraya.push(check3);
       }
-       
+
     //let myRegExp = /[^ ]/i;
 
       /*   let  arr = []; 
@@ -245,7 +255,9 @@ module.exports = class SpellingBee {
        // console.log(uniqueletters);
      });
   console.log(newarraya,'newarraya');
-   
+  console.log(word,'word');
+  console.log(wordstaticminusalphabetTOstring,'wordstaticminusalphabetTOstring');
+  console.log(newalphabetstring,'newalphabetstring');
       //WE WANT TO FIND NOW - ANY WORD OVER 4 LETTERS THAT HAS ANY OF THESE letters, and no more#
       //SO IT MUST NOT HAVE OTHER LETTERS for a start
       //e.g. list brings up this word : aardwolf , and our word is abactinal
