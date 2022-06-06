@@ -67,14 +67,19 @@
     }
     
 </style>
-<%= word %>
-<%-wordarray%>
+<%= word %><%=centerletter%>
 
-
+<%= wordarray %>
+<%=centerletter%>
+<%= remaining %>
+<%=wordarray %>
 
 <a href="#" id="shuffle" class="btn btn-primary" >shuffle</a>
 
 <script>
+      console.log(existingword1,'existingword1');
+        console.log(object);
+        console.log('<%= wordarray %>', 'word array ');
     function shuffle(array) {
         let currentIndex = array.length,  randomIndex;
 
@@ -94,7 +99,8 @@
         }
     document.querySelector('#shuffle').addEventListener('click', e => {
        
-        let existingword1 = '<%-wordarray%>';
+        let existingword1 = '<%=wordarray%>';
+      
         const existingwordtoarray = existingword1.split(',');
         let newarray = shuffle(existingwordtoarray);
     
@@ -113,7 +119,7 @@
 </script>
 
 <script>
-    const wordarray = '<%-wordarray%>';
+    const wordarray = '<%=wordarray%>';
     //const chars = word.split('');
     console.log(chars);
     document.getElementById('test').innerHTML = chars1;
@@ -127,27 +133,27 @@
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter0" id="centerletter" class="letter" x="50%" y="50%" dy="0.35em"><%-wordarray[0]%></text>
+        <text id="outerletter0" id="centerletter" class="letter" x="50%" y="50%" dy="0.35em"><%=wordarray[0]%></text>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter1" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%-wordarray[1]%></text>
+        <text id="outerletter1" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[1]%></text>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter2" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%-wordarray[2]%></text>
+        <text id="outerletter2" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[2]%></text>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter3" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%-wordarray[3]%></text>
+        <text id="outerletter3" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[3]%></text>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter4" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%-wordarray[4]%></text>
+        <text id="outerletter4" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[4]%></text>
     </svg>
     <svg class="svg"> <!--  width="400" height="180" -->
         <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter5" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%-wordarray[5]%></text>
+        <text id="outerletter5" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[5]%></text>
     </svg>
     
     

@@ -26,7 +26,12 @@
 <%- include('./includes/nav.ejs') %>
 
 
-<form action="">
+<!-- BECAUSE I WANT TO PASS OTHER DATA, FOR EXAMPLE THE ARRAY WITH MATCHIGN WORDS
+IM NOT GONNA CREATE A HIDDEN FIELD FROM IT, BUT RATHER SEND ALL THE STUFF AND THE 'FORM' PGROAMMATICALLY 
+LIKE FETCH, BUT WITHOUT ASYNC 
+SO subimt a form wth post request in js -->
+
+<form action="/newgamepost" method="POST">
     <h1 class="centertxt">Pick a word</h1>
    <!--  <label for="word"></label> -->
     <div class="flexcenter">
@@ -43,6 +48,11 @@
 
 
     </div>
+    <input type="text" name="hiddencentreletter" id="hiddencentreletter" value=""> 
+    <input type="text" name="hiddenword" id="hiddenword" value="">
+    <input type="text" name="hiddenwords" id="hiddenwords" value="">
+    <input type="text" name="hiddenarrayremaining" id="hiddenarrayremaining" value="">
+
     <h2 class="centertxt">Pick the Center Letter</h2>
     <div class="flexcenter centertxt"  id="looplettersdiv">
 
@@ -56,6 +66,11 @@
     <div id="showmatchtotal">
 
     </div>
+  
+    <div class="flexcenter">
+        <!-- <a class="btn btn-primary centertxt" id="generatewordbutton">Confirm</a> -->
+        <input type="submit" value="Confirm" class="btn btn-primary centertxt" id="generatewordbutton">   
+    </div>
     <div id="wordlistresults">
 
     </div>
@@ -65,6 +80,9 @@
   let indexloop = 0;
   let wordwechose = '';
   let worduniqueletters = '';
+  let centerletterwechose = '';
+  let arrayofuniqueletters = [];
+  let minusourletter = [];
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    // fetch('/miniwordlist.json')
    
@@ -76,7 +94,7 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
       wordwechose = data.word;
       console.log(indexloop,'indexloop');
       worduniqueletters = data.matchingwords.uniqueStr;
-      let arrayofuniqueletters = data.matchingwords.arrayofuniqueletters;
+      arrayofuniqueletters = data.matchingwords.arrayofuniqueletters;
       console.log(worduniqueletters);
       console.log(data.matchingwords.arrayofuniqueletters,'arrayofuniqueletters');
       let parentappend = document.querySelector('#looplettersdiv');
@@ -109,95 +127,110 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
         
     })
 console.log(wordwechose);
+
+document.querySelector('#hiddenword').value = wordwechose;
+
+  
 });
 
 document.querySelector('#looplettersdiv').addEventListener('click', async callback => {
+    
     let input = event.target;
     let inputid = event.target.id;
-
+  
     
-//maybe get list of other letters, and remove the class of blue if it exists
-    console.log(wordwechose,'wordwechose');
-    let ourwordarray = worduniqueletters.split('');
-    console.log(ourwordarray, 'ourwordarray');
-    let minusourletter = ourwordarray.filter(letter => letter !== inputid);
-    console.log(minusourletter, 'minusourletter');
-
-    let removeblues = minusourletter.forEach(letter => {
-        let divtoedit = document.querySelector(`#${letter}`);
-        divtoedit.classList.remove("icircleselected");
-       // let divtodelete = document.querySelector(`#${letter}`);
-      //  divtodelete.classList.remove('icircleselected');
-    })
-
-    let inputtagname = event.target.tagName; 
-    let mix = '#' + inputid;
-   // console.log(input.id, 'input');
-  
-     //find letters to remove circle selected, before putting it to our one
+    centerletterwechose = inputid;
+    if(inputid.length > 1) {
 
 
-     /* document.querySelectorAll('.icircle icircleselected').forEach(circleword => {
-       // circleword.className = 'icircle';
-       circleword.textContent = 'icircle';
-        console.log(circleword, 'circleword');
-     }); */
-   document.getElementById(inputid).className = 'icircle icircleselected';
-  
-   
-
-    if(inputtagname !== 'SPAN'){
-        return;
     }
-    else{
-   await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
-   .then(response => response.json())
-   .then(data => {
-      console.log(data)
-      console.log(data.wordlistnew.newarray.length, 'length');
-      document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
-      
-   //   if(indexloop > 0) {
-      //  let checkiftabs = document.querySelectorAll('.badge rounded-pill bg-primary');
-      //  console.log(checkiftabs.length,'checkiftabs1LENGTH');
-     // //  if(checkiftabs.length > 0){
-      //    console.log(checkiftabs,'checkiftabs')
+    else {
 
-           
-      //  }
-     //   else {
-     //       console.log('no tabs');
-     //   }
-    //    document.querySelector('.badge rounded-pill bg-primary').remove();
+        document.querySelector('#hiddencentreletter').value = inputid;
+    //maybe get list of other letters, and remove the class of blue if it exists
+        console.log(wordwechose,'wordwechose');
+        let ourwordarray = worduniqueletters.split('');
+        console.log(ourwordarray, 'ourwordarray');
+        minusourletter = ourwordarray.filter(letter => letter !== inputid);
+        console.log(minusourletter, 'minusourletter');
+        document.querySelector('#hiddenarrayremaining').value = minusourletter; //arrayofuniqueletters
+
+        let removeblues = minusourletter.forEach(letter => {
+            let divtoedit = document.querySelector(`#${letter}`);
+            divtoedit.classList.remove("icircleselected");
+        // let divtodelete = document.querySelector(`#${letter}`);
+        //  divtodelete.classList.remove('icircleselected');
+        })
+
+        let inputtagname = event.target.tagName; 
+        let mix = '#' + inputid;
+    // console.log(input.id, 'input');
+    
+        //find letters to remove circle selected, before putting it to our one
+
+
+        /* document.querySelectorAll('.icircle icircleselected').forEach(circleword => {
+        // circleword.className = 'icircle';
+        circleword.textContent = 'icircle';
+            console.log(circleword, 'circleword');
+        }); */
+    document.getElementById(inputid).className = 'icircle icircleselected';
+    
+    
+
+        if(inputtagname !== 'SPAN'){
+            return;
+        }
+        else{
+    await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+        console.log(data.wordlistnew.newarray.length, 'length');
+        document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
+        document.querySelector('#hiddenwords').value = data.wordlistnew.newarray;
+    //   if(indexloop > 0) {
+        //  let checkiftabs = document.querySelectorAll('.badge rounded-pill bg-primary');
+        //  console.log(checkiftabs.length,'checkiftabs1LENGTH');
+        // //  if(checkiftabs.length > 0){
+        //    console.log(checkiftabs,'checkiftabs')
+
             
-      //  }
-      document.querySelectorAll('.badge').forEach(badge => {
-      // console.log('found badge');
-       let divtodelete = document.querySelector(`#${badge.id}`);
-      // console.log(divtodelete, 'divtodelete');
-       let parentappend = document.querySelector('#wordlistresults');
-       parentappend.removeChild(divtodelete);
-       })
-      data.wordlistnew.newarray.forEach((word, index) => {
-            let parentappend2 = document.querySelector('#wordlistresults');
-            let spanmake = document.createElement("span");
-            spanmake.className = "badge rounded-pill bg-primary";
-            spanmake.id = word;
-            // styled.setAttribute('style', 'color: red');
-            spanmake.appendChild(document.createTextNode(word));          
-            spanmake.appendChild(document.createElement('p'));  
-            parentappend2.appendChild(spanmake);
-            //BUT IF CLICK AGAIN REMOVE PREVIOUS 
-          
-        });
-   })
-        //alert( inputid);
-        //alert(wordwechose);
-        //create another fetch api to get words with also the center letter only 
+        //  }
+        //   else {
+        //       console.log('no tabs');
+        //   }
+        //    document.querySelector('.badge rounded-pill bg-primary').remove();
+                
+        //  }
+        document.querySelectorAll('.badge').forEach(badge => {
+        // console.log('found badge');
+        let divtodelete = document.querySelector(`#${badge.id}`);
+        // console.log(divtodelete, 'divtodelete');
+        let parentappend = document.querySelector('#wordlistresults');
+        parentappend.removeChild(divtodelete);
+        })
+        data.wordlistnew.newarray.forEach((word, index) => {
+                let parentappend2 = document.querySelector('#wordlistresults');
+                let spanmake = document.createElement("span");
+                spanmake.className = "badge rounded-pill bg-primary";
+                spanmake.id = word;
+                // styled.setAttribute('style', 'color: red');
+                spanmake.appendChild(document.createTextNode(word));          
+                spanmake.appendChild(document.createElement('p'));  
+                parentappend2.appendChild(spanmake);
+                //BUT IF CLICK AGAIN REMOVE PREVIOUS 
+            
+            });
+    })
+            //alert( inputid);
+            //alert(wordwechose);
+            //create another fetch api to get words with also the center letter only 
 
+        }
     }
-
 });
+ 
 /* 
 document.querySelector('#clearcircles').addEventListener('click', async callback => {
     document.querySelectorAll('.icircle').forEach(circle => {

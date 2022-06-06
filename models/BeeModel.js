@@ -84,14 +84,7 @@ module.exports = class SpellingBee {
       cb(asdf);
   }
     //static findmin72(cb) {
-  static findmin72(cb) {
-    /* getwordsFromFile(words => {
-      const wordlist = words.find(p => p.length > 7);
-      cb(wordlist);
-    }) */
-    let test = 'test';
-    return test;
-  }
+ 
   static findmin71(cb) {
     //findmin7(cb) => {
       getwordsFromFile(words => {
@@ -163,10 +156,10 @@ module.exports = class SpellingBee {
               }
 
  });
-  console.log(newarraya,'newarraya');
-  console.log(word,'word');
+  //console.log(newarraya,'newarraya');
+  ///console.log(word,'word');
   // console.log(wordstaticminusalphabetTOstring,'wordstaticminusalphabetTOstring');
-  console.log(newalphabetstring,'newalphabetstring');
+  // console.log(newalphabetstring,'newalphabetstring');
 
  cb({newarray: newarraya, uniqueStr:uniqueStr, arrayofuniqueletters: lettersarray})
       //filter words with these letters

@@ -32,7 +32,41 @@ exports.newSpellingBeeform = (req, res, next) => {
         centerletter: centerletter, */
     });
 }
-//async
+//POST SAVE NEW GAME -- MONGO AFTER ACTUALLY 
+exports.newgamepostmethod = (req, res, next) => {
+
+  let querystrings = req.query;
+  const bodya = req.body;
+  console.log(bodya,'bodya');
+  let ourword = bodya.hiddenword;
+
+  let ourcenterletter = bodya.hiddencentreletter;
+  let ourremaining = bodya.remaining;
+  let remainingletterarray = bodya.hiddenarrayremaining;
+  let remainingletterarraynew = remainingletterarray.split(',');
+
+  console.log(remainingletterarraynew,'remainingletterarray');
+ //res.send({});
+ 
+ 
+  res.render('spelling2', {
+    querystrings: querystrings,
+    bodya: bodya,
+    pageTitle: 'New bee',
+    path: '/spelling',
+    word: ourword,
+    wordarray: remainingletterarraynew,
+    remaining: ourremaining,
+    centerletter: ourcenterletter 
+  });  
+  let word = req.body.hiddenword;
+  let centreletter = req.body.hiddencentreletter;
+  
+  //console.log(word, 'word');
+  //console.log(centreletter,'centreletter');
+  
+
+}
 exports.centerlettermatch = async (req, res, next) => {
    let word = req.query.word;
    let centerletter = req.query.centerletter;
