@@ -69,52 +69,27 @@ exports.newgamepostmethod = (req, res, next) => {
   
 
 }
-exports.centerlettermatch = async (req, res, next) => {
-   let word = req.query.word;
-   let centerletter = req.query.centerletter;
-  //res.send({hello: 'hello world'});
-  //get request stuff herte to send along word and letter 
-  await BeeModel.getwordswithcenterletter(word, centerletter, wordlistnew => {
-    res.send({wordlistnew: wordlistnew});
-    console.log(wordlistnew);
-  })
-}
+
 exports.generate = async (req, res, next) => {
   //const newfunction = () => {
     //FETCHALL WORKSZ
-   await BeeModel.findmin71(word => {
-      console.log(word);
-     // res.send({word: word})
-    // res.send(word);
-    
-    // res.send('word', {word: word});
-    //  res.send(word)
-    BeeModel.getwordsfromletters(word,matchingwords => {
-   //   console.log(matchingwords);
-      res.send({matchingwords, word });
+   await BeeModel.generateword(word => {
+    console.log(word);
+    BeeModel.getuniqueletters(word,matchingwords => {
+        res.send({word,matchingwords}); //res.send({word, definition}); 
     });
-        
-    // res.send({word});
-//THEN BRING ALL WORDS THAT U CAN MAKE WITH THESE 7 LETTERS 
-    
 
+   })
 
-    
-    //res.json(null)
-    })
-  // await BeeModel.getwordsfromletters(word,matchingwords => {
+}
 
- //   });
-    
-   
-   //   BeeModel.findmin71(word => {
-    // console.log(word);
-    //  console.log('helloooo');
-    //  res.word = word;
-      // res.send({word: word});
-    //  res.send(word)
-   // return word;
-   //    next();
- //   });
-
+exports.centerlettermatch = async (req, res, next) => {
+  let word = req.query.word;
+  let centerletter = req.query.centerletter;
+ //res.send({hello: 'hello world'});
+ //get request stuff herte to send along word and letter 
+ await BeeModel.getwordswithcenterletter(word, centerletter, wordlistnew => {
+   res.send({wordlistnew: wordlistnew});
+   console.log(wordlistnew);
+ })
 }

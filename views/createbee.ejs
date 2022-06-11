@@ -71,9 +71,17 @@ SO subimt a form wth post request in js -->
         <!-- <a class="btn btn-primary centertxt" id="generatewordbutton">Confirm</a> -->
         <input type="submit" value="Confirm" class="btn btn-primary centertxt" id="generatewordbutton">   
     </div>
-    <div id="wordlistresults">
 
-    </div>
+    <div class="container">
+        <div class="row">
+          <div class="col" id="wordlistresults"  class="wordlistresults">
+            Column
+          </div>
+          <div class="col">
+            Column
+          </div>
+        </div>
+      </div>
 </form>
 
 <script>
@@ -84,8 +92,8 @@ SO subimt a form wth post request in js -->
   let arrayofuniqueletters = [];
   let minusourletter = [];
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
-   // fetch('/miniwordlist.json')
    
+    // SENDS GET REQUEST TO GET A RANDOM WORD
    await fetch('/getwordsgenerate')
    .then(response => response.json())
    .then(data => {
@@ -98,7 +106,7 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
       console.log(worduniqueletters);
       console.log(data.matchingwords.arrayofuniqueletters,'arrayofuniqueletters');
       let parentappend = document.querySelector('#looplettersdiv');
-        
+    
       if(indexloop > 0) {
             document.querySelectorAll('.icircle').forEach(circle => {
         //alert(circle.id);
@@ -108,7 +116,10 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
             })
         }
       arrayofuniqueletters.forEach((letter, index) => {
-            console.log(letter, index);
+            
+            //test other way 
+        
+        console.log(letter, index);
             let spanmake = document.createElement("span");
             spanmake.className = "icircle";
             spanmake.id = letter;
@@ -182,66 +193,55 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
             return;
         }
         else{
-    await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        console.log(data.wordlistnew.newarray.length, 'length');
-        document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
-        document.querySelector('#hiddenwords').value = data.wordlistnew.newarray;
-    //   if(indexloop > 0) {
-        //  let checkiftabs = document.querySelectorAll('.badge rounded-pill bg-primary');
-        //  console.log(checkiftabs.length,'checkiftabs1LENGTH');
-        // //  if(checkiftabs.length > 0){
-        //    console.log(checkiftabs,'checkiftabs')
-
-            
-        //  }
-        //   else {
-        //       console.log('no tabs');
-        //   }
-        //    document.querySelector('.badge rounded-pill bg-primary').remove();
+            const getsimilarwords = await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                console.log(data.wordlistnew.newarray.length, 'length');
+                document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
+                document.querySelector('#hiddenwords').value = data.wordlistnew.newarray;
+               
+                    //DELETE EXISTING BADGES TO REPLACE THEM
+                    document.querySelectorAll('.badge').forEach(badge => {
+                    // console.log('found badge');
+                    let divtodelete = document.querySelector(`#${badge.id}`);
+                    // console.log(divtodelete, 'divtodelete');
+                    let parentappend = document.querySelector('#wordlistresults');
+                    parentappend.removeChild(divtodelete);
+                    })
                 
-        //  }
-        document.querySelectorAll('.badge').forEach(badge => {
-        // console.log('found badge');
-        let divtodelete = document.querySelector(`#${badge.id}`);
-        // console.log(divtodelete, 'divtodelete');
-        let parentappend = document.querySelector('#wordlistresults');
-        parentappend.removeChild(divtodelete);
-        })
-        data.wordlistnew.newarray.forEach((word, index) => {
-                let parentappend2 = document.querySelector('#wordlistresults');
-                let spanmake = document.createElement("span");
-                spanmake.className = "badge rounded-pill bg-primary";
-                spanmake.id = word;
-                // styled.setAttribute('style', 'color: red');
-                spanmake.appendChild(document.createTextNode(word));          
-                spanmake.appendChild(document.createElement('p'));  
-                parentappend2.appendChild(spanmake);
-                //BUT IF CLICK AGAIN REMOVE PREVIOUS 
-            
-            });
-    })
-            //alert( inputid);
-            //alert(wordwechose);
-            //create another fetch api to get words with also the center letter only 
+                data.wordlistnew.newarray.forEach((word, index) => {
+                    console.log(word, index);
+                    let parentappend2 = document.querySelector('#wordlistresults');
+                    let spanmake = document.createElement("span");
+                    spanmake.className = "badge rounded-pill bg-primary";
+                    spanmake.id = word;
 
+                    // styled.setAttribute('style', 'color: red');
+                    spanmake.appendChild(document.createTextNode(word));          
+                // spanmake.appendChild(document.createElement('p'));  
+                    parentappend2.appendChild(spanmake);
+                    //BUT IF CLICK AGAIN REMOVE PREVIOUS 
+                });
+          
+               
+            })
+            .then(after => {
+                console.log('after');
+            })
         }
     }
 });
  
-/* 
-document.querySelector('#clearcircles').addEventListener('click', async callback => {
-    document.querySelectorAll('.icircle').forEach(circle => {
-        //alert(circle.id);
-            let divtodelete = document.querySelector(`#${circle.id}`);
-            let parentappend = document.querySelector('#looplettersdiv');
-            parentappend.removeChild(divtodelete);
-        })
-}); */
-
-
+/* data.wordlistnew.newarray.forEach((word, index) => {
+            //but now test: frequency ordering
+            await fetch(`/https://api.datamuse.com/words?ml=${word}&md=f`)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            });
+            
+ */
 </script>
 
 
