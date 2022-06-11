@@ -99,9 +99,23 @@ module.exports = class SpellingBee {
             }
        });
        let rand = Math.floor(Math.random()*newarray.length);
-       let rValue = newarray[rand];
+      // let rValue = newarray[rand];
+       let randomWord = newarray[rand];
      //  console.log(rValue, 'rValue');
-       cb(rValue);
+
+     const uniqueCount = new Set(randomWord).size;
+     //get 7 unique letters
+     const uniqueStr = [...new Set(randomWord)].join('');
+     const lettersarray = uniqueStr.split('');
+     const withoutSpaces = uniqueStr.replaceAll(' ', '');
+
+
+           //Send results back to controller
+       cb({randomWord:randomWord, arrayofuniqueletters: lettersarray,uniqueStr:uniqueStr})
+
+
+
+     //  cb(rValue);
        
     
       })
@@ -167,82 +181,17 @@ module.exports = class SpellingBee {
     // cb('hellaaao');
 
   }
-  static getuniqueletters(word, cb) {
+/*   static getuniqueletters(word, cb) {
    
-    //WE NEED TO MATCH WORDS FROM THE DICTIONARY WITH THE SEVEN LETTERS..
     //count letters
     const uniqueCount = new Set(word).size;
-   //get 7 unique letters   //WHAT IF HAS DASH
+    //get 7 unique letters
     const uniqueStr = [...new Set(word)].join('');
     const lettersarray = uniqueStr.split('');
     const withoutSpaces = uniqueStr.replaceAll(' ', '');
-    
-    //then i can remove the ones i have, and exclude the other letters
-    const alphabetarray = [
-      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-    ];
-    const newalphabet = alphabetarray.filter(letter => {
-      if(!lettersarray.includes(letter)) {
-        return letter;
-      }
-    })
-  
-    const newalphabetstring = newalphabet.join('');
- 
-    //get list of words total into array
-    getwordsFromFile(words => {
-     // console.log(lettersarray,'word');
-      let wordsa = words.words;
-      //we want to find words that have a) at least 4 characters
-      const wordlist = wordsa.filter(p => p.length >= 4);
-      const wordlist2 = wordlist.filter(check2 => {
-        const uniqueCount = new Set(check2).size;
-    
-          if(uniqueCount <= 7) {
-      
-            return check2;
-          }
-     });
-    const newarraya = [];
-
-    //function find words that only have letters my word has
-    const wordlist3 = wordlist2.filter(check3 => {
-        const currentwordtoarray = check3.split(''); 
-        let string= `/[^${newalphabetstring}]/`;
-
-        let texto = 'cdfghijklopqrsuvwxyz';
-        let partooo = `[${texto}]`;
-      
-        //  let officialtrySTATIC = `[${wordstaticminusalphabetTOstring}]`;
-        let officialtry = `[${newalphabetstring}]`;
-        let centreletterstatic = `[t]`;
-        let centreletterhere = 'a';
-        let centreletter = `[${centreletterhere}]`;
-        let part = '[cdfghijklopqrsuvwxyz]';
-  
-        let string7= `/[${newalphabetstring}]/`;
-
-          //console.log(string6,'string6');
-        //  console.log(word,'word');
-        const regex = new RegExp(`${officialtry}`, 'g');
-        const regexSTATIC = new RegExp(`${partooo}`, 'g');
-        const regexCentreLetter = new RegExp(`${centreletterstatic}`, 'g');
-
-        let testregexpCentreletter = regexCentreLetter.test(check3);
-          
-        let testregexp = regexSTATIC.test(check3); //test static
-          
-        if (testregexp === false) {
-          newarraya.push(check3);
-        }
-      });
-      console.log(newarraya,'newarraya');
-    console.log(word,'word');
-    console.log(newalphabetstring,'newalphabetstring');
-
-      //Send results back to controller
+          //Send results back to controller
       cb({uniqueStr:uniqueStr, arrayofuniqueletters: lettersarray})
       //newarray: newarraya, 
-    });
-  }
+    } */
+  
 };

@@ -71,14 +71,12 @@ exports.newgamepostmethod = (req, res, next) => {
 }
 
 exports.generate = async (req, res, next) => {
-  //const newfunction = () => {
-    //FETCHALL WORKSZ
    await BeeModel.generateword(word => {
     console.log(word);
-    BeeModel.getuniqueletters(word,matchingwords => {
-        res.send({word,matchingwords}); //res.send({word, definition}); 
-    });
-
+  //  BeeModel.getuniqueletters(word,worduniqueletters => {
+     // res.send({word,worduniqueletters}); //res.send({word, definition}); 
+   // });
+   res.send({word});
    })
 
 }

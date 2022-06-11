@@ -98,13 +98,13 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
    .then(response => response.json())
    .then(data => {
       console.log(data);
-      document.querySelector('#word').textContent = data.word;
-      wordwechose = data.word;
+      document.querySelector('#word').textContent = data.word.randomWord;
+      wordwechose = data.word.randomWord;
       console.log(indexloop,'indexloop');
-      worduniqueletters = data.matchingwords.uniqueStr;
-      arrayofuniqueletters = data.matchingwords.arrayofuniqueletters;
+      worduniqueletters = data.word.uniqueStr;
+      arrayofuniqueletters = data.word.arrayofuniqueletters;
       console.log(worduniqueletters);
-      console.log(data.matchingwords.arrayofuniqueletters,'arrayofuniqueletters');
+      console.log(data.word.arrayofuniqueletters,'arrayofuniqueletters');
       let parentappend = document.querySelector('#looplettersdiv');
     
       if(indexloop > 0) {
