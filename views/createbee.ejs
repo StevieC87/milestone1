@@ -54,10 +54,10 @@ SO subimt a form wth post request in js -->
 
 
     </div>
-    <input type="hidden" name="hiddencentreletter" id="hiddencentreletter" value=""> 
-    <input type="hidden" name="hiddenword" id="hiddenword" value="">
-    <input type="hidden" name="hiddenwords" id="hiddenwords" value="">
-    <input type="hidden" name="hiddenarrayremaining" id="hiddenarrayremaining" value="">
+    <input type="text" name="hiddencentreletter" id="hiddencentreletter" value=""> 
+    <input type="text" name="hiddenword" id="hiddenword" value="">
+    <input type="text" name="hiddenwords" id="hiddenwords" value="">
+    <input type="text" name="hiddenarrayremaining" id="hiddenarrayremaining" value="">
 
     <h2 class="centertxt">Pick the Center Letter</h2>
     <div class="flexcenter centertxt"  id="looplettersdiv">
@@ -196,6 +196,7 @@ matchingwordObject.word = 'word';
 console.log('sssssssssssssssssssss', matchingwordObject);
 //let newobjectofwords1 = newobjectofwords.word ;
 
+let arrayofexcludedwords = [];
 
 document.addEventListener('click', async callback => {
     let targetelement = event.target;
@@ -228,21 +229,9 @@ document.addEventListener('click', async callback => {
                 else {
                     //IF IT'S A NON-CANCELLED WORD AND YOU'RE CLICKING THE DELETE BUTTON
              
-                    //    wordspan.style.textDecoration = 'line-through';
-                   // idtogreyin.style.background = 'grey';
                     idtogreyin.classList.add('wordcancelled');
                     console.log('outside');
-                   // console.log(word, 'wordCHECK');
-                   //TRYING TO SEE IF CLICKED WORD WE WANT REMOVED , 
-                   //WE WANT TO REMOVE IT FROM AN ARRAY
-                   //BUT BEST WE START ANOTHER ARRAY MAYBE
-                  
-                //   }
-                  
-                    //the word we are click on: targetword
-                //we wwnt to create another array maybe, or remove it from the array
-                  //  console.log(newcleanarrayofwords,'newcleanarrayofwords');
-
+               
                     console.log(targetword, 'targetwordCHECK');
 
                     //WAYS TO REMOVE CURRENT CLICKED WORD FROM ARRAY
@@ -253,33 +242,14 @@ document.addEventListener('click', async callback => {
                         if(wordaa == targetword) {
                             console.log('splice');
                             matchingwordsarrayis.splice(index, 1);
+                            arrayofexcludedwords.push(wordaa);
                         }
                     });
-                    
-                    //FILTER WAY
-                   // newcleanarrayofwords.filter((worda, index) => {
-                        //want to remove elemnt from array
-                        //filter iterates through our array
-                        //maybe when it finds our word 
-                        //it doesnt push it
-                      
-                    
-                    //    return worda == targetword;
-                      /*   if(worda !== targetword) {
-                            return worda;
-                           // word.ispangram = 'no';
-                           // console.log(word,'word');
-                           // console.log(matchingwordsarrayis,'matchingwordsarrayis');
-                         }
-                         else {
-                            console.log(worda,'worda');
-                            
-                           
-                         } */
-                         
-                 //       });
+                         document.querySelector('#hiddenwords').value = matchingwordsarrayis;
+
                         console.log(matchingwordsarrayis,'matchingwordsarrayisNEW1111');
                         console.log(newcleanarrayofwords, 'newcleanarrayofwordsAAAFTER');
+                        console.log(arrayofexcludedwords,'arrayofexcludedwords');
                 }
                 
             }
