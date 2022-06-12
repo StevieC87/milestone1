@@ -119,6 +119,7 @@ SO subimt a form wth post request in js -->
   let newmatchingletteres = [];
   let matchingwordsarrayis = [];
   let allpangrams = [];
+  let newcleanarrayofwords = [];
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    
     // SENDS GET REQUEST TO GET A RANDOM WORD
@@ -278,6 +279,7 @@ document.addEventListener('click', async callback => {
                          
                  //       });
                         console.log(matchingwordsarrayis,'matchingwordsarrayisNEW1111');
+                        console.log(newcleanarrayofwords, 'newcleanarrayofwordsAAAFTER');
                 }
                 
             }
@@ -354,7 +356,7 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
         circleword.textContent = 'icircle';
             console.log(circleword, 'circleword');
         }); */
-        let newcleanarrayofwords = [];
+        
     document.getElementById(inputid).className = 'icircle icircleselected';
     
     
