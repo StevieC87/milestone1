@@ -92,6 +92,22 @@ SO subimt a form wth post request in js -->
       </div>
 </form> 
 
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Definition</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body" id="modalbody"></div>
+    </div>
+    </div>
+</div>
+
 <script>
    
   let indexloop = 0;
@@ -192,8 +208,25 @@ document.addEventListener('click', async callback => {
                     .then(response => response.json())
                     .then(data => {
                         console.log(data);
-                        console.log(data[0].word);
-                        console.log(data[0].meanings[0].definitions[0]);
+                        let resultdefinition = '';
+                        if(data.title) {
+                            resultdefinition = 'Sorry no dictionary entry found';
+                            document.querySelector('#modalbody').textContent = resultdefinition;
+                        }
+                        else {
+                            console.log(data[0].meanings[0].definitions[0]);
+                            let resultdefinition = data[0].meanings[0].definitions[0].definition;
+                            let concated = '#' + targetword;
+                            // let popupchange = document.querySelector(`#${word}`).dataset.content = definition;
+                            //  let popupchange = document.querySelector(concated).setAttribute("data-bs-content", "hello");
+                            let popupchange = document.querySelector('#modalbody').textContent = resultdefinition;
+                        }
+                       
+                       // console.log(data[0].word);
+                      
+                        //
+                        //
+                        // setAttribute("class", "democlass");
                     })
             }
     }
@@ -217,7 +250,7 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
     //maybe get list of other letters, and remove the class of blue if it exists
         console.log(wordwechose,'wordwechose');
         let ourwordarray = worduniqueletters.split('');
-        console.log(ourwordarray, 'ourwordarray');
+       // console.log(ourwordarray, 'ourwordarray');
         minusourletter = ourwordarray.filter(letter => letter !== inputid);
         console.log(minusourletter, 'minusourletter');
         document.querySelector('#hiddenarrayremaining').value = minusourletter; //arrayofuniqueletters
@@ -252,8 +285,8 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
             const getsimilarwords = await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                console.log(data.wordlistnew.newarray.length, 'length');
+               // console.log(data)
+             //   console.log(data.wordlistnew.newarray.length, 'length');
                 document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
                 document.querySelector('#hiddenwords').value = data.wordlistnew.newarray;
                
@@ -281,14 +314,14 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
 
     //DISPLAY MATCHED WORDS
     data.wordlistnew.newarray.forEach((word, index) => {
-        console.log(word, index);
+      //  console.log(word, index);
         let testaa = 
         `<li id="li_${word}" class="list-group-item d-flex justify-content-between align-items-start"
         id="${word}">
             <span id="${word}Word" style="width: 250px;">${word}</span>
             <span id="${word}" style="width: 30px; margin-right: 15px"
                  class="badge bg-primary rounded-pill define"
-                 data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Popover text"
+                 data-bs-toggle="modal" data-bs-target="#myModal"
                  >
                 <i id="${word}" class="fa-solid fa-question iconw define"></i>
                     </span>
@@ -299,9 +332,9 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
         </li>`;
         //  let testaa = `<span class="badge rounded-pill bg-primary" id="${word}">${word}</span>`;
         
-  
+  //data-bs-toggle="popover" data-bs-trigger="click" data-bs-content="Loading Definition"
    
- 
+ //
 
 let parentappend2 = document.querySelector('#grouplist'); //wordlistresults
     /*     let spanmake = document.createElement("span");
@@ -315,7 +348,11 @@ let parentappend2 = document.querySelector('#grouplist'); //wordlistresults
 //  parentappend2.appendChild(testaa);
 parentappend2.innerHTML += testaa;
 
-
+let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+ 
   
 
 //  let testaa = `<span class="badge rounded-pill bg-primary" id="${word}">${word}</span>`;
@@ -368,7 +405,9 @@ parentappend2.innerHTML += testaa;
 
 </script>
 
-
+<script>
+    
+</script>
 
 
 
