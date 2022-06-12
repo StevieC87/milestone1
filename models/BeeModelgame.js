@@ -1,17 +1,25 @@
 const mongoose = require('mongoose');
-const Schema2 = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const BeeSchema2 = new Schema2({
+const BeeSchema2 = new Schema({
  
     word: {
     type: String,
     required: true
   },
-  centerletter: {
-    type: Number,
+  centreletter: {
+    type: String,
     required: true
   },
-  arrayofword: {
+  remaininglettersarray: {
+    type: Array,
+    required: true
+  },
+  matchingswords: {
+    type: Array,
+    required: true
+  },
+  pangrams: {
     type: Array,
     required: true
   }

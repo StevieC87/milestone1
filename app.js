@@ -31,14 +31,18 @@ app.use('/user', userRoutes);
 
 /* 404 error handling */
 app.use(errorController.get404);
- app.listen(3000);
 
-/* mongoose.connect(process.env.MONGOCONNECT)
+// app.listen(3000);
+
+//mongoose.connect(process.env.MONGOCONNECT)
+mongoose.connect(process.env.MONGOCONNECT, {
+    dbName: 'games'
+})
     .then(app.listen(3000))
     .catch(err=> {
         console.log(err);
     });
- */
+
 
 /* 
 const fileUpload = require("express-fileupload");

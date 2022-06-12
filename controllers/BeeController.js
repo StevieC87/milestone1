@@ -1,4 +1,5 @@
 const BeeModel = require("../models/BeeModel");
+const Bee = require("../models/BeeModelgame");
 //const Wish = require("../models/wish");
 const fs = require('fs');
 const path = require('path');
@@ -100,3 +101,30 @@ exports.howmanypangrams = (req, res, next) => {
   })
 }
   
+exports.addNewGame = (req, res, next) => {
+ 
+    const word = req.body.hiddenword;
+    const centreletter = req.body.hiddencentreletter;
+    const matchingwords = req.body.hiddenwords;
+    const remaininglettersarray = req.body.hiddenarrayremaining;
+    const pangrams = req.body.hiddenpangrams;
+
+    const game = new Bee({
+      word: word,
+      centreletter: centreletter,
+      matchingwords: matchingwords,
+      remaininglettersarray: remaininglettersarray,
+      pangrams:pangrams
+    });
+
+    game
+      .save()
+      .then(result => {
+        console.log('Create Product');
+     //   res.redirect('/admin/products');
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      //mongoose has a save method
+  };

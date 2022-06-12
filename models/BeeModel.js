@@ -193,7 +193,7 @@ module.exports = class SpellingBee {
     if(wordnow.length >= 7 && unique_letters_count === 7){
       allpangrams.push(wordnow);
     } 
-    console.log(allpangrams,'allpangrams');
+    // console.log(allpangrams,'allpangrams');
   })
  
   //console.log(newarraya,'newarraya');
