@@ -20,6 +20,12 @@
 .icircleselected {
     background: blue;
 }
+
+.wordcancelled {
+    text-decoration: line-through;
+    background: grey;
+
+}
 </style>
 <body>
   
@@ -32,7 +38,7 @@ LIKE FETCH, BUT WITHOUT ASYNC
 SO subimt a form wth post request in js -->
 
 <form action="/newgamepost" method="POST">
-    <h1 class="centertxt">Pick a word</h1>
+    <h1 class="centertxt">Pick word</h1>
    <!--  <label for="word"></label> -->
     <div class="flexcenter">
         <a class="btn btn-primary centertxt" id="generatewordbutton">Suggest</a>
@@ -60,8 +66,7 @@ SO subimt a form wth post request in js -->
   <!--   <span class="icircle">i</span>
      -->
 
-    <label for="centre letter">Pick the centre letter</label>
-    <input type="radio" name="centreletter" value="1">1
+
     <div id="show total matches"></div>
     <div id="showmatchtotal">
 
@@ -75,22 +80,28 @@ SO subimt a form wth post request in js -->
     <div class="container">
         <div class="row">
           <div class="col" id="wordlistresults"  class="wordlistresults">
-            Column
+            <h1 class="centertxt">Word matches</h1>
+            <ul class="list-group" id="grouplist">
+            
+            </ul>
           </div>
           <div class="col">
             Column
           </div>
         </div>
       </div>
-</form>
+</form> 
 
 <script>
+   
   let indexloop = 0;
   let wordwechose = '';
   let worduniqueletters = '';
   let centerletterwechose = '';
   let arrayofuniqueletters = [];
   let minusourletter = [];
+  let newmatchingletteres = [];
+
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    
     // SENDS GET REQUEST TO GET A RANDOM WORD
@@ -144,6 +155,51 @@ document.querySelector('#hiddenword').value = wordwechose;
   
 });
 
+document.addEventListener('click', async callback => {
+    let targetelement = event.target;
+    let targetword = event.target.id;
+   
+    
+       if(targetelement.tagName == 'SPAN' || targetelement.tagName == 'I' && targetelement.classList.contains("badge") || targetelement.classList.contains("iconw")){
+            //console.log('yes');
+            let wordspan = document.querySelector(`#${targetword}Word`);
+            let inter = `li_${targetword}`;
+            let idtogreyin = document.querySelector(`#li_${targetword}`); //(`li_${targetword}`);
+            console.log(idtogreyin,'idtogreyin');
+            console.log(targetword,'targetword');
+            console.log(inter, 'inter');
+             console.log(event);
+           
+             if(targetelement.classList.contains("delete")) {
+             console.log('delete');  
+               // if(wordspan.style.textDecoration == 'line-through' && idtogreyin.style.color == 'grey') {
+                if(idtogreyin.classList.contains('wordcancelled')) {
+                // wordspan.style.textDecoration = 'none';
+                  //  idtogreyin.style.background = 'transparent';
+                    idtogreyin.classList.remove('wordcancelled');
+                    console.log('inside');
+                }
+                else {
+                //    wordspan.style.textDecoration = 'line-through';
+                   // idtogreyin.style.background = 'grey';
+                    idtogreyin.classList.add('wordcancelled');
+                    console.log('outside');
+                }
+            }
+            else if(targetelement.classList.contains("define")){
+                console.log('define');
+                const getsimilarwords = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${targetword}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        console.log(data[0].word);
+                        console.log(data[0].meanings[0].definitions[0]);
+                    })
+            }
+    }
+}, true);
+
+
 document.querySelector('#looplettersdiv').addEventListener('click', async callback => {
     
     let input = event.target;
@@ -176,7 +232,7 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
         let inputtagname = event.target.tagName; 
         let mix = '#' + inputid;
     // console.log(input.id, 'input');
-    
+        
         //find letters to remove circle selected, before putting it to our one
 
 
@@ -202,27 +258,69 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
                 document.querySelector('#hiddenwords').value = data.wordlistnew.newarray;
                
                     //DELETE EXISTING BADGES TO REPLACE THEM
-                    document.querySelectorAll('.badge').forEach(badge => {
+               /*      document.querySelectorAll('.badge').forEach(badge => {
                     // console.log('found badge');
                     let divtodelete = document.querySelector(`#${badge.id}`);
                     // console.log(divtodelete, 'divtodelete');
                     let parentappend = document.querySelector('#wordlistresults');
                     parentappend.removeChild(divtodelete);
-                    })
-                
-                data.wordlistnew.newarray.forEach((word, index) => {
-                    console.log(word, index);
-                    let parentappend2 = document.querySelector('#wordlistresults');
-                    let spanmake = document.createElement("span");
-                    spanmake.className = "badge rounded-pill bg-primary";
-                    spanmake.id = word;
+                    }) */
+                    document.querySelectorAll('.list-group-item').forEach(badge => {
+                    // console.log('found badge');
+                    let divtodelete = document.querySelector(`#${badge.id}`);
+                    // console.log(divtodelete, 'divtodelete');
+                    let parentappend = document.querySelector('#grouplist');
+                    parentappend.removeChild(divtodelete);
+                    }) 
+                  
+                    //delete word list
 
-                    // styled.setAttribute('style', 'color: red');
-                    spanmake.appendChild(document.createTextNode(word));          
-                // spanmake.appendChild(document.createElement('p'));  
-                    parentappend2.appendChild(spanmake);
-                    //BUT IF CLICK AGAIN REMOVE PREVIOUS 
-                });
+
+// const listouter1 = '<ul class="list-group">';
+
+
+    //DISPLAY MATCHED WORDS
+    data.wordlistnew.newarray.forEach((word, index) => {
+        console.log(word, index);
+        let testaa = 
+        `<li id="li_${word}" class="list-group-item d-flex justify-content-between align-items-start"
+        id="${word}">
+            <span id="${word}Word" style="width: 250px;">${word}</span>
+            <span id="${word}" style="width: 30px; margin-right: 15px"
+                 class="badge bg-primary rounded-pill define"
+                 data-bs-toggle="popover" data-bs-trigger="hover" data-bs-content="Popover text"
+                 >
+                <i id="${word}" class="fa-solid fa-question iconw define"></i>
+                    </span>
+            <span id="${word}" style="width: 30px;" class="badge bg-danger rounded-pill delete"
+            >
+                <i id="${word}" data-word="${word}" class="fa-solid fa-trash-can iconw delete"></i>
+                </span>
+        </li>`;
+        //  let testaa = `<span class="badge rounded-pill bg-primary" id="${word}">${word}</span>`;
+        
+  
+   
+ 
+
+let parentappend2 = document.querySelector('#grouplist'); //wordlistresults
+    /*     let spanmake = document.createElement("span");
+    spanmake.className = "badge rounded-pill bg-primary";
+    spanmake.id = word; */
+
+    // styled.setAttribute('style', 'color: red');
+//     spanmake.appendChild(document.createTextNode(word));          
+// spanmake.appendChild(document.createElement('p'));  
+//    parentappend2.appendChild(spanmake);
+//  parentappend2.appendChild(testaa);
+parentappend2.innerHTML += testaa;
+
+
+  
+
+//  let testaa = `<span class="badge rounded-pill bg-primary" id="${word}">${word}</span>`;
+    //BUT IF CLICK AGAIN REMOVE PREVIOUS 
+});
           
                
             })
@@ -242,6 +340,32 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
             });
             
  */
+
+   // alert('body clicked');
+
+     /* if(element.tagName == 'span' && element.classList.contains("badge")){
+        console.log("hi");
+        alert('adsfsafd');
+    }
+    else{
+        console.log("bye");
+    } */
+  /*   
+                        }); */
+   
+
+/*  document.querySelector('#getworddefinition').addEventListener('click', async callback => {
+                const getsimilarwords = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${wordwechose}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data)
+                        });
+                    }); */
+  
+
+
+
+
 </script>
 
 

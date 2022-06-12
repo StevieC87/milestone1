@@ -15,5 +15,6 @@ router.get('/createbee', BeeController.newSpellingBeeform);
 router.get('/getwordsgenerate', BeeController.generate);
 router.get('/getwordswithcenterletter', BeeController.centerlettermatch)
 router.post('/newgamepost?', BeeController.newgamepostmethod);
+router.get('/howmanypangrams', BeeController.howmanypangrams);
 
 module.exports = router;

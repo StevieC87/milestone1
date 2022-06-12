@@ -121,6 +121,24 @@ module.exports = class SpellingBee {
       })
 
   }
+  static howmanypangrams(cb) {
+    getwordsFromFile(words => {
+      let wordsa = words.words;
+      const wordlist = wordsa.filter(p => p.length >= 7);
+      let newarray = [];
+      const wordlist2 = wordlist.filter(check2 => {
+         const uniqueCount = new Set(check2).size;
+      
+           if(uniqueCount === 7) {
+             newarray.push(check2);
+           }
+      });
+  
+      console.log(newarray.length, 'number of pangrams total possible from this word list');
+      cb({total: newarray.length, pangrams: newarray});
+    })
+  }
+
   static getwordswithcenterletter(word,centerletter, cb) {
     const uniqueCount = new Set(word).size;
     const uniqueStr = [...new Set(word)].join('');

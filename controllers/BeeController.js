@@ -91,3 +91,12 @@ exports.centerlettermatch = async (req, res, next) => {
    console.log(wordlistnew);
  })
 }
+
+exports.howmanypangrams = (req, res, next) => {
+  BeeModel.howmanypangrams(pangrams => {
+    res.send({pangrams: pangrams.pangrams, total: pangrams.total});
+    console.log(pangrams.total, 'total pangrams');
+    console.log(pangrams, 'pangrams');
+  })
+}
+  
