@@ -117,7 +117,8 @@ SO subimt a form wth post request in js -->
   let arrayofuniqueletters = [];
   let minusourletter = [];
   let newmatchingletteres = [];
-
+  let matchingwordsarrayis = [];
+  let allpangrams = [];
 document.querySelector('#generatewordbutton').addEventListener('click', async callback => {
    
     // SENDS GET REQUEST TO GET A RANDOM WORD
@@ -133,6 +134,7 @@ document.querySelector('#generatewordbutton').addEventListener('click', async ca
       console.log(worduniqueletters);
       console.log(data.word.arrayofuniqueletters,'arrayofuniqueletters');
       let parentappend = document.querySelector('#looplettersdiv');
+    
     
       if(indexloop > 0) {
             document.querySelectorAll('.icircle').forEach(circle => {
@@ -171,6 +173,29 @@ document.querySelector('#hiddenword').value = wordwechose;
   
 });
 
+//click on QUESTION MARK or the delete icon
+let matchingwordObject = {
+    words: [
+        {
+            matchingword: '',
+            numberofletters: '',
+            ispangram: '',
+        },
+        {
+            matchingword: '',
+            numberofletters: '',
+            ispangram: '',
+    }
+    ]
+    
+};
+
+
+matchingwordObject.word = 'word';
+console.log('sssssssssssssssssssss', matchingwordObject);
+//let newobjectofwords1 = newobjectofwords.word ;
+
+
 document.addEventListener('click', async callback => {
     let targetelement = event.target;
     let targetword = event.target.id;
@@ -186,6 +211,9 @@ document.addEventListener('click', async callback => {
             console.log(inter, 'inter');
              console.log(event);
            
+  
+
+            //DELETE BUTTON
              if(targetelement.classList.contains("delete")) {
              console.log('delete');  
                // if(wordspan.style.textDecoration == 'line-through' && idtogreyin.style.color == 'grey') {
@@ -193,15 +221,67 @@ document.addEventListener('click', async callback => {
                 // wordspan.style.textDecoration = 'none';
                   //  idtogreyin.style.background = 'transparent';
                     idtogreyin.classList.remove('wordcancelled');
-                    console.log('inside');
-                }
+               
+                 
+                    }
                 else {
-                //    wordspan.style.textDecoration = 'line-through';
+                    //IF IT'S A NON-CANCELLED WORD AND YOU'RE CLICKING THE DELETE BUTTON
+             
+                    //    wordspan.style.textDecoration = 'line-through';
                    // idtogreyin.style.background = 'grey';
                     idtogreyin.classList.add('wordcancelled');
                     console.log('outside');
+                   // console.log(word, 'wordCHECK');
+                   //TRYING TO SEE IF CLICKED WORD WE WANT REMOVED , 
+                   //WE WANT TO REMOVE IT FROM AN ARRAY
+                   //BUT BEST WE START ANOTHER ARRAY MAYBE
+                  
+                //   }
+                  
+                    //the word we are click on: targetword
+                //we wwnt to create another array maybe, or remove it from the array
+                  //  console.log(newcleanarrayofwords,'newcleanarrayofwords');
+
+                    console.log(targetword, 'targetwordCHECK');
+
+                    //WAYS TO REMOVE CURRENT CLICKED WORD FROM ARRAY
+                    //1. splice the word from the array
+                    matchingwordsarrayis.forEach((wordaa, index) => {
+                        //console.log(wordaa, 'word');
+                       // console.log(targetword, 'targetword');
+                        if(wordaa == targetword) {
+                            console.log('splice');
+                            matchingwordsarrayis.splice(index, 1);
+                        }
+                    });
+                    
+                    //FILTER WAY
+                   // newcleanarrayofwords.filter((worda, index) => {
+                        //want to remove elemnt from array
+                        //filter iterates through our array
+                        //maybe when it finds our word 
+                        //it doesnt push it
+                      
+                    
+                    //    return worda == targetword;
+                      /*   if(worda !== targetword) {
+                            return worda;
+                           // word.ispangram = 'no';
+                           // console.log(word,'word');
+                           // console.log(matchingwordsarrayis,'matchingwordsarrayis');
+                         }
+                         else {
+                            console.log(worda,'worda');
+                            
+                           
+                         } */
+                         
+                 //       });
+                        console.log(matchingwordsarrayis,'matchingwordsarrayisNEW1111');
                 }
+                
             }
+            //DEFINITION API 
             else if(targetelement.classList.contains("define")){
                 console.log('define');
                 const getsimilarwords = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${targetword}`)
@@ -274,6 +354,7 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
         circleword.textContent = 'icircle';
             console.log(circleword, 'circleword');
         }); */
+        let newcleanarrayofwords = [];
     document.getElementById(inputid).className = 'icircle icircleselected';
     
     
@@ -285,11 +366,20 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
             const getsimilarwords = await fetch(`/getwordswithcenterletter?word=${wordwechose}&centerletter=${inputid}`)
             .then(response => response.json())
             .then(data => {
-               // console.log(data)
+   //console.log('data',data)
              //   console.log(data.wordlistnew.newarray.length, 'length');
                 document.querySelector('#showmatchtotal').textContent = `${data.wordlistnew.newarray.length} matches`;
                 document.querySelector('#hiddenwords').value = data.wordlistnew.newarray;
+                allpangrams = data.wordlistnew.allpangrams;
+                matchingwordsarrayis = data.wordlistnew.newarray;
+                console.log('matchingwordsarrayis', matchingwordsarrayis);
+                console.log(allpangrams,'allpangrams');
                
+                
+                //  if(newcleanarrayofwords.length == 0) {
+                newcleanarrayofwords = [...matchingwordsarrayis];
+                console.log(newcleanarrayofwords,'newcleanarrayofwordsbefore');
+            
                     //DELETE EXISTING BADGES TO REPLACE THEM
                /*      document.querySelectorAll('.badge').forEach(badge => {
                     // console.log('found badge');
@@ -311,11 +401,47 @@ document.querySelector('#looplettersdiv').addEventListener('click', async callba
 
 // const listouter1 = '<ul class="list-group">';
 
-
+ //SKIP THIS FOR NOW
     //DISPLAY MATCHED WORDS
+    matchingwordObject.words = [];
     data.wordlistnew.newarray.forEach((word, index) => {
-      //  console.log(word, index);
-        let testaa = 
+
+    //ADD TO OBJECT OF MATCHING WORDS
+    //SKIP THIS FOR NOW
+      /*   let matchingword = word;
+        let numberofletters = word.length;
+        let ispangramReg = `/\b(${word})\b/i`;
+        //IM TRYING TO FIND IF THE WORD IS A PANGRAM
+        //I COMPARE AGAINST MY ARRAY OF PANGRAMS 
+        let ispangram = '';
+        //JUST CHECK IF ARRAY OF PANGRAMS CONTAINS THE WORD
+        allpangrams.forEach(pangram => {
+            if(pangram.includes(word)){
+                ispangram = true;
+            }
+        }); */
+      //  const checkifpangramreg = new RegExp(`${ispangramReg}`, 'g');
+        //PROBLEM HERE 
+       // let checkifpangram = checkifpangramreg.test(checkifpangramreg);
+      //  console.log(checkifpangram,'checkifpangram');
+      /*   if(checkifpangram === true){
+            ispangram = true;
+        }
+        else {
+            ispangram = false;
+        } */
+     /*    let newobjectforarray = {
+            word: matchingword,
+            numberofletters: numberofletters,
+            ispangram: ispangram
+            
+        } */
+     //   matchingwordObject.words.push(newobjectforarray);
+     
+       
+
+      //PRINT TO SCREEN  
+      let testaa = 
         `<li id="li_${word}" class="list-group-item d-flex justify-content-between align-items-start"
         id="${word}">
             <span id="${word}Word" style="width: 250px;">${word}</span>
@@ -363,6 +489,8 @@ let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
             })
             .then(after => {
                 console.log('after');
+                
+                console.log(matchingwordObject,'matchingwordObject!!!!!!!');
             })
         }
     }

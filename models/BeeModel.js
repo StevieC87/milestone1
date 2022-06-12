@@ -186,12 +186,22 @@ module.exports = class SpellingBee {
               }
 
  });
+ //FIND HOW MANY PANGRAMS THERE ARE 
+  const allpangrams = [];
+  const allpangramsfind = newarraya.filter(wordnow => {
+    const unique_letters_count = new Set(wordnow).size;
+    if(wordnow.length >= 7 && unique_letters_count === 7){
+      allpangrams.push(wordnow);
+    } 
+    console.log(allpangrams,'allpangrams');
+  })
+ 
   //console.log(newarraya,'newarraya');
   ///console.log(word,'word');
   // console.log(wordstaticminusalphabetTOstring,'wordstaticminusalphabetTOstring');
   // console.log(newalphabetstring,'newalphabetstring');
 
- cb({newarray: newarraya, uniqueStr:uniqueStr, arrayofuniqueletters: lettersarray})
+ cb({newarray: newarraya, uniqueStr:uniqueStr, arrayofuniqueletters: lettersarray, allpangrams: allpangrams})
       //filter words with these letters
     });
   
