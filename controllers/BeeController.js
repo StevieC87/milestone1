@@ -103,25 +103,37 @@ exports.howmanypangrams = (req, res, next) => {
   
 exports.addNewGame = (req, res, next) => {
  
+    //CHECK IF WE ARE PULLING THE DATA 
     const word = req.body.hiddenword;
     const centreletter = req.body.hiddencentreletter;
     const matchingwords = req.body.hiddenwords;
+    //MATCHING WORDS IS NOT AN ARRAY, IT'S A STRING, BECAUSE IT WAS IN THE FORM INPUT
+    //SO SPLIT IT INTO AN ARRAY
+    const matchingwordsarray = matchingwords.split(',');
+    console.log(matchingwordsarray, 'matchingwordsarray!!!!*****!!!!!!!!!');
     const remaininglettersarray = req.body.hiddenarrayremaining;
+    const remaininglettersarrayarray = remaininglettersarray.split(',');
     const pangrams = req.body.hiddenpangrams;
+    const pangramsarray = pangrams.split(',');
+    const testarray = ['hello', 'world', 'test'];
+  console.log(word,'wordwordwordwordwordwordwordwordword');
+  console.log(centreletter,'centrelettercentrelettercentrelettercentreletter');
+  console.log(matchingwordsarray,'matchingwordsmatchingwordsmatchingwordsmatchingwordsmatchingwords!!!!!');
+
 
     const game = new Bee({
       word: word,
       centreletter: centreletter,
-      matchingwords: matchingwords,
-      remaininglettersarray: remaininglettersarray,
-      pangrams:pangrams
+      remaininglettersarray: [remaininglettersarrayarray],
+      pangrams:[pangramsarray],
+      matchingwords2: [matchingwordsarray],
     });
 
     game
       .save()
       .then(result => {
         console.log('Create Product');
-     //   res.redirect('/admin/products');
+       res.redirect('/admin/products');
       })
       .catch(err => {
         console.log(err);

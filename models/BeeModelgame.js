@@ -11,18 +11,23 @@ const BeeSchema2 = new Schema({
     type: String,
     required: true
   },
-  remaininglettersarray: {
+/*   matchingswords: {
     type: Array,
-    required: true
-  },
-  matchingswords: {
+    required: false
+  }, */
+  remaininglettersarray: {
     type: Array,
     required: true
   },
   pangrams: {
     type: Array,
     required: true
+  },
+  matchingwords2 : {
+    type: Array,
+    required: true
   }
+ 
   
 })
 module.exports = mongoose.model('Bee', BeeSchema2);
