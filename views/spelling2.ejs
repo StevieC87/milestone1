@@ -9,12 +9,16 @@
     position: relative;
     width: 100%;
     } */
+    .outerdiv {
+        width: 300px;
+        height: 300px;
+    }
     .gridouter {
         display: flex;
 		justify-content: center; /* horizontal center */
         align-items: center;
         position: relative;
-        height: 400px;
+       
     }
     .external {
 
@@ -42,13 +46,13 @@
         color: purple;
         background: yellow;
         text-decoration: line-through;
-        transition: all 0.3s;
+        transition: all 0.2s;
         transform: scale(0.9, 0.9);
     }
     .animate {
         
         animation-name: scaleanimation;
-		animation-duration: 0.4s;
+		animation-duration: 0.2s;
     }
     @keyframes scaleanimation {
 		/* now anyrules we add here will apply to animation-name: square element */
@@ -74,6 +78,9 @@
             transform-origin: center;
             transform:scale(1,1)}
     }
+    .letterstype {
+        
+    }
 
     .letter{
         font-size: 20pt;
@@ -93,25 +100,31 @@
         
     }
     .svg:nth-child(1) {
-    transform: translate(50%, 50%);
+    transform: translate(50%, 22%);
+    /* transform: translate(50%, 50%); */
     }
     .svg:nth-child(2) {
-    transform: translate(128%, 0%);
+    transform: translate(128%, -29%);
+    /* 0 */
     }
     .svg:nth-child(3) {
-    transform: translate(127%, 103%);
+    transform: translate(128%, 74%);
+    /* 127%, 103% */
     }
     .svg:nth-child(4) {
-    transform: translate(50%, 153%);
+    transform: translate(50%, 125%);
+    /* 50%, 153% */
     }
     .svg:nth-child(5) {
-    transform: translate(-27%, 101%);
+    transform: translate(-28%, 73%);
+    
     }
     .svg:nth-child(6) {
-    transform: translate(-27%, -3%)
+    transform: translate(-28%, -30%);
     }
     .svg:nth-child(7) {
-    transform: translate(50%, -54%);
+    transform: translate(50%, -81%);
+    /* -54 */
     }
     .letternoselect {
         user-select: none; 
@@ -185,41 +198,74 @@
     //const chars = word.split('');
    // console.log(chars);
    // document.getElementById('test').innerHTML = chars1;
-
+/*   */
 </script>
 <div id="test"></div>
+<div id="letterstype" class="letterstype"></div>
 <div class="outerdiv gridouter">
     <svg class="svg" id="svg9"> <!--  width="400" height="180" -->
-        <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9"></polygon>
         <text id="outerletter9" class="letter lettercentre letternoselect" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
     </svg>
     <svg class="svg" id="svg0"> <!--  width="400" height="180" -->
-        <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
         <text id="outerletter0" id="centerletter" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
     </svg>
     <svg class="svg" id="svg1"> <!--  width="400" height="180" -->
-        <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
         <text id="outerletter1" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
     </svg>
     <svg class="svg" id="svg2"> <!--  width="400" height="180" -->
-        <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
         <text id="outerletter2" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em" ><%=wordarray[2].toUpperCase()%></text>
     </svg>
     <svg class="svg" id="svg3"> <!--  width="400" height="180" -->
-        <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
         <text id="outerletter3" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
     </svg>
     <svg class="svg" id="svg4"> <!--  width="400" height="180" -->
-        <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
         <text id="outerletter4" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
     </svg>
     <svg class="svg" id="svg5"> <!--  width="400" height="180" -->
-        <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
         <text id="outerletter5" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
     </svg>
     
     
 </div>
+<!-- <div class="outerdiv gridouter">
+    <svg class="svg" id="svg9"> 
+        <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter9" class="letter lettercentre letternoselect" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
+    </svg>
+    <svg class="svg" id="svg0">  
+        <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter0" id="centerletter" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
+    </svg>
+    <svg class="svg" id="svg1"> 
+        <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter1" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
+    </svg>
+    <svg class="svg" id="svg2"> 
+        <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter2" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em" ><%=wordarray[2].toUpperCase()%></text>
+    </svg>
+    <svg class="svg" id="svg3"> 
+        <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter3" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
+    </svg>
+    <svg class="svg" id="svg4"> 
+        <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter4" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
+    </svg>
+    <svg class="svg" id="svg5"> 
+        <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+        <text id="outerletter5" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
+    </svg>
+    
+    
+</div> -->
 <!-- <svg width="400" height="180">
     <rect x="80" y="20" width="150" height="150" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9" />
     Sorry, your browser does not support inline SVG.  
@@ -231,7 +277,7 @@
 
                             <!--             <polygon points="25 0,75 0,100 50, 75 100, 25 100, 0 50" style="fill:lightgray;stroke:purple;stroke-width:0" /> -->
      <!-- class="cell-fill" -->
-                            <!--  <polygon class="hegaxon center" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" stroke="white" stroke-width="2.5"></polygon> -->
+                            <!--  <polygon class="hegaxon center" points="0,51.96152422706631 30,0 90,0 120,51.96152422706631 90,103.92304845413263 30,103.92304845413263" ></polygon> -->
 <!--        
     
 
