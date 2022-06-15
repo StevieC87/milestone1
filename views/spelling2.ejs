@@ -252,19 +252,39 @@
         console.log(e.target.tagName, 'e.target.tagName');
         console.log(e.target.id, 'e.target.id');
         let clicktag = e.target.tagName;
-        let clickid = e.target.id; //this is also the array index
+        let clickclass = e.target.classList;
+        let clickid = e.target.id; 
+        let getnumberindex = clickid[clickid.length -1]
+       //this is also the array index
         //now if we click on polygon
         let clickidconcat = '#' + clickid;
-        if(clicktag == 'polygon' || clicktag == 'TEXT'){
+      //   if(clicktag == 'polygon' || clicktag == 'TEXT'){
+        if(clicktag == 'polygon' || clickclass.contains('letter')){
                 console.log('clicked', clicktag);
             //let polygonindex = e.target.id;
-            document.querySelector(`#${clickid}`).classList.add('animate');
-     
+
+         /*    if (e.target.classList.contains('animate') == false) {
+                e.target.classList.add('animate');
+                console.log('added animate');
+            } else {
+                e.target.classList.remove('animate');
+                console.log('removed animate');
+                e.target.classList.add('animate');
+            } 
+             */
+
+          //  document.querySelector(`#${clickid}`).classList.add('animate');
+           let effecttarget =  document.querySelector(`#p${getnumberindex}`);
+
             let newnumberonly = clickid.charAt(clickid.length-1);
-
-
+            effecttarget.classList.add('animate');
+            let wait = setTimeout(() => {
+                effecttarget.classList.remove('animate');
+            }, 300);   
+          
            let letterindex = `outerletter${newnumberonly}`;
            console.log(letterindex,'letterindex');
+        
     //    document.querySelector('#outerletter'+newnumberonly).classList.add('animate');
 //works   document.querySelector('#outerletter'+newnumberonly).classList.add('clicktransformtest');
             //now we need to get the letter from the array
