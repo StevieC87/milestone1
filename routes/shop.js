@@ -15,7 +15,9 @@ router.get('/createbee', BeeController.newSpellingBeeform);
 router.get('/getwordsgenerate', BeeController.generate);
 router.get('/getwordswithcenterletter', BeeController.centerlettermatch)
 // router.post('/newgamepost?', BeeController.newgamepostmethod);
+//OFFICIAL CREATE
 router.post('/newgamepost?', BeeController.addNewGame);
+router.get('/play/:gameId?', BeeController.playGame);
 
 router.get('/howmanypangrams', BeeController.howmanypangrams);
 

@@ -24,14 +24,57 @@
         width: 120px;
         height: 104px;
     }
-    .polygon:active {
+  /*   .polygon:active {
         transition: transform 0.3s;
         transform: scale(0.9, 0.9);
-        /* //(30px, 3px, 5); */
-    }
+        /(30px, 3px, 5);
+    } */
     .polygon {
     
     }
+    .clicktransform {
+        transition: transform 0.3s;
+        transform: scale(0.9, 0.9);
+       
+        /* //(30px, 3px, 5); */
+    }
+    .clicktransformtest {
+        color: purple;
+        background: yellow;
+        text-decoration: line-through;
+        transition: all 0.3s;
+        transform: scale(0.9, 0.9);
+    }
+    .animate {
+        
+        animation-name: scaleanimation;
+		animation-duration: 0.4s;
+    }
+    @keyframes scaleanimation {
+		/* now anyrules we add here will apply to animation-name: square element */
+		/* 0% {transform: rotatex(20deg);}
+		25% {transform: rotateY(160deg);}
+	    50% {transform: rotateY(200deg);}
+		75% {transform: rotateY(240deg);}
+		100% {transform: rotateY(360deg);} */
+        0% {
+            transform-origin: center;
+            transform: scale(1,1);
+        }
+		25% {
+            transform-origin: center;
+            transform: scale(0.95,0.95);}
+	    50% {
+            transform-origin: center;
+            transform: scale(0.9,0.9);}
+		75% {
+            transform-origin: center;
+            transform: scale(0.95,0.95);}
+		100% {
+            transform-origin: center;
+            transform:scale(1,1)}
+    }
+
     .letter{
         font-size: 20pt;
         transform: translate(-8px);
@@ -70,25 +113,31 @@
     .svg:nth-child(7) {
     transform: translate(50%, -54%);
     }
+    .letternoselect {
+        user-select: none; 
+    }
     
 </style>
 <%= word %><%=centerletter%>
 
-<%= wordarray %>
+
 <%=centerletter%>
-<%= remaining %>
+
 <%= wordarray %>
-<%= allmatchingwords %>
+ <!-- allmatchingwordsa  -->
+ <!-- wordarray -->
+
 
 <a href="#" id="shuffle" class="btn btn-primary" >shuffle</a>
 
 <script>
+        console.log('<%= allmatchingwordsa %>', 'ALL MATCHING WOOOOOOORDS!');
      // console.log(existingword1,'existingword1');
      //   console.log(object);
         console.log('<%= wordarray %>', 'word array ');
 
     function checkword(word) {
-        let allwords = '<%= allmatchingwords %>';
+     
     }
 
     function shuffle(array) {
@@ -128,7 +177,7 @@
 
     }); */
   
-
+   
 </script>
 
 <script>
@@ -140,33 +189,33 @@
 </script>
 <div id="test"></div>
 <div class="outerdiv gridouter">
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text class="letter lettercentre" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
+    <svg class="svg" id="svg9"> <!--  width="400" height="180" -->
+        <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter9" class="letter lettercentre letternoselect" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
     </svg>
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter0" id="centerletter" class="letter" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
+    <svg class="svg" id="svg0"> <!--  width="400" height="180" -->
+        <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter0" id="centerletter" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
     </svg>
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter1" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
+    <svg class="svg" id="svg1"> <!--  width="400" height="180" -->
+        <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter1" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
     </svg>
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter2" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[2].toUpperCase()%></text>
+    <svg class="svg" id="svg2"> <!--  width="400" height="180" -->
+        <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter2" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em" ><%=wordarray[2].toUpperCase()%></text>
     </svg>
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter3" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
+    <svg class="svg" id="svg3"> <!--  width="400" height="180" -->
+        <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter3" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
     </svg>
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter4" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
+    <svg class="svg" id="svg4"> <!--  width="400" height="180" -->
+        <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter4" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
     </svg>
-    <svg class="svg"> <!--  width="400" height="180" -->
-        <polygon  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
-        <text id="outerletter5" class="letter letterouter" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
+    <svg class="svg" id="svg5"> <!--  width="400" height="180" -->
+        <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" stroke="white" stroke-width="2.5"></polygon>
+        <text id="outerletter5" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
     </svg>
     
     
@@ -188,3 +237,37 @@
 
         </div>
 </div> -->
+
+<script>
+    //otherwise try with docum,ent click event listener
+  /*    document.querySelector('polygon').addEventListener('click', e => {
+        alert('hello');
+        console.log('asdfladjflka');
+        let polygonindex = e.target.id;
+        polygonindex.ClassList.add('clicktransform');
+    }) */
+
+    document.addEventListener('click', e => {
+        console.log(e, 'event');
+        console.log(e.target.tagName, 'e.target.tagName');
+        console.log(e.target.id, 'e.target.id');
+        let clicktag = e.target.tagName;
+        let clickid = e.target.id; //this is also the array index
+        //now if we click on polygon
+        let clickidconcat = '#' + clickid;
+        if(clicktag == 'polygon' || clicktag == 'TEXT'){
+                console.log('clicked', clicktag);
+            //let polygonindex = e.target.id;
+            document.querySelector(`#${clickid}`).classList.add('animate');
+     
+            let newnumberonly = clickid.charAt(clickid.length-1);
+
+
+           let letterindex = `outerletter${newnumberonly}`;
+           console.log(letterindex,'letterindex');
+    //    document.querySelector('#outerletter'+newnumberonly).classList.add('animate');
+//works   document.querySelector('#outerletter'+newnumberonly).classList.add('clicktransformtest');
+            //now we need to get the letter from the array
+        } //  document.querySelector
+    })
+</script>

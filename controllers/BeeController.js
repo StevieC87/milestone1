@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const rootDir = require('../util/path');
 
+
 const p = path.join(rootDir, 'data', 'miniwordlist.json');
 
 
@@ -33,7 +34,7 @@ exports.newSpellingBeeform = (req, res, next) => {
         centerletter: centerletter, */
     });
 }
-//POST SAVE NEW GAME -- MONGO AFTER ACTUALLY 
+//OLD OLD OLD OLD POST SAVE NEW GAME -- MONGO AFTER ACTUALLY  o
 exports.newgamepostmethod = (req, res, next) => {
 
   let querystrings = req.query;
@@ -100,7 +101,8 @@ exports.howmanypangrams = (req, res, next) => {
     console.log(pangrams, 'pangrams');
   })
 }
-  
+ 
+//OFFICIAL ADD GAME
 exports.addNewGame = (req, res, next) => {
  
     //CHECK IF WE ARE PULLING THE DATA 
@@ -124,19 +126,96 @@ exports.addNewGame = (req, res, next) => {
     const game = new Bee({
       word: word,
       centreletter: centreletter,
-      remaininglettersarray: [remaininglettersarrayarray],
-      pangrams:[pangramsarray],
-      matchingwords2: [matchingwordsarray],
+      remaininglettersarray: remaininglettersarrayarray,
+      pangrams:pangramsarray,
+      matchingwords2: matchingwordsarray,
     });
+ 
+    
+   
+   
+    let querystrings = req.query;
+    const bodya = req.body;
+    console.log(bodya,'bodya');
+ 
+    let allmatchingwords = bodya.hiddenwords;
+  
+    let ourcenterletter = bodya.hiddencentreletter;
+    let ourremaining = bodya.remaining;
+    let remainingletterarray = bodya.hiddenarrayremaining;
+    let remainingletterarraynew = remainingletterarray.split(',');
+    const testArray = ['hello', 'world', 'test'];
 
-    game
+     //try now get id of game
+     game.save((err, gameid) => {
+      console.log(gameid._id);
+   //   res.redirect('/spelling2');
+        res.render('spelling2', {
+        querystrings: querystrings,
+       // bodya: bodya,
+        pageTitle: 'Play Spelling Bee',
+        path: '/spelling',
+        word: word,
+        wordarray: remaininglettersarrayarray,
+        remaining: ourremaining,
+        centerletter: centreletter,
+        allmatchingwordsa: matchingwordsarray,
+        gameid: gameid._id
+      });  
+    })
+
+ /*    game
       .save()
       .then(result => {
-        console.log('Create Product');
-       res.redirect('/admin/products');
-      })
-      .catch(err => {
+        //console.log('Create Product');
+      res.redirect('/spelling2'); */
+     
+   /*      res.render('spelling2', {
+        querystrings: querystrings,
+       // bodya: bodya,
+        pageTitle: 'New bee',
+        path: '/spelling',
+        word: word,
+        wordarray: remaininglettersarrayarray,
+        remaining: ourremaining,
+        centerletter: centreletter,
+        allmatchingwords: matchingwordsarray
+      });   */
+     
+      
+    //  })
+     /*  .catch(err => {
         console.log(err);
-      })
-      //mongoose has a save method
+      }) */
+
   };
+
+exports.playGame = (req, res, next) => {
+  const gameId = req.params.gameId;
+  Bee.findById(gameId)
+  .then(game => {
+      //if error
+      if(!game){
+        console.log('no game with this id');
+        return res.redirect('/');
+      }
+    let word = game.word;
+    let centreletter = game.centreletter;
+    let remaininglettersarray = game.remaininglettersarray;
+    let pangrams = game.pangrams;
+    let matchingwords2 = game.matchingwords2;
+      console.log(word, 'GAME WORD GAME WORD GAME WORD');
+      console.log(remaininglettersarray, 'remaininglettersarray)))))))))!!!!!!!!!!!!!!!"""""');
+
+    res.render('spelling2', {
+      pageTitle: 'Play Game',
+      path: '/spelling2',
+      word: word,
+      centerletter: centreletter,
+      wordarray : remaininglettersarray,
+      pangrams: pangrams,
+      allmatchingwordsa: matchingwords2
+    });
+  })
+  .catch(err => console.log(err))
+}
