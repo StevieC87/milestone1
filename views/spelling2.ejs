@@ -199,6 +199,42 @@
             opacity: 1;
         }
     }
+    .alertdivremove {
+        width: 0px;
+   
+        position: absolute;
+        top: 0;
+        left: 0%;  
+        z-index: 0;
+       
+      }
+    .alertdivshow {
+        width: 100px;
+        background: lightgray;
+        position: absolute;
+        top: 0;
+        left: 50%;  
+        z-index: 40;
+        animation-name: alertdivanimation;
+        animation-duration: 0.5s;
+        animation-iteration-count: 1;
+        
+      }
+      @keyframes alertdivanimation {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+      }
+      .alertdiv
+   /*    .alertdivshow {
+
+      } */
     /* .deleteb, .enterb */
 </style>
 <!--  word 
@@ -227,6 +263,7 @@ wordarray  -->
     <div id="ourmatchedwordsdiv">
 
     </div>
+    <div id="alertdiv"></div>
     <div id="letterstype" class="letterstype"><i id="pointerline" class="fa-regular fa-pipe pointerline">|</i></span>
     </div> <!-- letterstype -->
 
@@ -417,8 +454,8 @@ document.querySelector('#shuffle').addEventListener('click', e => {
 let yourmatchedwords = [];
 let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv');
 
-
-
+let lettersinbox = document.querySelectorAll('#letterstype span');
+let alertdiv = document.querySelector('#alertdiv');
 
     document.querySelector('#enterb').addEventListener('click', e => {
         event.preventDefault();
@@ -430,19 +467,34 @@ let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv');
         });
         let wordfromarray = wordarray.join();
         const wordfromarray1 = wordfromarray.replaceAll(',', '').toLowerCase();
+        if(wordfromarray1.length <4 ){
+
+        }
         let wordsarray = '<%=  allmatchingwordsa %>';
         let ifincludes = wordsarray.includes(wordfromarray1);
         let message = '';
-        
+       
+    
         if(ifincludes == true)  {
 
             if(yourmatchedwords.includes(wordfromarray1) == true) {
                 //display message for WORD ALREADY FOUND
+                alertdiv.textContent = 'Word already found';
 
+                alertdiv.classList.add('alertdivshow');
+                let wait = setTimeout(() => {
+                    alertdiv.classList.remove('alertdivshow');
+                    alertdiv.classList.add('alertdivremove');
+                    alertdiv.textContent = '';
+                    lettersinbox.forEach (function(element, index) {
+                    element.remove();
+                });
+                }, 2000);
+               
             }
             else {
 
-            alert('correct');
+            //alert('correct');
             yourmatchedwords.push(wordfromarray1);
             //can create inside div a list, and append each
             //or can do for each, everytime udpda
@@ -452,7 +504,7 @@ let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv');
             ourmatchedwordsdiv.appendChild(spanmake);
 
             //then clear board
-            let lettersinbox = document.querySelectorAll('#letterstype span');
+           
                 lettersinbox.forEach (function(element, index) {
                     element.remove();
                 });
@@ -463,7 +515,16 @@ let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv');
        
         
         else {
-            alert('wrong');
+            alertdiv.textContent = 'No match'
+             alertdiv.ClassList.add('alertdivshow');
+                let wait = setTimeout(() => {
+                    alertdiv.ClassList.remove('alertdivshow');
+                    alertdiv.ClassList.add('alertdivremove');
+                }, 2000);
+                lettersinbox.forEach (function(element, index) {
+                    element.remove();
+                });
+          ///  alert('wrong');
         }
       
         //find if word is in words array 
