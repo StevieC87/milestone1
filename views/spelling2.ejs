@@ -10,14 +10,16 @@
     width: 100%;
     } */
     .outerdiv {
-        width: 300px;
-        height: 300px;
+        width: 320px;
+        height: 340px;
     }
     .gridouter {
         display: flex;
-		justify-content: center; /* horizontal center */
-        align-items: center;
+		justify-content: center;
+        flex-direction: column;
         position: relative;
+        width: 320px;
+      
        
     }
     .external {
@@ -79,7 +81,11 @@
             transform:scale(1,1)}
     }
     .letterstype {
-        
+        text-align: center;
+        font-size: 20pt;
+        font-weight: bold;
+        max-width: 320px; 
+        height: 60px;
     }
 
     .letter{
@@ -99,99 +105,78 @@
         fill: #E6E6E6;
         
     }
+
+    /* 93 down */
     .svg:nth-child(1) {
-    transform: translate(50%, 22%);
+    transform: translate(82%, 115%);
     /* transform: translate(50%, 50%); */
     }
     .svg:nth-child(2) {
-    transform: translate(128%, -29%);
+    transform: translate(160%, 64%);
     /* 0 */
     }
     .svg:nth-child(3) {
-    transform: translate(128%, 74%);
+    transform: translate(160%, 167%);
     /* 127%, 103% */
     }
     .svg:nth-child(4) {
-    transform: translate(50%, 125%);
+    transform: translate(82%, 218%);
     /* 50%, 153% */
     }
     .svg:nth-child(5) {
-    transform: translate(-28%, 73%);
+    transform: translate(4%, 166%);
     
     }
     .svg:nth-child(6) {
-    transform: translate(-28%, -30%);
+    transform: translate(4%, 64%);
     }
     .svg:nth-child(7) {
-    transform: translate(50%, -81%);
+    transform: translate(82%, 12%);
     /* -54 */
     }
     .letternoselect {
         user-select: none; 
     }
-    
+    .buttonsdiv {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+       /*  position: relative;
+        top: -20px; */
+    }
+    .buttonsdivmini {
+        width: 200px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .reloadb {
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        text-align: center;
+    }
+    .reloadb > i {
+        margin-left:-2px;
+        margin-top: 4px;
+    }
+    .btn-outline-secondary {
+        border: 1px solid rgba(228, 228, 228, 0.822) !important;
+        font-size: 12pt;
+    }
+    /* .deleteb, .enterb */
 </style>
-<%= word %><%=centerletter%>
+<!--  word 
+ centerletter
 
 
-<%=centerletter%>
+centerletter
 
-<%= wordarray %>
+wordarray  -->
  <!-- allmatchingwordsa  -->
  <!-- wordarray -->
 
 
-<a href="#" id="shuffle" class="btn btn-primary" >shuffle</a>
 
-<script>
-        console.log('<%= allmatchingwordsa %>', 'ALL MATCHING WOOOOOOORDS!');
-     // console.log(existingword1,'existingword1');
-     //   console.log(object);
-        console.log('<%= wordarray %>', 'word array ');
-
-    function checkword(word) {
-     
-    }
-
-    function shuffle(array) {
-        let currentIndex = array.length,  randomIndex;
-
-        // While there remain elements to shuffle.
-        while (currentIndex != 0) {
-
-            // Pick a remaining element.
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-
-            // And swap it with the current element.
-            [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-        }
-
-        return array;
-        }
-    document.querySelector('#shuffle').addEventListener('click', e => {
-        
-         let existingword1 = '<%= wordarray %>';
-        console.log('<%= wordarray %>','existingword1');
-        const existingwordtoarray = existingword1.split(',');
-        let newarray = shuffle(existingwordtoarray);
-    
-        let lettersinpage = document.querySelectorAll('.letterouter');
-        newarray.forEach(function(letter1, index) {
-
-            document.querySelector(`#outerletter${index}`).textContent = letter1.toUpperCase();
-        });
-
-        e.preventDefault();
-    })
-
-    /* document.querySelector('#shuffle').addEventListener('click', e => {
-
-    }); */
-  
-   
-</script>
 
 <script>
     const wordarray = '<%=wordarray%>';
@@ -201,39 +186,52 @@
 /*   */
 </script>
 <div id="test"></div>
-<div id="letterstype" class="letterstype"></div>
-<div class="outerdiv gridouter">
-    <svg class="svg" id="svg9"> <!--  width="400" height="180" -->
-        <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9"></polygon>
-        <text id="outerletter9" class="letter lettercentre letternoselect" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
-    </svg>
-    <svg class="svg" id="svg0"> <!--  width="400" height="180" -->
-        <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-        <text id="outerletter0" id="centerletter" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
-    </svg>
-    <svg class="svg" id="svg1"> <!--  width="400" height="180" -->
-        <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-        <text id="outerletter1" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
-    </svg>
-    <svg class="svg" id="svg2"> <!--  width="400" height="180" -->
-        <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-        <text id="outerletter2" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em" ><%=wordarray[2].toUpperCase()%></text>
-    </svg>
-    <svg class="svg" id="svg3"> <!--  width="400" height="180" -->
-        <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-        <text id="outerletter3" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
-    </svg>
-    <svg class="svg" id="svg4"> <!--  width="400" height="180" -->
-        <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-        <text id="outerletter4" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
-    </svg>
-    <svg class="svg" id="svg5"> <!--  width="400" height="180" -->
-        <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-        <text id="outerletter5" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
-    </svg>
-    
-    
-</div>
+<div class="gridouter">
+    <div id="letterstype" class="letterstype">
+        <!-- <span>TYPE LETTERS HERE</span> -->
+    </div> <!-- letterstype -->
+
+    <div class="outerdiv">
+        <svg class="svg" id="svg9"> <!--  width="400" height="180" -->
+            <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9"></polygon>
+            <text id="outerletter9" class="letter lettercentre letternoselect" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
+        </svg>
+        <svg class="svg" id="svg0"> <!--  width="400" height="180" -->
+            <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+            <text id="outerletter0" id="centerletter" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
+        </svg>
+        <svg class="svg" id="svg1"> <!--  width="400" height="180" -->
+            <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+            <text id="outerletter1" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
+        </svg>
+        <svg class="svg" id="svg2"> <!--  width="400" height="180" -->
+            <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+            <text id="outerletter2" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em" ><%=wordarray[2].toUpperCase()%></text>
+        </svg>
+        <svg class="svg" id="svg3"> <!--  width="400" height="180" -->
+            <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+            <text id="outerletter3" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
+        </svg>
+        <svg class="svg" id="svg4"> <!--  width="400" height="180" -->
+            <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+            <text id="outerletter4" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
+        </svg>
+        <svg class="svg" id="svg5"> <!--  width="400" height="180" -->
+            <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
+            <text id="outerletter5" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
+        </svg>
+        
+        
+    </div> <!-- outerdiv -->
+    <div id="buttonsdiv" class="buttonsdiv">
+        <div class="buttonsdivmini" id="buttonsdivmini">
+        <a href="" class="btn btn-outline-secondary deleteb">Delete</a>
+        <a id="shuffle" href="" class="btn btn-outline-secondary reloadb"><i class="fa-solid fa-rotate"></i></a>
+        <a href="" class="btn btn-outline-secondary enterb">Enter</a>
+    </div>
+    </div>   <!-- buttonsdiv -->
+</div> <!-- gridouter -->
+
 <!-- <div class="outerdiv gridouter">
     <svg class="svg" id="svg9"> 
         <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
@@ -285,6 +283,55 @@
 </div> -->
 
 <script>
+    console.log('<%= allmatchingwordsa %>', 'ALL MATCHING WOOOOOOORDS!');
+ // console.log(existingword1,'existingword1');
+ //   console.log(object);
+    console.log('<%= wordarray %>', 'word array ');
+
+function checkword(word) {
+ 
+}
+
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+    }
+document.querySelector('#shuffle').addEventListener('click', e => {
+    
+     let existingword1 = '<%= wordarray %>';
+    console.log('<%= wordarray %>','existingword1');
+    const existingwordtoarray = existingword1.split(',');
+    let newarray = shuffle(existingwordtoarray);
+
+    let lettersinpage = document.querySelectorAll('.letterouter');
+    newarray.forEach(function(letter1, index) {
+
+        document.querySelector(`#outerletter${index}`).textContent = letter1.toUpperCase();
+    });
+
+    e.preventDefault();
+})
+
+/* document.querySelector('#shuffle').addEventListener('click', e => {
+
+}); */
+
+
+</script>
+<script>
     //otherwise try with docum,ent click event listener
   /*    document.querySelector('polygon').addEventListener('click', e => {
         alert('hello');
@@ -307,19 +354,7 @@
       //   if(clicktag == 'polygon' || clicktag == 'TEXT'){
         if(clicktag == 'polygon' || clickclass.contains('letter')){
                 console.log('clicked', clicktag);
-            //let polygonindex = e.target.id;
-
-         /*    if (e.target.classList.contains('animate') == false) {
-                e.target.classList.add('animate');
-                console.log('added animate');
-            } else {
-                e.target.classList.remove('animate');
-                console.log('removed animate');
-                e.target.classList.add('animate');
-            } 
-             */
-
-          //  document.querySelector(`#${clickid}`).classList.add('animate');
+       
            let effecttarget =  document.querySelector(`#p${getnumberindex}`);
 
             let newnumberonly = clickid.charAt(clickid.length-1);
@@ -329,8 +364,18 @@
             }, 300);   
           
            let letterindex = `outerletter${newnumberonly}`;
-           console.log(letterindex,'letterindex');
-        
+           let letterindextexttag = document.querySelector(`#${letterindex}`);
+           let leterindextexttagLetter = letterindextexttag.textContent;
+         
+        let targetbox = document.querySelector('#letterstype');
+  //      let targetboxAddletter = targetbox.textContent = leterindextexttagLetter;
+    //    let targetboxtext = targetbox.textContent;
+
+            let spanmake = document.createElement('span');
+            spanmake.textContent = leterindextexttagLetter;
+            let parent = targetbox;
+            parent.appendChild(spanmake);
+
     //    document.querySelector('#outerletter'+newnumberonly).classList.add('animate');
 //works   document.querySelector('#outerletter'+newnumberonly).classList.add('clicktransformtest');
             //now we need to get the letter from the array
