@@ -189,6 +189,7 @@ wordarray  -->
 <div class="gridouter">
     <div id="letterstype" class="letterstype">
         <!-- <span>TYPE LETTERS HERE</span> -->
+        <span id="pointerline" style="font-size: 26pt; color: #f6d921">|</span>
     </div> <!-- letterstype -->
 
     <div class="outerdiv">
@@ -225,9 +226,10 @@ wordarray  -->
     </div> <!-- outerdiv -->
     <div id="buttonsdiv" class="buttonsdiv">
         <div class="buttonsdivmini" id="buttonsdivmini">
-        <a href="" class="btn btn-outline-secondary deleteb">Delete</a>
-        <a id="shuffle" href="" class="btn btn-outline-secondary reloadb"><i class="fa-solid fa-rotate"></i></a>
-        <a href="" class="btn btn-outline-secondary enterb">Enter</a>
+        <a href="" id="deleteb" class="btn btn-outline-secondary deleteb">Delete</a>
+        <a id="shuffle" href="" class="btn btn-outline-secondary reloadb">
+            <i class="fa-solid fa-rotate"></i></a>
+        <a href="" id="enterb" class="btn btn-outline-secondary enterb">Enter</a>
     </div>
     </div>   <!-- buttonsdiv -->
 </div> <!-- gridouter -->
@@ -294,7 +296,7 @@ function checkword(word) {
 
 function shuffle(array) {
     let currentIndex = array.length,  randomIndex;
-
+    event.preventDefault();
     // While there remain elements to shuffle.
     while (currentIndex != 0) {
 
@@ -374,11 +376,45 @@ document.querySelector('#shuffle').addEventListener('click', e => {
             let spanmake = document.createElement('span');
             spanmake.textContent = leterindextexttagLetter;
             let parent = targetbox;
-            parent.appendChild(spanmake);
+            const pointerline = document.querySelector('#pointerline');
+            pointerline.before(spanmake);
+           // parent.appendChild(spanmake);
 
     //    document.querySelector('#outerletter'+newnumberonly).classList.add('animate');
 //works   document.querySelector('#outerletter'+newnumberonly).classList.add('clicktransformtest');
             //now we need to get the letter from the array
         } //  document.querySelector
     })
+
+    document.querySelector('#deleteb').addEventListener('click', e => {
+        event.preventDefault();
+        let lettersboxis =  document.querySelector('#letterstype');
+       //we want to delete last span which is letter
+       //we might have last span always defa
+        //grab all 
+        let lettersinbox = document.querySelectorAll('#letterstype span');
+
+        lettersinbox[lettersinbox.length-2].remove();
+        
+        
+        let newarray1 = [];
+        lettersinbox.forEach(function(letter1, index) {
+           
+           // newarray1.push(letter1.textContent);
+        });
+
+       let wordfromarray = newarray1.join();
+       const wordfromarray1 = wordfromarray.replaceAll(',', '');
+
+        lettersboxis.prepend
+
+        console.log(newarray1, 'newarray1');
+        console.log(wordfromarray1, 'wordfromarray');
+        //let lettersinboxlength = lettersinbox.length;
+
+       
+    }
+    )
+    
+
 </script>
