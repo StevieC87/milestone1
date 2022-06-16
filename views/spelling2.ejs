@@ -162,6 +162,39 @@
     .btn-outline-secondary {
         border: 1px solid rgba(228, 228, 228, 0.822) !important;
         font-size: 12pt;
+        font-weight: regular;
+        font: Courier New;
+    }
+
+    .pointerline {
+        color: #f6d921;
+       
+        animation-name: pointer;
+     /*    animation-delay: 2s; */
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-out;
+        font-size: 32pt;
+    }
+    @keyframes pointer {
+        0% {
+            opacity: 1;
+        }
+        45% {
+            opacity: 1;
+        }
+        46%{
+            opacity: 0;
+        }
+        85% {
+            opacity: 0;
+        }
+        91%{
+            opacity: 1;
+        }
+        100% {
+            opacity: 1;
+        }
     }
     /* .deleteb, .enterb */
 </style>
@@ -189,7 +222,9 @@ wordarray  -->
 <div class="gridouter">
     <div id="letterstype" class="letterstype">
         <!-- <span>TYPE LETTERS HERE</span> -->
-        <span id="pointerline" style="font-size: 26pt; color: #f6d921">|</span>
+<!--         <span id="pointerline" class="pointerline" style="font-size: 26pt; color: #f6d921">|</span> -->
+        <span id="pointerline" class="pointerline"><i class="fa-regular fa-pipe">|</i></span>
+        
     </div> <!-- letterstype -->
 
     <div class="outerdiv">
