@@ -201,6 +201,7 @@
     }
     .alertdivremove {
         width: 0px;
+   
         position: absolute;
         top: 0;
         left: 0%;  
@@ -208,17 +209,15 @@
        
       }
     .alertdivshow {
-       /*  width: 150px; */
-     
+        width: 100px;
+        background: lightgray;
         position: absolute;
-       /*  top: 0;
-        left: 50%;   */
+        top: 0;
+        left: 50%;  
         z-index: 40;
         animation-name: alertdivanimation;
         animation-duration: 0.5s;
         animation-iteration-count: 1;
-        border: 1px solid lightgray;
-        border-radius: 5px;
         
       }
       @keyframes alertdivanimation {
@@ -232,11 +231,6 @@
             opacity: 1;
         }
       }
-      .alertdivwrapper{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
       .alertdiv
    /*    .alertdivshow {
 
@@ -247,6 +241,7 @@
  centerletter
 
 
+centerletter
 
 wordarray  -->
 
@@ -268,11 +263,7 @@ wordarray  -->
     <div id="ourmatchedwordsdiv">
 
     </div>
-    <div class="alertdivwrapper">
-        <div id="alertdiv">
-
-        </div>
-    </div>
+    <div id="alertdiv"></div>
     <div id="letterstype" class="letterstype"><i id="pointerline" class="fa-regular fa-pipe pointerline">|</i></span>
     </div> <!-- letterstype -->
 
@@ -361,6 +352,20 @@ document.querySelector('#shuffle').addEventListener('click', e => {
     e.preventDefault();
 })
 
+/* document.querySelector('#shuffle').addEventListener('click', e => {
+
+}); */
+
+
+</script>
+<script>
+    //otherwise try with docum,ent click event listener
+  /*    document.querySelector('polygon').addEventListener('click', e => {
+        alert('hello');
+        console.log('asdfladjflka');
+        let polygonindex = e.target.id;
+        polygonindex.ClassList.add('clicktransform');
+    }) */
 
     document.addEventListener('click', e => {
         console.log(e, 'event');
@@ -451,107 +456,78 @@ let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv');
 
 let lettersinbox = document.querySelectorAll('#letterstype span');
 let alertdiv = document.querySelector('#alertdiv');
-let alertmessage = '';
-let centerletter = '<%= centerletter %>';
 
-//EVENT LISTENER FOR PRESS 'ENTER' , 
-document.querySelector('#enterb').addEventListener('click', e => {
-    event.preventDefault();
-    
-    //MAKE A STRING OF WORD, FROM SELECTED LETTERS 
-    let lettersboxis =  document.querySelector('#letterstype');
-    let lettersinbox = document.querySelectorAll('#letterstype span');
-    let wordarray = [];
-    lettersinbox.forEach(function(letter, index) {
-        wordarray.push(letter.textContent);
-    });
-    let wordfromarray = wordarray.join();
-    const wordfromarray1 = wordfromarray.replaceAll(',', '').toLowerCase();
-   
-
-    let wordsarray = '<%=  allmatchingwordsa %>';
-    let ifincludes = wordsarray.includes(wordfromarray1);
-    let message = '';
-
-    
-/* function test1 () {
-
- */
-    // METHOD THAT DISPLAYS MESSAGE ON THE SPELLIGN BEE e.g. 'word already found'
-    function MessageM(message) {
-        alertdiv.textContent = message;
-        alertdiv.classList.add('alertdivshow');
-        let wait = setTimeout(() => {
-            alertdiv.classList.remove('alertdivshow');
-            alertdiv.classList.add('alertdivshow');
-            alertdiv.textContent = '';
-            lettersinbox.forEach (function(element, index) {
-            element.remove();
+    document.querySelector('#enterb').addEventListener('click', e => {
+        event.preventDefault();
+        let lettersboxis =  document.querySelector('#letterstype');
+        let lettersinbox = document.querySelectorAll('#letterstype span');
+        let wordarray = [];
+        lettersinbox.forEach(function(letter, index) {
+            wordarray.push(letter.textContent);
         });
-        }, 2000);
-    }
-    //VALIDATION FOR WORD
-    const validation = () => {
-        //IF LESS THAN 4 CHARACTERS - MESSAGE
-        if(wordfromarray1.length < 4 ){
-            console.error(wordfromarray1.length, 'word length');
-            return MessageM('Word too short');
+        let wordfromarray = wordarray.join();
+        const wordfromarray1 = wordfromarray.replaceAll(',', '').toLowerCase();
+        if(wordfromarray1.length <4 ){
+
         }
-        //IF MORE THAN 4 CHARACTERS
-        else if(wordfromarray1.length > 3){  
-            //MAKE SURE CENTRE LETTER IS INCLUDED
-            if(!wordfromarray1.includes(centerletter)) {
-                console.error('missing center letter');
-                return MessageM('Missing Center Letter');
+        let wordsarray = '<%=  allmatchingwordsa %>';
+        let ifincludes = wordsarray.includes(wordfromarray1);
+        let message = '';
+       
+    
+        if(ifincludes == true)  {
+
+            if(yourmatchedwords.includes(wordfromarray1) == true) {
+                //display message for WORD ALREADY FOUND
+                alertdiv.textContent = 'Word already found';
+
+                alertdiv.classList.add('alertdivshow');
+                let wait = setTimeout(() => {
+                    alertdiv.classList.remove('alertdivshow');
+                    alertdiv.classList.add('alertdivremove');
+                    alertdiv.textContent = '';
+                    lettersinbox.forEach (function(element, index) {
+                    element.remove();
+                });
+                }, 2000);
+               
             }
-            //IF LETTER INCLUDED, CHECK IF WORD IS INCLUDED
             else {
-                //CHECK YOU HAVEN'T FOUND WORD ALREADY
-                if(yourmatchedwords.includes(wordfromarray1) == true) {
-                return MessageM('Already found!');
-                }
-                else {
-                //CHECK IF WORD IS IN OUR LIST 
-                
-                    if(!wordsarray.includes(wordfromarray1)) {
-                        return MessageM('Not a word');
-                    }
-                    else {
-                        console.log('word found');
-                        yourmatchedwords.push(wordfromarray1);
-                       
-                        let spanmake = document.createElement('span');
-                        spanmake.textContent = wordfromarray1;
-                        ourmatchedwordsdiv.appendChild(spanmake);
 
-                        lettersinbox.forEach (function(element, index) {
-                        element.remove();
-                      });
-                        return MessageM('Nice');
-                    }
-                
-                //can create inside div a list, and append each
-                //or can do for each, everytime udpda
-             //   let arraytowords = yourmatchedwords.forEach(function(element, index) {
-                
-                //then clear board
-                
-              //  });
-                return alertmessage = '';
-                }
+            //alert('correct');
+            yourmatchedwords.push(wordfromarray1);
+            //can create inside div a list, and append each
+            //or can do for each, everytime udpda
+            let arraytowords = yourmatchedwords.forEach(function(element, index) {
+            let spanmake = document.createElement('span');
+            spanmake.textContent = element;
+            ourmatchedwordsdiv.appendChild(spanmake);
+
+            //then clear board
+           
+                lettersinbox.forEach (function(element, index) {
+                    element.remove();
+                });
+            
+                });
             }
-            //else if includes center letter
+        }
+       
+        
+        else {
+            alertdiv.textContent = 'No match'
+             alertdiv.ClassList.add('alertdivshow');
+                let wait = setTimeout(() => {
+                    alertdiv.ClassList.remove('alertdivshow');
+                    alertdiv.ClassList.add('alertdivremove');
+                }, 2000);
+                lettersinbox.forEach (function(element, index) {
+                    element.remove();
+                });
+          ///  alert('wrong');
+        }
+      
+        //find if word is in words array 
 
-
-
-
-    } 
-    }
-
-   //validation();
-    if(validation() !== ''){
-     //   alert(alertmessage);
-    }
-
-})
+    })
 </script>
