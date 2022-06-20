@@ -9,6 +9,10 @@
     position: relative;
     width: 100%;
     } */
+    :root {
+        --myleftmargin: 20px;
+        --myleftmargin2: 28px;
+    }
     .outerdiv {
         width: 320px;
         height: 340px;
@@ -266,9 +270,176 @@
         border-radius: 20px;
         font-size: 10pt;
     }
-    .pointshow {
-       /*  margin-left: auto; */
+  /*   .pointshow {
+         margin-left: auto; 
+    } */
+    .pointsouterdiv{
+        display: flex;
+        justify-content: space-evenly;
+     /*    align-items: center; */
     }
+    .pointsdiv {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        width: 270px;
+    }
+    .circlefirst {
+        height: 8px;
+        width: 8px;
+        background-color: #f6d921;
+        border-radius: 50%;
+        margin-top: 6px;
+        
+    }
+    .circlefirst::after {
+        content: '';
+        height: 1px;
+        width: var(--myleftmargin2);
+        background-color: #e6e6e6;
+        position: absolute;
+        top: 50%;
+       
+        z-index: -1;
+    }
+    .circle {
+        height: 8px;
+        width: 8px;
+        background-color: #E6E6E6;
+        border-radius: 50%;
+        margin-top: 6px;
+        position: absolute;
+        font-size: 8pt;
+     /*    display: inline-block;
+         */
+      }
+      .circle::after {
+        content: '';
+        height: 1px;
+       /*  width: 32px; */
+       width: var(--myleftmargin2);
+        background-color: #e6e6e6;
+        position: absolute;
+        top: 50%;
+        z-index: -1;
+        
+      }
+      .circle:nth-child(1) {
+        margin-left: 0px;
+        top: 6px;
+      }
+
+      .circle:nth-child(2) {
+       /*  margin-left: 36px; */
+       margin-left: var(--myleftmargin2);
+    
+      }
+      .circle:nth-child(2)::before {
+       /*  content: '';
+        height: 1px;
+        width: 17px;
+        background-color: #e6e6e6;
+        position: absolute;
+        top: 50%;
+        left: -198%;
+        z-index: -1; */
+      }
+      .circle:nth-child(3) {
+       /*  margin-left: 48px; */
+       margin-left: calc(var(--myleftmargin2) * 2);
+      }
+      .circle:nth-child(4) {
+       /*  margin-left: 72px; */
+       margin-left: calc(var(--myleftmargin2) * 3);
+     /*   background-color: red; */
+      }
+      .circle:nth-child(5) {
+       /*  margin-left: 96px; */
+       margin-left: calc(var(--myleftmargin2) * 4);
+      }
+      .circle:nth-child(6) {
+       /*  margin-left: 120px; */
+        margin-left: calc(var(--myleftmargin2) * 5);
+      }
+      .circle:nth-child(7) {
+       /*  margin-left: 144px; */
+       margin-left: calc(var(--myleftmargin2) * 6);
+       
+      }
+      .circle:nth-child(8) {
+      /*   margin-left: 168px; */
+      margin-left: calc(var(--myleftmargin2) * 7);
+      }
+    
+      .class2 { 
+        margin-left: 24px !important;
+      }
+        .class3 { 
+            margin-left: 48px !important;
+        }
+        .class4 {  
+            margin-left: 72px !important;
+        }
+        .class5 { 
+            margin-left: 96px   !important;
+        }
+        .class6 { 
+            margin-left: 120px  !important;
+        }
+        .class7 { 
+            margin-left: 144px !important;
+        }
+        .class8 { 
+            margin-left: 168px !important;
+        }
+        .class9 { 
+            margin-left: 192px  !important;
+        }
+
+    .circlenext {
+        margin-left: 17px;
+
+    }
+    
+    .circleend {
+        height: 8px;
+        width: 8px;
+        /* border-radius: 50%; */
+       /*  margin-left: 17px; */
+        margin-top: 6px;
+       /*  margin-left: 177px; */
+         margin-left: calc(var(--myleftmargin2) * 8);
+       /*  background-color: #E6E6E6; */
+       background-color:green;
+       position: absolute;
+
+    }
+    .ourmatchedwordsdiv2 {
+        padding-right: 5px;
+
+    }
+    .pointslevel {
+        font-weight: bold;
+        font-size: 10pt;
+        width: 86px;
+    }
+    .circleactive {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6rem;
+        text-align: center;
+        margin-top: 0px;
+       
+    
+    }
+    .circleactive::before {
+      
+    
+    }
+    .numberpoint {
+     
+    }
+
 </style>
 <!--  word 
  centerletter
@@ -292,6 +463,20 @@ wordarray  -->
 </script>
 <div id="test"></div>
 <div class="gridouter">
+    <div id="pointsouterdiv" class="pointsouterdiv">
+    <div id="pointslevel" class="pointslevel">Beginner</div>
+    <div id="points" class="pointsdiv">
+        <span class="circlefirst" id="beginner"></span>
+        <span class="circle circlenext" id="goodstart"></span>
+        <span class="circle circlenext" id="movingup"></span>
+        <span class="circle circlenext" id="good"></span>
+        <span class="circle circlenext" id="solid"></span>
+        <span class="circle circlenext" id="nice"></span>
+        <span class="circle circlenext" id="great"></span>
+        <span class="circle circlenext" id="amazing"></span>
+        <span class="circleend" id="genius"></span>
+    </div>
+    </div>
     <div id="ourmatchedwordsdivouter" class="ourmatchedwordsdivouter">
         <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1"></div>
         <div id="ourmatchedwordsdiv2" class="ourmatchedwordsdiv2"><i class="fa-solid fa-angle-down"></i></div>
@@ -351,6 +536,14 @@ wordarray  -->
 </div> <!-- gridouter -->
 
 <script>
+
+let currentscore = 0;
+let currentlevel = 'beginner';
+let beginnercircle = document.querySelector('#beginner');
+beginnercircle.classList.add('circleactive');
+let numberhtmlelement = '<span class="numberpoint">0</span>';
+document.querySelector('#beginner').innerHTML = numberhtmlelement;
+
     console.log('<%= allmatchingwordsa %>', 'ALL MATCHING WOOOOOOORDS!');
  // console.log(existingword1,'existingword1');
  //   console.log(object);
@@ -421,12 +614,12 @@ const points = () => {
     console.log(pangramsarray,'pangramsarray');
     console.log(totalpoints, 'totalpoints without pangrams');
     console.log(matchingwordstoarray,'matchingwordstoarray!!!!!!!!!!');
-
-    gamelevel(totalpoints);
+    return totalpoints;
+   // gamelevel(totalpoints);
 
 }
 points();
-function gamelevel(totalpoints) {
+function gamelevel(totalpoints, ourscore) {
     //THEN CALCULATE HOW MANY POINTS FOR EACH LEVEL YOU NEED
     let beginner = 0;
     let goodstart =  Math.round(totalpoints * 0.0215);
@@ -439,12 +632,132 @@ function gamelevel(totalpoints) {
     let genius = Math.round(totalpoints * 0.69);
     //let goodstartrounded = Math.round(goodstart);
 
-
-
-
+    let currentpointslevel = '';
     console.log(goodstart, 'goodstartrounded');
     console.log(movingup, 'movingup');
-    
+    let beginnercircle = document.querySelector('#beginner');
+    let goodstartcircle = document.querySelector('#goodstart');
+    let movingupcircle = document.querySelector('#movingup');
+    let solidcircle =  document.querySelector('#solid');
+    let goodcircle = document.querySelector('#good');
+    let nicecircle = document.querySelector('#nice');
+    let greatcircle = document.querySelector('#great');
+    let amazingcircle = document.querySelector('#amazing');
+    let geniuscircle = document.querySelector('#genius');
+
+    //otherwise DO A FOR EACH, STRIP THEM OF THEIR CLASSES MAYBE
+    if(ourscore >= goodstart && ourscore < movingup) {
+       // alert('here')
+       // currentscore = totalpoints;
+        currentpointslevel = 'Good start';
+        beginnercircle.classList.remove('circleactive');
+       // goodstartcircle.classList.add('circleactive');
+       goodstartcircle.classList.add('circleactive'); //  class2
+       goodstartcircle.classList.add('class2'); 
+        goodstartcircle.innerHTML = ourscore;
+        let currentscore = 0;
+        beginnercircle.innerHTML = '';
+    }
+    else if (ourscore >= movingup && ourscore < good) {
+        //currentscore = totalpoints;
+        currentpointslevel = 'Moving Up';
+        beginnercircle.classList.remove('circleactive');
+        goodstartcircle.classList.remove('circleactive');
+        movingupcircle.classList.add('circleactive');
+       // goodstartcircle.classList.remove('class2');
+        movingupcircle.classList.add('class3'); 
+        movingupcircle.innerHTML = ourscore;
+        goodstartcircle.innerHTML = '';
+        beginnercircle.innerHTML = '';
+         alert('moving up');
+       
+    }
+    else if (ourscore >= good && ourscore < solid) {
+        beginnercircle.classList.remove('circleactive');
+        currentpointslevel = 'Good';
+        movingupcircle.classList.remove('circleactive');
+       // movingupcircle.classList.remove('class3');
+        goodcircle.classList.add('circleactive');
+        goodcircle.classList.add('class4'); 
+        movingupcircle.innerHTML = '';
+        goodstartcircle.innerHTML = '';
+        beginnercircle.innerHTML = '';
+
+        goodcircle.innerHTML = ourscore;
+        alert('good');
+    }
+    else if (ourscore >= solid && ourscore < nice) {
+        currentpointslevel = 'Solid';
+        goodcircle.classList.remove('circleactive');
+    //    goodcircle.classList.remove('class4');
+        solidcircle.classList.add('circleactive');
+        solidcircle.classList.add('class5'); 
+        goodcircle.innerHTML = '';
+        movingupcircle.innerHTML = '';
+        goodstartcircle.innerHTML = '';
+        beginnercircle.innerHTML = '';
+
+        document.querySelector('#solid').innerHTML = ourscore;
+        alert('solid');
+    }
+    else if (ourscore >= nice && ourscore < great) {
+        currentpointslevel = 'Nice';
+        solidcircle.classList.remove('circleactive');
+    //    solidcircle.classList.remove('class5');
+        nicecircle.classList.add('circleactive');
+        nicecircle.classList.add('class6');
+        solidcircle.innerHTML = '';
+        goodcircle.innerHTML = '';
+        movingupcircle.innerHTML = '';
+        goodstartcircle.innerHTML = '';
+        beginnercircle.innerHTML = '';
+        nicecircle.innerHTML = ourscore;
+        alert('nice');
+    }
+    else if (ourscore >= great && ourscore < amazing) {
+        currentpointslevel = 'Great';
+        nicecircle.classList.remove('class6');
+    //    nicecircle.classList.remove('circleactive');
+        greatcircle.classList.add('circleactive');
+        greatcircle.classList.add('class7');
+        nicecircle.innerHTML = '';
+        solidcircle.innerHTML = '';
+        goodcircle.innerHTML = '';
+        movingupcircle.innerHTML = '';
+        goodstartcircle.innerHTML = '';
+        beginnercircle.innerHTML = '';
+        greatcircle.innerHTML = ourscore;
+        
+    }
+    else if (ourscore >= amazing && ourscore < genius) {
+        currentpointslevel = 'Amazing';
+        greatcircle.classList.remove('circleactive');
+   //     greatcircle.classList.remove('class7');
+        amazingcircle.classList.add('circleactive');
+        amazingcircle.classList.add('class8');
+        amazingcircle.innerHTML = '';
+        nicecircle.innerHTML = '';
+        solidcircle.innerHTML = '';
+        goodcircle.innerHTML = '';
+        movingupcircle.innerHTML = '';
+        goodstartcircle.innerHTML = '';
+        beginnercircle.innerHTML = '';
+        amazingcircle.innerHTML = ourscore;
+
+
+    }
+    else if (ourscore >= genius) {
+        currentpointslevel = 'Genius';
+  //      amazingcircle.classList.remove('class8');
+        amazingcircle.classList.remove('circleactive');
+        geniuscircle.classList.add('circleactive');
+        geniuscircle.classList.add('class9');
+        amazingcircle.innerHTML = '';
+        geniuscircle.innerHTML = ourscore;
+    }
+    else if(ourscore === totalpoints) {
+        alert('queen bee');
+    }
 }
 
 
@@ -571,6 +884,19 @@ document.querySelector('#enterb').addEventListener('click', e => {
         pointshowdiv.textContent = pointstoshow;
         alertdiv.textContent = message;
         alertdiv.classList.add('alertdivshow');
+
+        currentscore += wordpoints;
+        
+        //show current score in the points div
+
+        //but ALSO GET THE LEVEL FROM THE CURRENT SCORE
+        //current level
+        let totalpointsare = points();
+        console.log(totalpointsare,'totalpointsare');
+        let currentlevel = gamelevel(totalpointsare, currentscore);
+        console.log(currentlevel, 'currentlevel');
+
+
         let wait = setTimeout(() => {
             alertdiv.classList.remove('alertdivshow');
      //       alertdiv.classList.add('alertdivshow');
@@ -578,7 +904,7 @@ document.querySelector('#enterb').addEventListener('click', e => {
             lettersinbox.forEach (function(element, index) {
             element.remove();
         });
-        }, 20000);
+        }, 2000);
     }
     //VALIDATION FOR WORD
     const validation = () => {
@@ -704,3 +1030,5 @@ document.querySelector('#enterb').addEventListener('click', e => {
 
 })
 </script>
+</body>
+</html>
