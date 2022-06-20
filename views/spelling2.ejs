@@ -209,8 +209,7 @@
       }
     .alertdivshow {
        /*  width: 150px; */
-     
-        position: absolute;
+      /*   position: absolute; */
        /*  top: 0;
         left: 50%;   */
         z-index: 40;
@@ -218,9 +217,12 @@
         animation-duration: 0.5s;
         animation-iteration-count: 1;
         border: 1px solid lightgray;
-        border-radius: 5px;
+        background-color: white;
+        padding: 2px 11px;
+        font-size: 0.8rem;
         
       }
+ 
       @keyframes alertdivanimation {
         0% {
             opacity: 0;
@@ -235,13 +237,38 @@
       .alertdivwrapper{
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
+        column-gap: 10px;
       }
-      .alertdiv
-   /*    .alertdivshow {
-
-      } */
-    /* .deleteb, .enterb */
+    .ourmatchedwordsdivouter{
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        height: 35px;
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 5px;
+        max-width: 320px;
+    }
+    .wordlistword{
+        margin-right: 5px;
+        font-size: 10pt;    
+    }
+    .ourmatchedwordsdiv1{
+        width: 270px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: clip;
+        margin-left: 5px;
+    }
+    .btn-outline-secondary {
+        border-radius: 20px;
+        font-size: 10pt;
+    }
+    .pointshow {
+       /*  margin-left: auto; */
+    }
 </style>
 <!--  word 
  centerletter
@@ -265,11 +292,16 @@ wordarray  -->
 </script>
 <div id="test"></div>
 <div class="gridouter">
-    <div id="ourmatchedwordsdiv">
-
+    <div id="ourmatchedwordsdivouter" class="ourmatchedwordsdivouter">
+        <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1"></div>
+        <div id="ourmatchedwordsdiv2" class="ourmatchedwordsdiv2"><i class="fa-solid fa-angle-down"></i></div>
+        
     </div>
     <div class="alertdivwrapper">
         <div id="alertdiv">
+
+        </div>
+        <div id="pointshow" class="pointshow">
 
         </div>
     </div>
@@ -310,10 +342,10 @@ wordarray  -->
     </div> <!-- outerdiv -->
     <div id="buttonsdiv" class="buttonsdiv">
         <div class="buttonsdivmini" id="buttonsdivmini">
-        <a href="" id="deleteb" class="btn btn-outline-secondary deleteb">Delete</a>
-        <a id="shuffle" href="" class="btn btn-outline-secondary reloadb">
+        <a href="" id="deleteb" class="btn btn-outline-secondary deleteb" style="padding-top: 9px">Delete</a>
+        <a id="shuffle" href="" class="btn btn-outline-secondary reloadb"  style="padding-top: 9px;">
             <i class="fa-solid fa-rotate"></i></a>
-        <a href="" id="enterb" class="btn btn-outline-secondary enterb">Enter</a>
+        <a href="" id="enterb" class="btn btn-outline-secondary enterb"  style="padding-top: 9px;">Enter</a>
     </div>
     </div>   <!-- buttonsdiv -->
 </div> <!-- gridouter -->
@@ -360,6 +392,61 @@ document.querySelector('#shuffle').addEventListener('click', e => {
 
     e.preventDefault();
 })
+
+//CALCULATE TOTAL POINTS
+const points = () => {
+   
+    let matchingwords = '<%=  allmatchingwordsa %>';
+    
+    let matchingwordstoarray = matchingwords.split(',');
+    //For each word, we count how many letters, and how many points the total is
+    let totalpoints = 0;
+    matchingwordstoarray.forEach(function(word, index) {
+        let wordlength = word.length;
+        
+        if(wordlength === 4) {
+            totalpoints += 1;
+        }
+        else if(wordlength > 4) {
+            totalpoints += wordlength;
+        }
+  
+    });
+    //then add THE POINTS FOR THE PANGRAMS 
+    let pangrams1 = '<%= pangrams %>';
+    let pangramsarray = pangrams1.split(',');
+    pangramsarray.forEach(function(pangram, index) {
+        totalpoints += 7;
+    });
+    console.log(pangramsarray,'pangramsarray');
+    console.log(totalpoints, 'totalpoints without pangrams');
+    console.log(matchingwordstoarray,'matchingwordstoarray!!!!!!!!!!');
+
+    gamelevel(totalpoints);
+
+}
+points();
+function gamelevel(totalpoints) {
+    //THEN CALCULATE HOW MANY POINTS FOR EACH LEVEL YOU NEED
+    let beginner = 0;
+    let goodstart =  Math.round(totalpoints * 0.0215);
+    let movingup = Math.round(totalpoints * 0.0537);
+    let good = Math.round(totalpoints * 0.075);
+    let solid = Math.round(totalpoints * 0.15);
+    let nice = Math.round(totalpoints * 0.247);
+    let great = Math.round(totalpoints * 0.397);
+    let amazing = Math.round(totalpoints * 0.505);
+    let genius = Math.round(totalpoints * 0.69);
+    //let goodstartrounded = Math.round(goodstart);
+
+
+
+
+    console.log(goodstart, 'goodstartrounded');
+    console.log(movingup, 'movingup');
+    
+}
+
 
 
     document.addEventListener('click', e => {
@@ -447,7 +534,7 @@ document.querySelector('#shuffle').addEventListener('click', e => {
     )
     
 let yourmatchedwords = [];
-let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv');
+let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv1');
 
 let lettersinbox = document.querySelectorAll('#letterstype span');
 let alertdiv = document.querySelector('#alertdiv');
@@ -478,17 +565,20 @@ document.querySelector('#enterb').addEventListener('click', e => {
 
  */
     // METHOD THAT DISPLAYS MESSAGE ON THE SPELLIGN BEE e.g. 'word already found'
-    function MessageM(message) {
+    function MessageM(message, wordpoints) {
+        let pointshowdiv = document.querySelector('#pointshow');
+        let pointstoshow = '+'+wordpoints;
+        pointshowdiv.textContent = pointstoshow;
         alertdiv.textContent = message;
         alertdiv.classList.add('alertdivshow');
         let wait = setTimeout(() => {
             alertdiv.classList.remove('alertdivshow');
-            alertdiv.classList.add('alertdivshow');
+     //       alertdiv.classList.add('alertdivshow');
             alertdiv.textContent = '';
             lettersinbox.forEach (function(element, index) {
             element.remove();
         });
-        }, 2000);
+        }, 20000);
     }
     //VALIDATION FOR WORD
     const validation = () => {
@@ -512,22 +602,81 @@ document.querySelector('#enterb').addEventListener('click', e => {
                 }
                 else {
                 //CHECK IF WORD IS IN OUR LIST 
-                
+                    //if not in word list
                     if(!wordsarray.includes(wordfromarray1)) {
                         return MessageM('Not a word');
                     }
+                    //IF IT'S IN OUR LIST, ADD IT TO ARRAY
                     else {
                         console.log('word found');
                         yourmatchedwords.push(wordfromarray1);
                        
-                        let spanmake = document.createElement('span');
-                        spanmake.textContent = wordfromarray1;
-                        ourmatchedwordsdiv.appendChild(spanmake);
+                        //check if pangram
+                        let pangrams = '<%= pangrams %>';
+                        let pangramsarray = pangrams.split(',');
+                        let ifpangram = pangramsarray.includes(wordfromarray1);
 
-                        lettersinbox.forEach (function(element, index) {
-                        element.remove();
-                      });
-                        return MessageM('Nice');
+                        console.log(pangrams,'pangrams!!!!!!');
+
+                        //CALCULATE POINTS AND DISPLAY
+                        let points = wordfromarray1.length; 
+                        let wordpoints = 0;
+
+                        if (points === 4) {
+                            wordpoints += 1;
+                        }
+                        else if (points > 4) {
+                            wordpoints += points;
+                        }
+
+                        if(ifpangram == true) {
+                            wordpoints += 7;
+                        }
+
+                        console.log(wordpoints, 'wordpoints');
+
+
+                       // var sentence = "Mr. glue has a blue shouse";
+                      //  var regularExpression = /\bblue\b/g;
+                 /*      let  regularExpression = `/\b${wordfromarray1}\b/g`;
+                  //      var output = regularExpression.test(sentence);
+                       // let centreletter = `[${centerletter}]`;
+                        const regexCentreLetter = new RegExp(`${regularExpression}`, 'g');
+                        let testregexpcenter = regexCentreLetter.test(pangrams);
+                       alert(testregexpcenter,'testregexpcenter')
+
+
+                        let pagrammatch = pangrams.includes(wordfromarray1); */
+                        let spanmake = document.createElement('span');
+                        spanmake.className = 'wordlistword';
+                        let capitalisedMatchedword = wordfromarray1.charAt(0).toUpperCase() + wordfromarray1.slice(1);                          
+                          
+                       
+
+                       spanmake.textContent = capitalisedMatchedword;
+
+                         //OTHER WAY
+                      //   let newspan = `<span class="">${capitalisedMatchedword}</span>`;
+
+                            ourmatchedwordsdiv.appendChild(spanmake);
+
+                            lettersinbox.forEach (function(element, index) {
+                            element.remove();
+                            });
+                        if(ifpangram == true) {
+                            //create span to display word on page
+                           
+                            return MessageM('Pangram!', wordpoints);
+                        }
+                        else {
+                           //create span to display word on page
+                          
+                            return MessageM('Nice!', wordpoints);
+
+                            }
+
+
+                       
                     }
                 
                 //can create inside div a list, and append each
