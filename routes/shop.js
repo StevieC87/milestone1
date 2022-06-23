@@ -6,7 +6,7 @@ const shopController = require('../controllers/shop');
 const BeeController = require('../controllers/BeeController');
 const { Router } = require('express');
 
-router.get('/', shopController.listProducts);
+/* router.get('/', shopController.listProducts); */
 
 router.post('/add-to-wishlist', shopController.addToWishlist);
 
@@ -81,7 +81,7 @@ let matchingwordsarray = [
     "teak"
   ];
 
-router.get('/playaa', (req, res) => {
+router.get('/', (req, res) => {
     res.render('spelling2', {
          pageTitle: 'Play local test Bee',
          path: '/spelling2a',

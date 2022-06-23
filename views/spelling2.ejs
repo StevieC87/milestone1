@@ -398,7 +398,7 @@
 
     .circlenext {
         margin-left: 17px;
-
+        
     }
     
     .circleend {
@@ -621,7 +621,7 @@ const points = () => {
 points();
 function gamelevel(totalpoints, ourscore) {
     //THEN CALCULATE HOW MANY POINTS FOR EACH LEVEL YOU NEED
-    let beginner = 0;
+    let beginner = 0;,
     let goodstart =  Math.round(totalpoints * 0.0215);
     let movingup = Math.round(totalpoints * 0.0537);
     let good = Math.round(totalpoints * 0.075);
@@ -758,8 +758,9 @@ function gamelevel(totalpoints, ourscore) {
     else if(ourscore === totalpoints) {
         alert('queen bee');
     }
+   
 }
-
+    
 
 
     document.addEventListener('click', e => {
