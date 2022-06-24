@@ -1,0 +1,145 @@
+<script>
+      if(ourscore >= goodstart && ourscore < movingup) {
+
+currentpointslevel = 'Good start';
+//remove classes & content from other circles
+ let circles = document.querySelectorAll('.circlecircle');
+    circles.forEach(function(circle, index) {
+        circle.classList.remove('circleactive');
+        circle.innerHTML = '';
+}); 
+//HERE ADD THE ACTIVE CIRCLE CLASSES ETC
+goodstartcircle.classList.add('circleactive');
+goodstartcircle.classList.add('circle2newclass');
+goodstartcircle.classList.add('colorin');
+goodstartcircle.innerHTML = pointstoshow;
+
+leveldisplay.textContent = currentpointslevel;
+    //old
+     // beginnercircle.innerHTML = '';
+        /*     goodstartcircle.style.setProperty("--gray", "#f6d921    "); */ 
+   
+document.getElementById("myElement").style.setProperty("--color", "blue"); 
+
+}
+else if (ourscore >= movingup && ourscore < good) {
+
+    //currentscore = totalpoints;
+    currentpointslevel = 'Moving Up';
+    let circles = document.querySelectorAll('.circlecircle');
+    circles.forEach(function(circle, index) {
+        circle.classList.remove('circleactive');
+    });
+    goodstartcircle.classList.remove('circle2newclass');
+    movingupcircle.classList.add('circle3newclass');
+    
+//    beginnercircle.classList.remove('circleactive');
+//    goodstartcircle.classList.remove('circleactive');
+    movingupcircle.classList.add('circleactive');
+    goodstartcircle.classList.add('colorin');
+    movingupcircle.classList.add('colorin');
+   // goodstartcircle.classList.remove('class2');
+  //  movingupcircle.classList.add('class3'); 
+    movingupcircle.innerHTML = pointstoshow;
+    goodstartcircle.innerHTML = '';
+    beginnercircle.innerHTML = '';
+    leveldisplay.textContent = currentpointslevel;
+   //  alert('moving up');
+   
+   
+}
+else if (ourscore >= good && ourscore < solid) {
+    beginnercircle.classList.remove('circleactive');
+    currentpointslevel = 'Good';
+    let circles = document.querySelectorAll('.circlecircle');
+    circles.forEach(function(circle, index) {
+        circle.classList.remove('circleactive');
+     
+    });
+   // movingupcircle.classList.remove('circleactive');
+   // movingupcircle.classList.remove('class3');
+    goodcircle.classList.add('circleactive');
+  //  goodcircle.classList.add('class4'); 
+    goodstartcircle.classList.add('colorin');
+    movingupcircle.classList.add('colorin');
+    goodcircle.classList.add('colorin');
+    movingupcircle.innerHTML = '';
+    goodstartcircle.innerHTML = '';
+    beginnercircle.innerHTML = '';
+
+    goodcircle.innerHTML = ourscore;
+  //  alert('good');
+}
+else if (ourscore >= solid && ourscore < nice) {
+    currentpointslevel = 'Solid';
+    goodcircle.classList.remove('circleactive');
+//    goodcircle.classList.remove('class4');
+    solidcircle.classList.add('circleactive');
+ //   solidcircle.classList.add('class5'); 
+    goodcircle.innerHTML = '';
+    movingupcircle.innerHTML = '';
+    goodstartcircle.innerHTML = '';
+    beginnercircle.innerHTML = '';
+
+    document.querySelector('#solid').innerHTML = ourscore;
+  //  alert('solid');
+}
+else if (ourscore >= nice && ourscore < great) {
+    currentpointslevel = 'Nice';
+    solidcircle.classList.remove('circleactive');
+//    solidcircle.classList.remove('class5');
+    nicecircle.classList.add('circleactive');
+//    nicecircle.classList.add('class6');
+    solidcircle.innerHTML = '';
+    goodcircle.innerHTML = '';
+    movingupcircle.innerHTML = '';
+    goodstartcircle.innerHTML = '';
+    beginnercircle.innerHTML = '';
+    nicecircle.innerHTML = ourscore;
+ //   alert('nice');
+}
+else if (ourscore >= great && ourscore < amazing) {
+    currentpointslevel = 'Great';
+    nicecircle.classList.remove('class6');
+//    nicecircle.classList.remove('circleactive');
+    greatcircle.classList.add('circleactive');
+//    greatcircle.classList.add('class7');
+    nicecircle.innerHTML = '';
+    solidcircle.innerHTML = '';
+    goodcircle.innerHTML = '';
+    movingupcircle.innerHTML = '';
+    goodstartcircle.innerHTML = '';
+    beginnercircle.innerHTML = '';
+    greatcircle.innerHTML = ourscore;
+    
+}
+else if (ourscore >= amazing && ourscore < genius) {
+    currentpointslevel = 'Amazing';
+    greatcircle.classList.remove('circleactive');
+//     greatcircle.classList.remove('class7');
+    amazingcircle.classList.add('circleactive');
+//    amazingcircle.classList.add('class8');
+    amazingcircle.innerHTML = '';
+    nicecircle.innerHTML = '';
+    solidcircle.innerHTML = '';
+    goodcircle.innerHTML = '';
+    movingupcircle.innerHTML = '';
+    goodstartcircle.innerHTML = '';
+    beginnercircle.innerHTML = '';
+    amazingcircle.innerHTML = ourscore;
+
+
+}
+else if (ourscore >= genius) {
+    currentpointslevel = 'Genius';
+//      amazingcircle.classList.remove('class8');
+    amazingcircle.classList.remove('circleactive');
+    geniuscircle.classList.add('circleactive');
+    geniuscircle.classList.add('class9');
+    amazingcircle.innerHTML = '';
+    geniuscircle.innerHTML = ourscore;
+}
+else if(ourscore === totalpoints) {
+    alert('queen bee');
+}
+</script>

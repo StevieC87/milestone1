@@ -12,7 +12,7 @@ const app = express();
 
 //IMPORT ROUTE MODULES
 const shopRoutes = require('./routes/shop');
-const adminRoutes = requir``e('./routes/admin');
+const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 
 //SET TEMPLATE ENGINE
