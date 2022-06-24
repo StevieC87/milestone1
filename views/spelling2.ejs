@@ -424,7 +424,7 @@ document.querySelector('#enterb').addEventListener('click', e => {
         let totalpointsare = points();
         console.log(totalpointsare,'totalpointsare');
        let currentlevel = gamelevel(totalpointsare, currentscore);
-       //  let currentlevel = gamelevel(totalpointsare, 232);
+      //   let currentlevel = gamelevel(totalpointsare, 125);
         console.log(currentlevel, 'currentlevel');
 
 
@@ -560,6 +560,14 @@ document.querySelector('#enterb').addEventListener('click', e => {
     }
 
 })
+
+
+let clickydiv = document.querySelector('#ourmatchedwordsdivouter');
+clickydiv.addEventListener('click', e => {
+  //  alert('hello');
+  clickydiv.classList.toggle('clickydivexpand');
+})
+
 </script>
 </body>
 </html>

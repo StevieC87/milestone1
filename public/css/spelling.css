@@ -280,6 +280,12 @@
         flex-direction: row;
         width: 270px;
     }
+
+    .clickydivexpand{
+        height: 300px;
+        transition: all 0.5s ease-in-out;
+    }
+
     .circlefirst {
         height: 8px;
         width: 8px;
@@ -452,8 +458,8 @@
         margin-top: 6px;
        /*  margin-left: 177px; */
          margin-left: calc(var(--myleftmargin2) * 8);
-       /*  background-color: #E6E6E6; */
-       background-color:green;
+        background-color: #E6E6E6;
+      
        position: absolute;
 
     }
@@ -464,7 +470,7 @@
     .leveldisplay {
         font-weight: bold;
         font-size: 10pt;
-        width: 120px;
+        width: 83px;
     }
     .circleactive {
         width: 20px;
