@@ -20,15 +20,6 @@ wordarray  -->
 
 
 
-
-<script>
-    const wordarray = '<%=wordarray%>';
-    //const chars = word.split('');
-   // console.log(chars);
-   // document.getElem
-   /*   <!-- <span>TYPE LETTERS HERE</span> -->
-<!--         <span id="pointerline" class="pointerline" style="font-size: 26pt; color: #f6d921">|</span> --> */
-</script>
 <div id="test"></div>
 <div class="gridouter">
     <div id="pointsouterdiv" class="pointsouterdiv">
@@ -46,8 +37,15 @@ wordarray  -->
     </div>
     </div>
     <div id="ourmatchedwordsdivouter" class="ourmatchedwordsdivouter">
-        <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1"></div>
-        <div id="ourmatchedwordsdiv2" class="ourmatchedwordsdiv2"><i class="fa-solid fa-angle-down"></i></div>
+        <div class="ourmatchedwordsTOP">
+            <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1"></div>
+            <div id="ourmatchedwordsdiv2" class="ourmatchedwordsdiv2">
+                <i class="fa-solid fa-angle-down"></i></div>
+        </div>
+        <div id="ourmatchedwordsbelow" class="ourmatchedwordsbelow">
+            
+        </div>
+       
         
     </div>
     <div class="alertdivwrapper">
@@ -106,20 +104,15 @@ wordarray  -->
 <script>
 
 let currentscore = 0;
+
+
+//POINT CIRCLES RELATED
 let currentlevel = 'beginner';
 let beginnercircle = document.querySelector('#beginner');
 beginnercircle.classList.add('circleactive');
 let numberhtmlelement = '<div class="numberpoint">0</div>';
 document.querySelector('#beginner').innerHTML = numberhtmlelement;
 
-    console.log('<%= allmatchingwordsa %>', 'ALL MATCHING WOOOOOOORDS!');
- // console.log(existingword1,'existingword1');
- //   console.log(object);
-    console.log('<%= wordarray %>', 'word array ');
-
-function checkword(word) {
- 
-}
 
 /* SHUFFLE WORDS */
 function shuffle(array) {
@@ -155,14 +148,13 @@ document.querySelector('#shuffle').addEventListener('click', e => {
     e.preventDefault();
 })
 
-//CALCULATE TOTAL POINTS FOR WORD
+//Calculate and return TOTAL POINTS FOR ALL WORDS
 const points = () => {
-   
+    //create array of all words
     let matchingwords = '<%=  allmatchingwordsa %>';
-    
     let matchingwordstoarray = matchingwords.split(',');
-    //For each word, we count how many letters, and how many points the total is
     let totalpoints = 0;
+    //count how many points for each word, add to totalpoints
     matchingwordstoarray.forEach(function(word, index) {
         let wordlength = word.length;
         
@@ -180,14 +172,13 @@ const points = () => {
     pangramsarray.forEach(function(pangram, index) {
         totalpoints += 7;
     });
-    console.log(pangramsarray,'pangramsarray');
-    console.log(totalpoints, 'totalpoints without pangrams');
-    console.log(matchingwordstoarray,'matchingwordstoarray!!!!!!!!!!');
     return totalpoints;
-   // gamelevel(totalpoints);
-
 }
-points();
+
+
+
+
+//FUNCTION FOR POINT CIRCLE
 function gamelevel(totalpoints, ourscore) {
     //THEN CALCULATE HOW MANY POINTS FOR EACH LEVEL YOU NEED
     let beginner = 0;
@@ -220,78 +211,76 @@ function gamelevel(totalpoints, ourscore) {
     beginnercircle.classList.add('colorin');
     //otherwise DO A FOR EACH, STRIP THEM OF THEIR CLASSES MAYBE
 
-function testmethis() {
+    //this is inside another function here
+    function testmethis() {
+        let circles = document.querySelectorAll('.circlecircle');
+            circles.forEach(function(circle, index) {
+                circle.classList.remove('circleactive');
+                circle.innerHTML = '';
+        }); 
+        if(ourscore >= goodstart && ourscore < movingup) {
+            currentpointslevel = 'Good start';
+            currentlevelstage = 1;
+            circleweneed = goodstartcircle;
+        }
+        else if (ourscore >= movingup && ourscore < good) {
+            currentpointslevel = 'Moving Up';
+            currentlevelstage = 2;
+            circleweneed = movingupcircle;
+        }
+        else if (ourscore >= good && ourscore < solid) {
+            currentpointslevel = 'Good';
+            currentlevelstage = 3;
+            circleweneed = goodcircle;
+        }
+        else if (ourscore >= solid && ourscore < nice) {
+            currentpointslevel = 'Solid';
+            currentlevelstage = 4;
+            circleweneed = solidcircle;
+        }
+        else if (ourscore >= nice && ourscore < great) {
+            currentpointslevel = 'Nice';
+            currentlevelstage = 5;
+            circleweneed = nicecircle;
+        }
+        else if (ourscore >= great && ourscore < amazing) {
+            currentpointslevel = 'Great';
+            currentlevelstage = 6;
+            circleweneed = greatcircle;
+        }
+        else if (ourscore >= amazing && ourscore < genius) {
+            currentpointslevel = 'Amazing';
+            currentlevelstage = 7;
+            circleweneed = amazingcircle;
+        }
+        else if (ourscore >= genius) {
+            currentpointslevel = 'Genius';
+            currentlevelstage = 8;
+            circleweneed = geniuscircle;
+        }
+        else if(ourscore === totalpoints) {
+            alert('queen bee');
 
-    let circles = document.querySelectorAll('.circlecircle');
-        circles.forEach(function(circle, index) {
-            circle.classList.remove('circleactive');
-            circle.innerHTML = '';
-    }); 
-
-
-    if(ourscore >= goodstart && ourscore < movingup) {
-        currentpointslevel = 'Good start';
-        currentlevelstage = 1;
-        circleweneed = goodstartcircle;
-    }
-    else if (ourscore >= movingup && ourscore < good) {
-        currentpointslevel = 'Moving Up';
-        currentlevelstage = 2;
-        circleweneed = movingupcircle;
-    }
-    else if (ourscore >= good && ourscore < solid) {
-        currentpointslevel = 'Good';
-        currentlevelstage = 3;
-        circleweneed = goodcircle;
-    }
-    else if (ourscore >= solid && ourscore < nice) {
-        currentpointslevel = 'Solid';
-        currentlevelstage = 4;
-        circleweneed = solidcircle;
-    }
-    else if (ourscore >= nice && ourscore < great) {
-        currentpointslevel = 'Nice';
-        currentlevelstage = 5;
-        circleweneed = nicecircle;
-    }
-    else if (ourscore >= great && ourscore < amazing) {
-        currentpointslevel = 'Great';
-        currentlevelstage = 6;
-        circleweneed = greatcircle;
-    }
-    else if (ourscore >= amazing && ourscore < genius) {
-        currentpointslevel = 'Amazing';
-        currentlevelstage = 7;
-        circleweneed = amazingcircle;
-    }
-    else if (ourscore >= genius) {
-        currentpointslevel = 'Genius';
-        currentlevelstage = 8;
-        circleweneed = geniuscircle;
-    }
-    else if(ourscore === totalpoints) {
-        alert('queen bee');
-
-    }
+        }
 
 
-    circleweneed.classList.add('circleactive');
-    //class to add 
-    let classtoadd = `circle${currentlevelstage+1}newclass`
-   // circleweneed.classList.add('circle2newclass');
-   console.log(classtoadd,'classtoadd');
-    circleweneed.classList.add(classtoadd);
-    circleweneed.classList.add('colorin');
-    circleweneed.innerHTML = pointstoshow;
+        circleweneed.classList.add('circleactive');
+        //class to add 
+        let classtoadd = `circle${currentlevelstage+1}newclass`
+    // circleweneed.classList.add('circle2newclass');
+    console.log(classtoadd,'classtoadd');
+        circleweneed.classList.add(classtoadd);
+        circleweneed.classList.add('colorin');
+        circleweneed.innerHTML = pointstoshow;
+        
+        leveldisplay.textContent = currentpointslevel;
     
-    leveldisplay.textContent = currentpointslevel;
-   
-}
-testmethis();
+    }
+    testmethis();
   
    
 }
-
+let centerletteris = '<%=centerletter%>';
 document.addEventListener('click', e => {
         console.log(e, 'event');
         console.log(e.target.tagName, 'e.target.tagName');
@@ -332,9 +321,12 @@ document.addEventListener('click', e => {
                 console.log(element, index, 'element', 'index');
             });
             console.log(contents, 'contents');
-            if(contentslength == 2) {
+            console.log(centerletteris,'centerletteris');
+            console.log(leterindextexttagLetter, 'leterindextexttagLetter');
+            if(leterindextexttagLetter === centerletteris.toUpperCase()){
                 spanmake.className = 'orange';
             }
+           
        //     console.log(targetbox.innerHTML,'targetbox.innerHTML');
             //console.log(targetbox.innerHTML.tagName,'tagName');
           
@@ -372,7 +364,6 @@ document.querySelector('#deleteb').addEventListener('click', e => {
         console.log(wordfromarray1, 'wordfromarray');
         //let lettersinboxlength = lettersinbox.length;
 
-       
     }
     )
     
@@ -383,6 +374,9 @@ let lettersinbox = document.querySelectorAll('#letterstype span');
 let alertdiv = document.querySelector('#alertdiv');
 let alertmessage = '';
 let centerletter = '<%= centerletter %>';
+
+
+
 
 //EVENT LISTENER FOR PRESS 'ENTER' , 
 document.querySelector('#enterb').addEventListener('click', e => {
@@ -398,7 +392,7 @@ document.querySelector('#enterb').addEventListener('click', e => {
     let wordfromarray = wordarray.join();
     const wordfromarray1 = wordfromarray.replaceAll(',', '').toLowerCase();
    
-
+    //CHECK IF WORD IS A MATCH
     let wordsarray = '<%=  allmatchingwordsa %>';
     let ifincludes = wordsarray.includes(wordfromarray1);
     let message = '';
@@ -428,6 +422,14 @@ document.querySelector('#enterb').addEventListener('click', e => {
         console.log(currentlevel, 'currentlevel');
 
 
+        /* TRYING HERE TO ADD THE WORD INSIDE THE 
+        YOUR MATCHED WORD LIST */
+        
+
+
+
+
+
         let wait = setTimeout(() => {
             alertdiv.classList.remove('alertdivshow');
      //       alertdiv.classList.add('alertdivshow');
@@ -437,7 +439,8 @@ document.querySelector('#enterb').addEventListener('click', e => {
         });
         }, 2000);
     }
-    //VALIDATION FOR WORD
+    
+    //VALIDATION FOR WORD TO SEE IF IT'S A VALID WORD
     const validation = () => {
         //IF LESS THAN 4 CHARACTERS - MESSAGE
         if(wordfromarray1.length < 4 ){
@@ -465,7 +468,7 @@ document.querySelector('#enterb').addEventListener('click', e => {
                     }
                     //IF IT'S IN OUR LIST, ADD IT TO ARRAY
                     else {
-                        console.log('word found');
+                       // console.log('word found');
                         yourmatchedwords.push(wordfromarray1);
                        
                         //check if pangram
@@ -473,7 +476,7 @@ document.querySelector('#enterb').addEventListener('click', e => {
                         let pangramsarray = pangrams.split(',');
                         let ifpangram = pangramsarray.includes(wordfromarray1);
 
-                        console.log(pangrams,'pangrams!!!!!!');
+                     //   console.log(pangrams,'pangrams!!!!!!');
 
                         //CALCULATE POINTS AND DISPLAY
                         let points = wordfromarray1.length; 
@@ -490,8 +493,7 @@ document.querySelector('#enterb').addEventListener('click', e => {
                             wordpoints += 7;
                         }
 
-                        console.log(wordpoints, 'wordpoints');
-
+                     //   console.log(wordpoints, 'wordpoints');
 
                        // var sentence = "Mr. glue has a blue shouse";
                       //  var regularExpression = /\bblue\b/g;
@@ -504,19 +506,54 @@ document.querySelector('#enterb').addEventListener('click', e => {
 
 
                         let pagrammatch = pangrams.includes(wordfromarray1); */
+
+                        //CREATE WORD TO ADD TO OUR LIST OF MATCHED WORDS
+                        let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
+
                         let spanmake = document.createElement('span');
                         spanmake.className = 'wordlistword';
-                        let capitalisedMatchedword = wordfromarray1.charAt(0).toUpperCase() + wordfromarray1.slice(1);                          
-                          
-                       
+                        let capitalisedMatchedword = wordfromarray1.charAt(0).toUpperCase() + wordfromarray1.slice(1);         
+                      
 
                        spanmake.textContent = capitalisedMatchedword;
 
-                         //OTHER WAY
-                      //   let newspan = `<span class="">${capitalisedMatchedword}</span>`;
+                   /*     let spanmake3div = document.createElement('div');
+                       spanmake3div.className = 'yourmatchedwodsindiv';
+                       let spanmake3 = `<span class="yourmatchedwordsin">${capitalisedMatchedword}</span>
+                       </br>
+                       <hr>`;  
+                        spanmake3div.innerHTML = spanmake3;
+ */
+                      /*  let spanmake2 = document.createElement('span');
+                          spanmake2.className = 'wordlistword';
+                          spanmake2.textContent = capitalisedMatchedword; */
+                     
+                          yourmatchedwords.sort();
+                          ourmatchedwordsbelow.innerHTML = '';
+                       yourmatchedwords.forEach(function(element, index) {
 
-                            ourmatchedwordsdiv.appendChild(spanmake);
+                            let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
 
+                             let span4div = document.createElement('div');
+                           span4div.className = 'yourmatchedwodsindiv';
+
+                            let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span>
+                            </br>
+                            <hr>`;
+                            span4div.innerHTML = spanmake4;
+                         
+                            ourmatchedwordsbelow.appendChild(span4div);
+                          //  alert('word');
+                            
+                        });
+
+                        
+                   //     ourmatchedwordsbelow.appendChild(spanmake3div);
+                        ourmatchedwordsdiv.appendChild(spanmake);
+                     
+                   
+                   //OTHER WAY
+                                       
                             lettersinbox.forEach (function(element, index) {
                             element.remove();
                             });
@@ -527,7 +564,8 @@ document.querySelector('#enterb').addEventListener('click', e => {
                         }
                         else {
                            //create span to display word on page
-                          
+                        
+
                             return MessageM('Nice!', wordpoints);
 
                             }
@@ -562,11 +600,17 @@ document.querySelector('#enterb').addEventListener('click', e => {
 })
 
 
-let clickydiv = document.querySelector('#ourmatchedwordsdivouter');
+
+
+
+let clickydiv = document.querySelector('#ourmatchedwordsdiv1');
+let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
 clickydiv.addEventListener('click', e => {
-  //  alert('hello');
-  clickydiv.classList.toggle('clickydivexpand');
+  //alert('hello');
+  clickyouter.classList.toggle('clickydivexpand');
 })
+
+
 
 </script>
 </body>
