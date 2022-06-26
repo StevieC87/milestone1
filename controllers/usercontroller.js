@@ -1,4 +1,4 @@
-const User = require("../models/userModel");
+const UserModel = require("../models/UserModel");
 
 
 exports.login = (req, res, next) => {
@@ -17,5 +17,29 @@ exports.signup = (req, res, next) => {
         path: '/signup',
 
     });
-    signup
+    
+}
+
+exports.registration = async (req, res, next) => {
+    console.log('registration CONTRLLER HERE');
+    
+     try {
+      //  const user = await UserModel.create(req.body);
+    //    res.redirect('/login');
+    const user = new UserModel({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+    });
+    const savedUser = await user.save();
+    if(savedUser) {
+     return res.redirect('/user/login?register=true');
+   //   res.render('helloworld');
+    }
+    return next(new Error('Failed to save user unknown reason'));
+    }
+    catch (err) {
+        console.log(err);
+        return next(err);
+    }/* */
 }
