@@ -118,7 +118,7 @@ document.querySelector('#beginner').innerHTML = numberhtmlelement;
     // use a for loop to do this? said copilot
 
 
-let matchingwords = '<%=  allmatchingwordsa %>';
+let matchingwords = '<%=allmatchingwordsa%>';
     let matchingwordstoarray = matchingwords.split(',');
 //Calculate and return TOTAL POINTS FOR ALL WORDS
 
@@ -328,7 +328,7 @@ const points = () => {
 
 //get level based on points
 function returnCurrentLevel(ourscore) {
- //  
+    let currentlevelstage = 0;
     console.log(ourscore,'ourscore');
     let totalpoints = points();
     //console.log(totalpoints,' totalpoints');
@@ -341,57 +341,71 @@ function returnCurrentLevel(ourscore) {
     let great = Math.round(totalpoints * 0.397);
     let amazing = Math.round(totalpoints * 0.505);
     let genius = Math.round(totalpoints * 0.69);
-    if(ourscore < goodstart) {
+    if(ourscore == 0) {
         currentpointslevel = 'Beginner';
+        currentlevelshorthand = 'beginner';
+        currentlevelstage = 0;
     }
-    else if(ourscore >= goodstart && ourscore < movingup) {
+   // else if(ourscore >= goodstart && ourscore < movingup) {
+    else if(ourscore > 0 && ourscore < movingup) {
         currentpointslevel = 'Good start';
+        currentlevelshorthand = 'goodstart';
         currentlevelstage = 1;
         //circleweneed = goodstartcircle;
     }
     else if (ourscore >= movingup && ourscore < good) {
         currentpointslevel = 'Moving Up';
+        currentlevelshorthand = 'movingup';
         currentlevelstage = 2;
         // circleweneed = movingupcircle;
     }
     else if (ourscore >= good && ourscore < solid) {
         currentpointslevel = 'Good';
+        currentlevelshorthand = 'good';
         currentlevelstage = 3;
         // circleweneed = goodcircle;
     }
     else if (ourscore >= solid && ourscore < nice) {
         currentpointslevel = 'Solid';
+        currentlevelshorthand = 'solid';
         currentlevelstage = 4;
         // circleweneed = solidcircle;
     }
     else if (ourscore >= nice && ourscore < great) {
         currentpointslevel = 'Nice';
+        currentlevelshorthand = 'nice';
         currentlevelstage = 5;
         //  circleweneed = nicecircle;
     }
     else if (ourscore >= great && ourscore < amazing) {
-        currentpointslevel = 'Great';
+        currentpointslevel = 'Great';   
+        currentlevelshorthand = 'great';
         currentlevelstage = 6;
         // circleweneed = greatcircle;
     }
     else if (ourscore >= amazing && ourscore < genius) {
         currentpointslevel = 'Amazing';
+        currentlevelshorthand = 'amazing';
         currentlevelstage = 7;
         // circleweneed = amazingcircle;
     }
     else if (ourscore >= genius) {
         currentpointslevel = 'Genius';
+        currentlevelshorthand = 'genius';
         currentlevelstage = 8;
         //   circleweneed = geniuscircle;
     }
     else if(ourscore === totalpoints) {
-        alert('queen bee');
+        alert('Queen Bee');
+        currentlevelstage = 9;
+        currentpointslevel = 'Queen Bee';
+        currentlevelshorthand = 'queenbee';
 
     }
     else {
         currentpointslevel = 'Beginner';
     }
-    return currentpointslevel;
+    return {currentpointslevel, currentlevelstage, currentlevelshorthand};
 }
 
 
@@ -411,6 +425,7 @@ function newfunctionPoints(wordpoints, currentscore) {
     let amazingcircle = document.querySelector('#amazing');
     let geniuscircle = document.querySelector('#genius');
 
+
     let circleweneed = '';
     const leveldisplay = document.querySelector('#leveldisplay');
    
@@ -428,124 +443,92 @@ function newfunctionPoints(wordpoints, currentscore) {
                 circle.classList.remove('circleactive');
                 circle.innerHTML = '';
         }); 
-        let ourcurrentlevel = returnCurrentLevel(currentscore);
+        let ourcurrentlevel = returnCurrentLevel(currentscore).currentpointslevel;
+        let ourcurrentlevelstage = returnCurrentLevel(currentscore).currentlevelstage;
+        let currentlevelshorthand = returnCurrentLevel(currentscore).currentlevelshorthand;
         console.log(ourcurrentlevel,'ourcurrentlevel!!!!!!!!');
         if(ourcurrentlevel === 'Beginner') {
             circleweneed = goodstartcircle;
-            currentlevelstage = 0;
+            //currentlevelstage = 0;
         }
         else if(ourcurrentlevel === 'Good start') {
             circleweneed = goodstartcircle;
-            currentlevelstage = 1;
+            //currentlevelstage = 1;
         }
         else if(ourcurrentlevel === 'Moving Up') {
             circleweneed = movingupcircle;
-            currentlevelstage = 2;
+           // currentlevelstage = 2;
         }
         else if(ourcurrentlevel === 'Good') {
             circleweneed = goodcircle;
-            currentlevelstage = 3;
+           // currentlevelstage = 3;
         }
         else if(ourcurrentlevel === 'Solid') {
             circleweneed = solidcircle;
-            currentlevelstage = 4;
+            //currentlevelstage = 4;
         }
         else if(ourcurrentlevel === 'Nice') {
             circleweneed = nicecircle;
-            currentlevelstage = 5;
+           /// currentlevelstage = 5;
         }
         else if(ourcurrentlevel === 'Great') {
             circleweneed = greatcircle;
-            currentlevelstage = 6;
+           // currentlevelstage = 6;
         }
         else if(ourcurrentlevel === 'Amazing') {
             circleweneed = amazingcircle;
-            currentlevelstage = 7;
+          //  currentlevelstage = 7;
         }
         else if(ourcurrentlevel === 'Genius') {
             circleweneed = geniuscircle;
-            currentlevelstage = 8;
+          //  currentlevelstage = 8;
         }
         else {
             alertdiv.textContent = 'You are a beginner';
         }
-       
+        let shorthandlevelsArray = ['beginner', 'goodstart', 'movingup', 'good', 'solid', 'nice', 'great', 'amazing', 'genius'];
         circleweneed.classList.add('circleactive');
+        //we know current level stage
+        //we want all previous level stages, to have colorin class
+       // let levelsinarray = ['Beginner', 'Good start', 'Moving Up', 'Good', 'Solid', 'Nice', 'Great', 'Amazing', 'Genius'];
+        //find index of current level, then for previous levels, we can try add class , for their circles
+        console.log(ourcurrentlevel,'ourcurrentlevel');
+        let currentlevelindex = shorthandlevelsArray.indexOf(currentlevelshorthand); //e.g. 0 for beginner, 1 for goodstart, 2 for movingup, 3 for good, 4 for solid, 5 for nice, 6 for great, 7 for amazing, 8 for genius
+        console.log(currentlevelindex, 'currentlevelindex!!!!********');
+        let previouslevels = shorthandlevelsArray.slice(0, currentlevelindex); //e.g. ['Beginner', 'Good start', 'Moving Up']
+        console.log(previouslevels,'previouslevelspreviouslevels');
+        previouslevels.forEach(function(level, index) {
+            let circle = document.querySelector(`#${level}`); //e.g. goodstartcircle
+            console.log(circle,'circle');
+            circle.classList.add('colorin');
+        });
+        //get also circles for previous levels
+
+
         //class to add 
-        let classtoadd = `circle${currentlevelstage+1}newclass`
+        //for loop with ++i
+        //loop for as many as current index level, then remove class colorin
+        for(i = 0; i < ourcurrentlevel; i++) {
+            let circle = document.querySelector(`#${shorthandlevelsArray[i]}`);
+            circle.classList.remove('colorin');
+        }
+         let findprevious = `circle${ourcurrentlevelstage}newclass`;
+         console.log(findprevious,'findprevious!');
+        let findpreviousfill = document.querySelector('findprevious');
+        if(findpreviousfill) {
+            findpreviousfill.classList.remove('findprevious');
+        };
+        console.log(findpreviousfill,'findpreviousfill!!!!!!!!');
+         let classtoadd = `circle${ourcurrentlevelstage+1}newclass`
     // circleweneed.classList.add('circle2newclass');
         console.log(classtoadd,'classtoadd');
         circleweneed.classList.add(classtoadd);
         circleweneed.classList.add('colorin');
         circleweneed.innerHTML = pointstoshow;
         
-        leveldisplay.textContent = currentpointslevel;
+        leveldisplay.textContent = ourcurrentlevel;
             
-            
-            
-
-/* 
-        if(ourscore >= goodstart && ourscore < movingup) {
-            currentpointslevel = 'Good start';
-            currentlevelstage = 1;
-            circleweneed = goodstartcircle;
-        }
-        else if (ourscore >= movingup && ourscore < good) {
-            currentpointslevel = 'Moving Up';
-            currentlevelstage = 2;
-            circleweneed = movingupcircle;
-        }
-        else if (ourscore >= good && ourscore < solid) {
-            currentpointslevel = 'Good';
-            currentlevelstage = 3;
-            circleweneed = goodcircle;
-        }
-        else if (ourscore >= solid && ourscore < nice) {
-            currentpointslevel = 'Solid';
-            currentlevelstage = 4;
-            circleweneed = solidcircle;
-        }
-        else if (ourscore >= nice && ourscore < great) {
-            currentpointslevel = 'Nice';
-            currentlevelstage = 5;
-            circleweneed = nicecircle;
-            
-        }
-        else if (ourscore >= great && ourscore < amazing) {
-            currentpointslevel = 'Great';
-            currentlevelstage = 6;
-            circleweneed = greatcircle;
-           
-        }
-        else if (ourscore >= amazing && ourscore < genius) {
-            currentpointslevel = 'Amazing';
-            currentlevelstage = 7;
-            circleweneed = amazingcircle;
-           
-        }
-        else if (ourscore >= genius) {
-            currentpointslevel = 'Genius';
-            currentlevelstage = 8;
-            circleweneed = geniuscircle;
-        
-        }
-        else if(ourscore === totalpoints) {
-            alert('queen bee');
-
-        }
-
-
-        circleweneed.classList.add('circleactive');
-        //class to add 
-        let classtoadd = `circle${currentlevelstage+1}newclass`
-    // circleweneed.classList.add('circle2newclass');
-        console.log(classtoadd,'classtoadd');
-        circleweneed.classList.add(classtoadd);
-        circleweneed.classList.add('colorin');
-        circleweneed.innerHTML = pointstoshow;
-        
-        leveldisplay.textContent = currentpointslevel;
-     */
+  
 }
 
  
@@ -566,7 +549,8 @@ function newfunctionPoints(wordpoints, currentscore) {
         }
         
         //get current level 
-        let currentlevel = returnCurrentLevel(currentscore)
+        let currentlevel = returnCurrentLevel(currentscore).currentpointslevel;
+        console.log(currentlevel,'currentlevel');
 
         //CREATE ELEMENT TO DISPLAY MESSAGE
         let pointstoshow = '+'+wordpoints; //e.g. +5
@@ -674,8 +658,12 @@ function validation(word) {
                         //CLEAR EXPANDABLE DIV WORDS
                         ourmatchedwordsbelow.innerHTML = '';
 
+                        //our array of all matched words
+                        matchingwords.sort();
+                        console.log(matchingwords,'matchingwords');
+                        matchingwords.forEach(function(element, index) {
                         //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
-                        yourmatchedwords.forEach(function(element, index) {
+                      //  yourmatchedwords.forEach(function(element, index) {
                         let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
                         let span4div = document.createElement('div');
                         span4div.className = 'yourmatchedwodsindiv';
