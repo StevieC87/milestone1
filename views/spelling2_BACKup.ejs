@@ -1,14 +1,14 @@
 <%- include('./includes/head.ejs') %>
-<script src="/js/shuffle.js" defer></script>
-<script src="/js/urmatchedwords.js" defer></script>
-<script src="/js/delete.js" defer></script>
 <link href="/css/spelling.css" rel="stylesheet">
-
 </head>
 
 <body>
 <%- include('./includes/nav.ejs') %>
 
+<style>
+   
+
+</style>
 <!--  word 
  centerletter
 
@@ -103,12 +103,8 @@ wordarray  -->
 
 <script>
 
-    //related shuffle
-    let existingword1 = '<%= wordarray %>';
-    console.log('<%= wordarray %>','existingword1');
-
 let currentscore = 0;
-let newarray1 = [];
+
 
 //POINT CIRCLES RELATED
 let currentlevel = 'beginner';
@@ -117,6 +113,40 @@ beginnercircle.classList.add('circleactive');
 let numberhtmlelement = '<div class="numberpoint">0</div>';
 document.querySelector('#beginner').innerHTML = numberhtmlelement;
 
+
+/* SHUFFLE WORDS */
+function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+    event.preventDefault();
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+    }
+document.querySelector('#shuffle').addEventListener('click', e => {
+    
+     let existingword1 = '<%= wordarray %>';
+    console.log('<%= wordarray %>','existingword1');
+    const existingwordtoarray = existingword1.split(',');
+    let newarray = shuffle(existingwordtoarray);
+
+    let lettersinpage = document.querySelectorAll('.letterouter');
+    newarray.forEach(function(letter1, index) {
+
+        document.querySelector(`#outerletter${index}`).textContent = letter1.toUpperCase();
+    });
+
+    e.preventDefault();
+})
 
 //Calculate and return TOTAL POINTS FOR ALL WORDS
 const points = () => {
@@ -294,14 +324,14 @@ document.addEventListener('click', e => {
             console.log(centerletteris,'centerletteris');
             console.log(leterindextexttagLetter, 'leterindextexttagLetter');
             if(leterindextexttagLetter === centerletteris.toUpperCase()){
-                spanmake.className = 'orange wordletter';
+                spanmake.className = 'orange';
             }
            
        //     console.log(targetbox.innerHTML,'targetbox.innerHTML');
             //console.log(targetbox.innerHTML.tagName,'tagName');
           
             else {
-                spanmake.className = 'blue wordletter';
+                spanmake.className = 'blue';
             }
             const pointerline = document.querySelector('#pointerline');
           pointerline.before(spanmake);
@@ -313,6 +343,30 @@ document.addEventListener('click', e => {
         } //  document.querySelector
     })
 
+document.querySelector('#deleteb').addEventListener('click', e => {
+        event.preventDefault();
+        let lettersboxis =  document.querySelector('#letterstype');
+       //we want to delete last span which is letter
+       //we might have last span always defa
+        //grab all 
+        let lettersinbox = document.querySelectorAll('#letterstype span');
+
+        lettersinbox[lettersinbox.length-1].remove();
+        
+        
+        
+       let wordfromarray = newarray1.join();
+       const wordfromarray1 = wordfromarray.replaceAll(',', '');
+
+       // lettersboxis.prepend
+
+        console.log(newarray1, 'newarray1');
+        console.log(wordfromarray1, 'wordfromarray');
+        //let lettersinboxlength = lettersinbox.length;
+
+    }
+    )
+    
 let yourmatchedwords = [];
 let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv1');
 
@@ -548,7 +602,43 @@ document.querySelector('#enterb').addEventListener('click', e => {
 })
 
 
+let clickydiv = document.querySelector('#ourmatchedwordsdiv1');
+let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
+//if click the div with the arrow, expand and show list of words 
+clickydiv.addEventListener('click', e => {
+  //only if you have found words expand
+  if(yourmatchedwords.length >= 1) {
+    //expand
+    clickyouter.classList.toggle('clickydivexpand');
+    //hide game
+    document.querySelector('#letterstype').classList.toggle('d-none');
+    document.querySelector('#outerdiv').classList.toggle('d-none');
+    document.querySelector('#buttonsdiv').classList.toggle('d-none');
+    //hide words while open
+    document.querySelectorAll('.ourmatchedwordsdiv1 > span').forEach(function(element, index) {
+        element.classList.toggle('d-none');
+    });
 
+    //set word or word(s)
+    let numberofwordsyoufound = yourmatchedwords.length;
+    let plural = '';
+    if(numberofwordsyoufound > 1) {
+        plural = 's';
+    }
+
+    //create the 'you have found x words message'
+    let creatediv   = document.createElement('div');
+    let texttoadd = `<span>You have found ${numberofwordsyoufound} word${plural}</span>`;
+    creatediv.innerHTML = texttoadd;
+    let parenthere = document.querySelector('#ourmatchedwordsdiv1');
+    parenthere.appendChild(creatediv);
+
+  }
+  
+
+ 
+  
+})
 
 
 

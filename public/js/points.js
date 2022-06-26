@@ -1,114 +1,3 @@
-<%- include('./includes/head.ejs') %>
-<script src="/js/shuffle.js" defer></script>
-<script src="/js/urmatchedwords.js" defer></script>
-<script src="/js/delete.js" defer></script>
-<link href="/css/spelling.css" rel="stylesheet">
-
-</head>
-
-<body>
-<%- include('./includes/nav.ejs') %>
-
-<!--  word 
- centerletter
-
-
-
-wordarray  -->
-
- <!-- wordarray -->
-
-
-
-<div id="test"></div>
-<div class="gridouter">
-    <div id="pointsouterdiv" class="pointsouterdiv">
-    <div id="leveldisplay" class="leveldisplay">Beginner</div>
-    <div id="points" class="pointsdiv">
-        <span class="circlefirst circlecircle" id="beginner"></span>
-        <span class="circle circlenext circlecircle" id="goodstart"></span>
-        <span class="circle circlenext circlecircle" id="movingup"></span>
-        <span class="circle circlenext circlecircle" id="good"></span>
-        <span class="circle circlenext circlecircle" id="solid"></span>
-        <span class="circle circlenext circlecircle" id="nice"></span>
-        <span class="circle circlenext circlecircle" id="great"></span>
-        <span class="circle circlenext circlecircle" id="amazing"></span>
-        <span class="circleend circlecircle" id="genius"></span>
-    </div>
-    </div>
-    <div id="ourmatchedwordsdivouter" class="ourmatchedwordsdivouter">
-        <div class="ourmatchedwordsTOP">
-            <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1"></div>
-            <div id="ourmatchedwordsdiv2" class="ourmatchedwordsdiv2">
-                <i class="fa-solid fa-angle-down"></i></div>
-        </div>
-        <div id="ourmatchedwordsbelow" class="ourmatchedwordsbelow">
-            
-        </div>
-       
-        
-    </div>
-    <div class="alertdivwrapper">
-        <div id="alertdiv" class="d-none">
-
-        </div>
-        <div id="pointshow" class="pointshow">
-
-        </div>
-    </div>
-    <div id="letterstype" class="letterstype"><i id="pointerline" class="fa-regular fa-pipe pointerline">|</i></span>
-    </div> <!-- letterstype -->
-
-    <div id="outerdiv" class="outerdiv">
-        <svg class="svg" id="svg9"> <!--  width="400" height="180" -->
-            <polygon id="p9" class="polygon center"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9"></polygon>
-            <text id="outerletter9" class="letter lettercentre letternoselect" x="50%" y="50%" dy="0.35em"><%=centerletter.toUpperCase()%></text>
-        </svg>
-        <svg class="svg" id="svg0"> <!--  width="400" height="180" -->
-            <polygon id="p0" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-            <text id="outerletter0" id="centerletter" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[0].toUpperCase()%></text>
-        </svg>
-        <svg class="svg" id="svg1"> <!--  width="400" height="180" -->
-            <polygon id="p1" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-            <text id="outerletter1" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[1].toUpperCase()%></text>
-        </svg>
-        <svg class="svg" id="svg2"> <!--  width="400" height="180" -->
-            <polygon id="p2"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-            <text id="outerletter2" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em" ><%=wordarray[2].toUpperCase()%></text>
-        </svg>
-        <svg class="svg" id="svg3"> <!--  width="400" height="180" -->
-            <polygon id="p3"  class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-            <text id="outerletter3" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[3].toUpperCase()%></text>
-        </svg>
-        <svg class="svg" id="svg4"> <!--  width="400" height="180" -->
-            <polygon id="p4" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-            <text id="outerletter4" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[4].toUpperCase()%></text>
-        </svg>
-        <svg class="svg" id="svg5"> <!--  width="400" height="180" -->
-            <polygon id="p5" class="polygon outer"  points="0,51 30,0 90,0 120,51.9 90,103.9 30,103.9" ></polygon>
-            <text id="outerletter5" class="letter letterouter letternoselect" x="50%" y="50%" dy="0.35em"><%=wordarray[5].toUpperCase()%></text>
-        </svg>
-        
-        
-    </div> <!-- outerdiv -->
-    <div id="buttonsdiv" class="buttonsdiv">
-        <div class="buttonsdivmini" id="buttonsdivmini">
-        <a href="" id="deleteb" class="btn btn-outline-secondary deleteb" style="padding-top: 9px">Delete</a>
-        <a id="shuffle" href="" class="btn btn-outline-secondary reloadb"  style="padding-top: 9px;">
-            <i class="fa-solid fa-rotate"></i></a>
-        <a href="" id="enterb" class="btn btn-outline-secondary enterb"  style="padding-top: 9px;">Enter</a>
-    </div>
-    </div>   <!-- buttonsdiv -->
-</div> <!-- gridouter -->
-
-<script>
-
-    //related shuffle
-    let existingword1 = '<%= wordarray %>';
-    console.log('<%= wordarray %>','existingword1');
-
-let currentscore = 0;
-let newarray1 = [];
 
 //POINT CIRCLES RELATED
 let currentlevel = 'beginner';
@@ -294,14 +183,15 @@ document.addEventListener('click', e => {
             console.log(centerletteris,'centerletteris');
             console.log(leterindextexttagLetter, 'leterindextexttagLetter');
             if(leterindextexttagLetter === centerletteris.toUpperCase()){
-                spanmake.className = 'orange wordletter';
+                alert(leterindextexttagLetter);
+                spanmake.className = 'orange';
             }
            
        //     console.log(targetbox.innerHTML,'targetbox.innerHTML');
             //console.log(targetbox.innerHTML.tagName,'tagName');
           
             else {
-                spanmake.className = 'blue wordletter';
+                spanmake.className = 'blue';
             }
             const pointerline = document.querySelector('#pointerline');
           pointerline.before(spanmake);
@@ -313,6 +203,30 @@ document.addEventListener('click', e => {
         } //  document.querySelector
     })
 
+document.querySelector('#deleteb').addEventListener('click', e => {
+        event.preventDefault();
+        let lettersboxis =  document.querySelector('#letterstype');
+       //we want to delete last span which is letter
+       //we might have last span always defa
+        //grab all 
+        let lettersinbox = document.querySelectorAll('#letterstype span');
+
+        lettersinbox[lettersinbox.length-1].remove();
+        
+        
+        
+       let wordfromarray = newarray1.join();
+       const wordfromarray1 = wordfromarray.replaceAll(',', '');
+
+       // lettersboxis.prepend
+
+        console.log(newarray1, 'newarray1');
+        console.log(wordfromarray1, 'wordfromarray');
+        //let lettersinboxlength = lettersinbox.length;
+
+    }
+    )
+    
 let yourmatchedwords = [];
 let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv1');
 
@@ -548,10 +462,3 @@ document.querySelector('#enterb').addEventListener('click', e => {
 })
 
 
-
-
-
-
-</script>
-</body>
-</html>

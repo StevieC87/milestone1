@@ -7,7 +7,7 @@ const userController = require('../controllers/usercontroller');
 const { Router } = require('express');
 const { clear } = require('console');
 
- router.get('/login', userController.login);
+/*  router.get('/login', userController.login);
  router.post('/login', passport.authenticate('local', {
      successRedirect: '/',
      failureRedirect: '/login?error=true',
@@ -18,15 +18,15 @@ const { clear } = require('console');
          res.redirect('/');
    }
    );
-
- router.get('/signup', userController.signup);
+ */
+ // router.get('/signup', userController.signup);
 /* 
  router.get('/registration' , (req, res, next) => {
     res.render('user/login', {
  });
 }   
  ); */
- router.post('/signup', userController.registration);
+ //router.post('/signup', userController.registration);
 /* router.post('/signup', function (req, res, next) {
       console.log('registration CONTRLLER HERE');
       res.render('helloworld');
