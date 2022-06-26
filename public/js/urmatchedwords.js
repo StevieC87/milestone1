@@ -6,6 +6,23 @@ clickydiv.addEventListener('click', e => {
   if(yourmatchedwords.length >= 1) {
     //expand
     clickyouter.classList.toggle('clickydivexpand');
+    clickyouter.classList.toggle('overflowscroll');//divtoincludein.className.toggle('d-none');
+
+    let wrap = document.querySelector('#ourmatchedwordsdivouter');
+    let divtoincludein = document.querySelector('#youhavefounddiv');
+
+    if (wrap.classList.contains('clickydivexpand')) {
+       //alert('open')
+      divtoincludein.classList.remove('d-none');
+
+    }
+    else {
+      //alert('close')
+      //divtoincludein.classList.remove('d-block');
+      divtoincludein.classList.add('d-none');
+    }
+
+
     //hide game
     document.querySelector('#letterstype').classList.toggle('d-none');
     document.querySelector('#outerdiv').classList.toggle('d-none');
@@ -14,7 +31,7 @@ clickydiv.addEventListener('click', e => {
     document.querySelectorAll('.ourmatchedwordsdiv1 > span').forEach(function(element, index) {
         element.classList.toggle('d-none');
     });
-
+    
     //set word or word(s)
     let numberofwordsyoufound = yourmatchedwords.length;
     let plural = '';
@@ -23,11 +40,15 @@ clickydiv.addEventListener('click', e => {
     }
 
     //create the 'you have found x words message'
-    let creatediv   = document.createElement('div');
+    //let creatediv   = document.createElement('div');
+
+ 
+    //creatediv.id = 'youfoundxwordsdiv';
     let texttoadd = `<span>You have found ${numberofwordsyoufound} word${plural}</span>`;
-    creatediv.innerHTML = texttoadd;
-    let parenthere = document.querySelector('#ourmatchedwordsdiv1');
-    parenthere.appendChild(creatediv);
+    divtoincludein.innerHTML = texttoadd;
+    //
+    // let parenthere = document.querySelector('#ourmatchedwordsdiv1');
+    //parenthere.appendChild(creatediv);
 
   }
   
@@ -35,3 +56,5 @@ clickydiv.addEventListener('click', e => {
  
   
 })
+
+

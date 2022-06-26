@@ -38,7 +38,10 @@ wordarray  -->
     </div>
     <div id="ourmatchedwordsdivouter" class="ourmatchedwordsdivouter">
         <div class="ourmatchedwordsTOP">
-            <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1"></div>
+            <div id="ourmatchedwordsdiv1" class="ourmatchedwordsdiv1">
+                <div id="youhavefounddiv"></div>
+                
+            </div>
             <div id="ourmatchedwordsdiv2" class="ourmatchedwordsdiv2">
                 <i class="fa-solid fa-angle-down"></i></div>
         </div>
@@ -117,12 +120,20 @@ beginnercircle.classList.add('circleactive');
 let numberhtmlelement = '<div class="numberpoint">0</div>';
 document.querySelector('#beginner').innerHTML = numberhtmlelement;
 
+//up to e.g. 14 items in first div
 
+//the other 14 in second div
+
+//remaining in third div etc maybe do it dybnamically
+    // use a for loop to do this? said copilot
+
+
+let matchingwords = '<%=  allmatchingwordsa %>';
+    let matchingwordstoarray = matchingwords.split(',');
 //Calculate and return TOTAL POINTS FOR ALL WORDS
 const points = () => {
     //create array of all words
-    let matchingwords = '<%=  allmatchingwordsa %>';
-    let matchingwordstoarray = matchingwords.split(',');
+   
     let totalpoints = 0;
     //count how many points for each word, add to totalpoints
     matchingwordstoarray.forEach(function(word, index) {
@@ -475,10 +486,11 @@ document.querySelector('#enterb').addEventListener('click', e => {
                       /*  let spanmake2 = document.createElement('span');
                           spanmake2.className = 'wordlistword';
                           spanmake2.textContent = capitalisedMatchedword; */
-                     
+                        //  matchingwordstoarray.sort();
                           yourmatchedwords.sort();
                           ourmatchedwordsbelow.innerHTML = '';
-                       yourmatchedwords.forEach(function(element, index) {
+              
+                        yourmatchedwords.forEach(function(element, index) {
 
                             let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
 
