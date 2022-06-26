@@ -329,7 +329,7 @@ const points = () => {
 //get level based on points
 function returnCurrentLevel(ourscore) {
  //  
-    console.log(ourscore,' ourscore');
+    console.log(ourscore,'ourscore');
     let totalpoints = points();
     //console.log(totalpoints,' totalpoints');
     let beginner = 0;
@@ -393,12 +393,14 @@ function returnCurrentLevel(ourscore) {
     }
     return currentpointslevel;
 }
-/* 
-function newfunctionPoints() {
 
+
+function newfunctionPoints(wordpoints, currentscore) {
+   
+    let totalpointsare = points();
     let currentpointslevel = '';
-    console.log(goodstart, 'goodstartrounded');
-    console.log(movingup, 'movingup');
+ /*    console.log(goodstart, 'goodstartrounded');
+    console.log(movingup, 'movingup'); */
     let beginnercircle = document.querySelector('#beginner');
     let goodstartcircle = document.querySelector('#goodstart');
     let movingupcircle = document.querySelector('#movingup');
@@ -411,13 +413,78 @@ function newfunctionPoints() {
 
     let circleweneed = '';
     const leveldisplay = document.querySelector('#leveldisplay');
-    let pointstoshow = `<div class="numberpoint">${ourscore}</div>`;
+   
+    let check =  document.querySelector('#numberpoint');
+    if(check)
+    {
+       // check.remove();
+        check.innerHTML = '';
+    }
+    //show here our total score
+    let pointstoshow = `<div id="numberpoint" class="numberpoint">${currentscore}</div>`;
     beginnercircle.classList.add('colorin');
     let circles = document.querySelectorAll('.circlecircle');
             circles.forEach(function(circle, index) {
                 circle.classList.remove('circleactive');
                 circle.innerHTML = '';
         }); 
+        let ourcurrentlevel = returnCurrentLevel(currentscore);
+        console.log(ourcurrentlevel,'ourcurrentlevel!!!!!!!!');
+        if(ourcurrentlevel === 'Beginner') {
+            circleweneed = goodstartcircle;
+            currentlevelstage = 0;
+        }
+        else if(ourcurrentlevel === 'Good start') {
+            circleweneed = goodstartcircle;
+            currentlevelstage = 1;
+        }
+        else if(ourcurrentlevel === 'Moving Up') {
+            circleweneed = movingupcircle;
+            currentlevelstage = 2;
+        }
+        else if(ourcurrentlevel === 'Good') {
+            circleweneed = goodcircle;
+            currentlevelstage = 3;
+        }
+        else if(ourcurrentlevel === 'Solid') {
+            circleweneed = solidcircle;
+            currentlevelstage = 4;
+        }
+        else if(ourcurrentlevel === 'Nice') {
+            circleweneed = nicecircle;
+            currentlevelstage = 5;
+        }
+        else if(ourcurrentlevel === 'Great') {
+            circleweneed = greatcircle;
+            currentlevelstage = 6;
+        }
+        else if(ourcurrentlevel === 'Amazing') {
+            circleweneed = amazingcircle;
+            currentlevelstage = 7;
+        }
+        else if(ourcurrentlevel === 'Genius') {
+            circleweneed = geniuscircle;
+            currentlevelstage = 8;
+        }
+        else {
+            alertdiv.textContent = 'You are a beginner';
+        }
+       
+        circleweneed.classList.add('circleactive');
+        //class to add 
+        let classtoadd = `circle${currentlevelstage+1}newclass`
+    // circleweneed.classList.add('circle2newclass');
+        console.log(classtoadd,'classtoadd');
+        circleweneed.classList.add(classtoadd);
+        circleweneed.classList.add('colorin');
+        circleweneed.innerHTML = pointstoshow;
+        
+        leveldisplay.textContent = currentpointslevel;
+            
+            
+            
+
+/* 
         if(ourscore >= goodstart && ourscore < movingup) {
             currentpointslevel = 'Good start';
             currentlevelstage = 1;
@@ -442,21 +509,25 @@ function newfunctionPoints() {
             currentpointslevel = 'Nice';
             currentlevelstage = 5;
             circleweneed = nicecircle;
+            
         }
         else if (ourscore >= great && ourscore < amazing) {
             currentpointslevel = 'Great';
             currentlevelstage = 6;
             circleweneed = greatcircle;
+           
         }
         else if (ourscore >= amazing && ourscore < genius) {
             currentpointslevel = 'Amazing';
             currentlevelstage = 7;
             circleweneed = amazingcircle;
+           
         }
         else if (ourscore >= genius) {
             currentpointslevel = 'Genius';
             currentlevelstage = 8;
             circleweneed = geniuscircle;
+        
         }
         else if(ourscore === totalpoints) {
             alert('queen bee');
@@ -474,10 +545,10 @@ function newfunctionPoints() {
         circleweneed.innerHTML = pointstoshow;
         
         leveldisplay.textContent = currentpointslevel;
-    
+     */
 }
 
- */
+ 
 
  //show pop up message
  function MessageM(message,wordpoints) {
@@ -489,7 +560,7 @@ function newfunctionPoints() {
         let totalpointsare = points();
         
         //add the points for current word to our total score
-        currentscore += wordpoints;
+       // currentscore += wordpoints;
         if(wordpoints == 0) {
             currentscore = 0;
         }
@@ -528,9 +599,8 @@ function newfunctionPoints() {
              alertdiv.classList.remove('alertdivshow');
              pointshowdiv.textContent = '';
              let lettersinbox = document.querySelectorAll('#letterstype span');
-             console.log(lettersinbox,'lettersinbox'); 
+         
             lettersinbox.forEach (function(element, index) {
-               // alert(element);
                 element.remove();
             });
         }, 2000);
@@ -588,8 +658,9 @@ function validation(word) {
 
                         if(ifpangram == true) {
                             wordpoints += 7;
+                            
                         }
-
+                        currentscore += wordpoints;
                         //SHOW WORD INSIDE EXPANDABLE DIV 
                         //get parent
                         let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
@@ -616,21 +687,22 @@ function validation(word) {
                         
                    //     ourmatchedwordsbelow.appendChild(spanmake3div);
                         ourmatchedwordsdiv.appendChild(spanmake);
-                     
-                   
-                   //OTHER WAY
+                    
+                   //CLEAR WORD AREA
                    let lettersinbox = document.querySelectorAll('#letterstype span');          
                             lettersinbox.forEach (function(element, index) {
                             element.remove();
                             });
+                    //IF PANGRAM 
                         if(ifpangram == true) {
                             //create span to display word on page
-                           
+                            newfunctionPoints(wordpoints, currentscore);
                             return MessageM('Pangram!', wordpoints);
                         }
+                    //ELSE IF NORMAL WORD MATCHED
                         else {
                            //create span to display word on page
-
+                            newfunctionPoints(wordpoints, currentscore);
                             return MessageM('success',wordpoints);
 
                             }
