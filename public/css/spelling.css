@@ -366,8 +366,8 @@
         margin-left: calc(var(--myleftmargin2) * 2);
        }
       .circle3newclass {
-        margin-left: calc(var(--myleftmargin3)  * 2 ) !important;
-     /* margin-left: 52px !important; */ 
+     /*    margin-left: calc(var(--myleftmargin3)  *3 ) !important; */
+     margin-left: 79px !important; 
        }
        
       .circle:nth-child(4) {
@@ -395,24 +395,24 @@
 
     .circle4newclass {
        /*  margin-left: calc(var(--myleftmargin3 ) * 3) !important; */
-        margin-left: 74px !important;
+        margin-left: 102px !important;
         }
     .circle5newclass {
       /*   margin-left: calc(var(--myleftmargin3)  * 4)!important; */
-      margin-left: 102px !important;
+      margin-left: 134px !important;
     }
     .circle6newclass {
       /*   margin-left: calc(var(--myleftmargin3) * 5) !important; */
-        margin-left: 134px !important;
+        margin-left: 163px !important;
     }
     .circle7newclass {
       /*   margin-left: calc(var(--myleftmargin3) * 6) !important; */
-        margin-left: 163px !important;
+        margin-left: 191px !important;
 
     }
     .circle8newclass {
         /* margin-left: calc(var(--myleftmargin3) * 7) !important; */
-        margin-left: 191px !important;
+        margin-left: 217px !important;
     }
     .circle9newclass {
        /*  margin-left: calc(var(--myleftmargin3)  * 8) !important; */
@@ -493,7 +493,7 @@
     }
 
     .yourmatchedwordsin{
-       
+        font-size: 10pt;
     }
     .yourmatchedwodsindiv{
         margin-top: 4px;

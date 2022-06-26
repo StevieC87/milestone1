@@ -508,9 +508,19 @@ function newfunctionPoints(wordpoints, currentscore) {
         //class to add 
         //for loop with ++i
         //loop for as many as current index level, then remove class colorin
-        for(i = 0; i < ourcurrentlevel; i++) {
-            let circle = document.querySelector(`#${shorthandlevelsArray[i]}`);
-            circle.classList.remove('colorin');
+        console.log(ourcurrentlevelstage,'ourcurrentlevelstageBEFORELOOP');
+        for(i = 0; i < ourcurrentlevelstage; i++) {
+           /*  let circle = document.querySelector(`#${shorthandlevelsArray}`);
+            circle.classList.remove('colorin'); */
+            //otherwise try: 
+            let classhere = `circle${i}newclass`;
+         
+            console.log(classhere,'classhere');
+            let elementwiththatclass = document.querySelector(`.${classhere}`);
+            if(elementwiththatclass) {
+                elementwiththatclass.classList.remove(classhere);
+            }
+           
         }
          let findprevious = `circle${ourcurrentlevelstage}newclass`;
          console.log(findprevious,'findprevious!');
@@ -519,7 +529,7 @@ function newfunctionPoints(wordpoints, currentscore) {
             findpreviousfill.classList.remove('findprevious');
         };
         console.log(findpreviousfill,'findpreviousfill!!!!!!!!');
-         let classtoadd = `circle${ourcurrentlevelstage+1}newclass`
+         let classtoadd = `circle${ourcurrentlevelstage}newclass`
     // circleweneed.classList.add('circle2newclass');
         console.log(classtoadd,'classtoadd');
         circleweneed.classList.add(classtoadd);
@@ -528,7 +538,7 @@ function newfunctionPoints(wordpoints, currentscore) {
         
         leveldisplay.textContent = ourcurrentlevel;
             
-  
+       // console.log(ourcurrentlevelstage,'ourcurrentlevelstageafterLOOP');
 }
 
  
@@ -595,6 +605,8 @@ function newfunctionPoints(wordpoints, currentscore) {
 //check if word is valid
 function validation(word) {
         let wordsarray = '<%=  allmatchingwordsa %>';
+        let wordsarraytoarray = wordsarray.split(',');
+
         //IF LESS THAN 4 CHARACTERS - MESSAGE
         if(word.length < 4 ){
             console.error(word.length, 'word length');
@@ -659,11 +671,11 @@ function validation(word) {
                         ourmatchedwordsbelow.innerHTML = '';
 
                         //our array of all matched words
-                        matchingwords.sort();
-                        console.log(matchingwords,'matchingwords');
-                        matchingwords.forEach(function(element, index) {
+                      //  wordsarraytoarray.sort();
+                       // console.log(wordsarraytoarray,'matchingwords');
+                      //  wordsarraytoarray.forEach(function(element, index) {
                         //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
-                      //  yourmatchedwords.forEach(function(element, index) {
+                      yourmatchedwords.forEach(function(element, index) {
                         let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
                         let span4div = document.createElement('div');
                         span4div.className = 'yourmatchedwodsindiv';
