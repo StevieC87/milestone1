@@ -3,3 +3,5 @@ node_modules
 /.history 
 data/bigwordlist.json
 data/littlewordlist.json
+lib/auth.js
+controllers/usercontroller.js
