@@ -17,5 +17,5 @@ exports.signup = (req, res, next) => {
         path: '/signup',
 
     });
-    signup
+
 }
