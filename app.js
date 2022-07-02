@@ -10,6 +10,7 @@ const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const MONGODB_URI = 'mongodb+srv://stevieMASTERp455:Mypass1234@cluster0.rcdac.azure.mongodb.net/games?'
 
+const auth = require('./lib/auth');
 // import module for 404 errors
 const errorController = require('./controllers/error');
 
@@ -39,6 +40,12 @@ app.use(session({
     saveUninitialized: false,
     store: store
     }));
+
+app.use(auth.initialize);
+app.use(auth.session);
+
+
+
 app.use((req, res, next) => {
     try {
       //  console.log(req.session);
