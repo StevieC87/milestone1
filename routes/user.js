@@ -13,7 +13,7 @@ const { Router } = require('express');
  router.post('/login', passport.authenticate('local', {
      successRedirect: '/',
      failureRedirect: '/user/login?error=true',
-     failureFlash: false
+    
 }));
 
 router.post('/signup', async (req, res, next) => {

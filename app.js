@@ -49,8 +49,8 @@ app.use(auth.setUser);
 app.use((req, res, next) => {
     try {
       //  console.log(req.session);
-        req.session.visits = req.session.visits + 1 || 1;
-        console.log(req.session);
+     //  req.session.visits = req.session.visits + 1 || 1;
+      //  console.log(req.session);
     }
     catch (err) {
         console.log(err);

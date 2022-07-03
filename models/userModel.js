@@ -1,11 +1,3 @@
-/* const fs = require('fs');
-const path = require('path');
-const rootDir = require('../util/path');
-
-
-module.exports = class User {
-
-} */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
