@@ -9,11 +9,11 @@
     <body>
 <%- include('../includes/nav.ejs') %>
 
-    <form class="signup-form">
+    <form action="signup" method="post" class="signup-form">
         <h2 style="margin-top: 20px">Sign up</h2>
-        <input type="text" autocomplete="off" id="name" placeholder="name">
-        <input type="email" autocomplete="off" id="email" placeholder="email">
-        <input type="password" autocomplete="off" id="password" placeholder="password">
+        <input name="username" type="text" autocomplete="off" id="username" placeholder="username">
+        <input name="email" type="email" autocomplete="off" id="email" placeholder="email">
+        <input name="password" type="password" autocomplete="off" id="password" placeholder="password">
        
         <div>
       

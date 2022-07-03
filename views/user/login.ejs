@@ -10,12 +10,16 @@
 
     <%- include('../includes/nav.ejs') %>
   
+    <% if (error) { %>
+      <%= error %>
+    <% } %>
+        
  
-    <form class="signup-form" style="height: 70vh">
+    <form action="/user/login" method="POST" class="signup-form" style="height: 70vh">
         <h2 style="margin-top: 20px">Log in</h2>
        
-        <input type="email" autocomplete="off" id="email" placeholder="email">
-        <input type="password" autocomplete="off" id="password" placeholder="password">
+        <input name="email "type="email" autocomplete="off" id="email" placeholder="email">
+        <input name="password" type="password" autocomplete="off" id="password" placeholder="password">
 
         <button class="submit-btn">login</button>
         <a href="/user/signup" class="link">don't have an account? Create one here</a>
