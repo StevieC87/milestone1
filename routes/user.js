@@ -7,8 +7,31 @@ const UserModel = require('../models/userModel');
 const userController = require('../controllers/usercontroller');
 const { Router } = require('express');
 
- router.get('/login', userController.login);
- router.get('/signup', userController.signup);
+
+function redirectIfLoggedIn(req, res, next) {
+    if (req.user) {
+        return res.redirect('/users/account');
+    } else {
+      return next();
+    }
+}
+
+ router.get('/login', redirectIfLoggedIn, userController.login);
+
+/* router.get('/logout', (req, res) => {
+    req.logout();
+    return res.redirect('/', () => {
+        console.log('logout');
+    })
+}) */
+router.get("/logout", (req, res) => {
+    req.logout(req.user, err => {
+      if(err) return next(err);
+      res.redirect("/");
+    });
+  });
+
+ router.get('/signup', redirectIfLoggedIn, userController.signup);
  
  router.post('/login', passport.authenticate('local', {
      successRedirect: '/',
@@ -34,6 +57,19 @@ router.post('/signup', async (req, res, next) => {
 
 }
 );
+
+router.get('/account', (req, res, next) => {
+    if (req.user) {
+        return next();
+        //return res.render('account', { user: req.user });
+    }
+        return res.status(401).end();  
+}
+ ,(req, res) => {
+    res.render('/user/account', { user: req.user });
+}
+);
+
 
 
 
