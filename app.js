@@ -43,7 +43,7 @@ app.use(session({
 
 app.use(auth.initialize);
 app.use(auth.session);
-
+app.use(auth.setUser);
 
 
 app.use((req, res, next) => {
