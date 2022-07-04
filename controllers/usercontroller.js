@@ -1,4 +1,4 @@
-const UserModel = require("../models/UserModel");
+// const UserModel = require("../models/userModel");
 
 
 exports.login = (req, res, next) => {
@@ -15,11 +15,13 @@ exports.signup = (req, res, next) => {
     res.render('user/signup', {
         pageTitle: 'Signup Page',
         path: '/signup',
-
     });
     
 }
 
+
+
+/* OLD DUNNO 
 exports.registration = async (req, res, next) => {
     console.log('registration CONTRLLER HERE');
     
@@ -41,5 +43,5 @@ exports.registration = async (req, res, next) => {
     catch (err) {
         console.log(err);
         return next(err);
-    }/* */
-}
+    }
+} */

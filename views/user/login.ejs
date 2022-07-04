@@ -4,38 +4,19 @@
 <link rel="stylesheet" href="/css/form.css">
 <!--   <script src="js/form.js"></script>
 -->
-    <style>
-        .alertcustom{
-            position: absolute;
-            top: 0;
-            z-index: 100;
-        }
-        .show {
-            display: block;
-        }
-        .hide {
-            display: none;
-        }
-
-    </style>
     </head>
 
     <body>
-       
-    
+
     <%- include('../includes/nav.ejs') %>
-   
-    <!-- ALERT BUTTON -->
-    <div class="alertcustom alert alert-primary d-none" role="alert" id="registeralert">
-        Registered!</div>
-    
-    
-    
-        <form class="signup-form" style="height: 70vh">
+  
+
+ 
+    <form action="/user/login" method="POST" class="signup-form" style="height: 70vh">
         <h2 style="margin-top: 20px">Log in</h2>
        
-        <input type="email" autocomplete="off" id="email" placeholder="email">
-        <input type="password" autocomplete="off" id="password" placeholder="password">
+        <input name="email" type="email" autocomplete="off" id="email" placeholder="email">
+        <input name="password" type="password" autocomplete="off" id="password" placeholder="password">
 
         <button class="submit-btn">login</button>
         <a href="/user/signup" class="link">don't have an account? Create one here</a>
@@ -43,35 +24,6 @@
 
 
     <%- include('../includes/footer.ejs') %>
-
-    <script>
-          /*   var alertList = document.querySelectorAll('.alert')
-        alertList.forEach(function (alert) {
-        new bootstrap.Alert(alert)
-        }) */
-
-        //check if register parameter is in url
-        var url = new URL(window.location.href);
-        var register = url.searchParams.get("register");
-        let alerta = document.querySelector('#registeralert');
-
-        if(register == "true"){
-                console.log('true');
-          //  alert.classList.add('show');
-          alerta.classList.remove('d-none');
-          alerta.classList.add('d-block');
-         setTimeout(function(){
-            alerta.classList.remove('d-block');
-            alerta.classList.add('d-none');
-            }, 3000);
-         
-          //alert('yes');
-           // document.querySelector('.alertcustom').innerHTML = alert;
-
-         /*     */
-        }
-
-    </script>
 </body>
 
 </html>

@@ -9,24 +9,15 @@
     <body>
 <%- include('../includes/nav.ejs') %>
 
-    <form class="signup-form" action="/user/signup" method="post">
+    <form action="signup" method="post" class="signup-form">
         <h2 style="margin-top: 20px">Sign up</h2>
-        <input type="text" autocomplete="off" id="username" placeholder="username" name="username">
-        <input type="email" autocomplete="off" id="email" placeholder="email" name="email">
-        <input type="password" autocomplete="off" id="password" placeholder="password" name="password">
-<!--         <input type="text" autocomplete="off" id="number" placeholder="number"> -->
+        <input name="username" type="text" autocomplete="off" id="username" placeholder="username">
+        <input name="email" type="email" autocomplete="off" id="email" placeholder="email">
+        <input name="password" type="password" autocomplete="off" id="password" placeholder="password">
+       
         <div>
-            <label for="terms-and-cond">agree to our <a href="">terms and conditions</a></label>
-            <input type="checkbox" checked class="checkbox" id="terms-and-cond">
-
-        </div>
-
-        <br>
-   <!--      <div>
-            <label for="notification">recieve upcoming offers and events mails</a></label>
-            <input type="checkbox" class="checkbox" id="notification">
-
-        </div> -->
+      
+   
 
         <button class="submit-btn">create account</button>
         <a href="/login" class="link">already have an account? Log in here</a>

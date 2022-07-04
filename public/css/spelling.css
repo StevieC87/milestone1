@@ -355,11 +355,15 @@
       /*  margin-left: calc(var(--myleftmargin2)+24px)
          */
       }
-    
+      .circle1newclass {
+        /*  margin-left: calc(var(--myleftmargin2)-6px) !important; */
+      /*   margin-left: 23px !important; */
+        margin-left: var(--myleftmargin3) !important;
+       }
       .circle2newclass {
        /*  margin-left: calc(var(--myleftmargin2)-6px) !important; */
      /*   margin-left: 23px !important; */
-       margin-left: var(--myleftmargin3) !important;
+     margin-left: 51px !important;
       }
       .circle:nth-child(3) {
         /*  margin-left: 48px; */
@@ -395,7 +399,7 @@
 
     .circle4newclass {
        /*  margin-left: calc(var(--myleftmargin3 ) * 3) !important; */
-        margin-left: 102px !important;
+        margin-left: 107px !important;
         }
     .circle5newclass {
       /*   margin-left: calc(var(--myleftmargin3)  * 4)!important; */
