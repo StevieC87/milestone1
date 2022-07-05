@@ -57,9 +57,9 @@ app.use('/user', userRoutes);
 /* 404 error handling */
 app.use(errorController.get404);
 
- //app.listen(3000);
+app.listen(3000);
 
- mongoose.connect(
+ /* mongoose.connect(
     MONGODB_URI
 )
     .then(result => {
@@ -69,8 +69,10 @@ app.use(errorController.get404);
     .catch(err => {
         console.log(err);
     }
-    );
-//mongoose.connect(process.env.MONGOCONNECT)
+    ); */
+
+
+//OLD mongoose.connect(process.env.MONGOCONNECT)
 /* mongoose.connect(process.env.MONGOCONNECT, {
     dbName: 'games'
 })

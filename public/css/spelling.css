@@ -513,3 +513,7 @@
     #youhavefounddiv > span {
         font-size: 10pt;
     }
+
+.pangram-alert {
+    background-color: #F6D921;
+}
