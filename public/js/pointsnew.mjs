@@ -149,10 +149,7 @@ export function validation(word, wordsarray, pangrams) {
 
     /**********  FUNCTIONS FOR ENTER  ***********/
 //get total points all words
-
-
-
-function points(pangrams1) {
+function maxpoints(pangrams1) {
     //create array of all words
    let totalpoints = 0;
     //count how many points for each word, add to totalpoints

@@ -14,136 +14,7 @@ function onclick(matchingwords,wordsarray,centerletter ) {
 
     // needs wordsarray
 //check if word is valid
-export function makestringfromletters() {
-    /*     
-    let lettersboxis =  document.querySelector('#letterstype');
-    let lettersinbox = document.querySelectorAll('#letterstype span');
-    let wordarray = [];
-    lettersinbox.forEach(function(letter, index) {
-        wordarray.push(letter.textContent);
-    });
-    let wordfromarray = wordarray.join();
-    const wordfromarray1 = wordfromarray.replaceAll(',', '').toLowerCase(); */
-    alert(wordfromarray1);
-    return wordfromarray1;
-}
-export function validation(word, wordsarray) {
-        alert(`${word} + ${wordsarray}, word and wordsarray`);
-       // let wordsarray = '<%=  allmatchingwordsa %>';
-       // needs wordsarray
 
-        //IF LESS THAN 4 CHARACTERS - MESSAGE
-        if(word.length < 4 ){
-            console.error(word.length, 'word length');
-            return MessageM('Word too short');
-        }
-        //IF MORE THAN 4 CHARACTERS
-        else if(word.length > 3){  
-            //MAKE SURE CENTRE LETTER IS INCLUDED
-            if(!word.includes(centerletter)) {
-                console.error('missing center letter');
-                return MessageM('Missing Center Letter');
-            }
-            //IF LETTER INCLUDED, CHECK IF WORD IS INCLUDED
-            else {
-                //CHECK YOU HAVEN'T FOUND WORD ALREADY
-                if(yourmatchedwords.includes(word) == true) {
-                return MessageM('Already found!');
-                }
-                else {
-                //CHECK IF WORD IS IN OUR LIST 
-                    
-                    //IF NOT A WORD
-                    if(!wordsarray.includes(word)) {
-                        console.log(wordsarray, 'WOOOOOOOORDSAWWAY');
-                        return MessageM('Not a word');
-                    }
-                    //IF IT'S IN OUR LIST, ADD IT TO ARRAY
-                    else {
-                        yourmatchedwords.push(word);
-                       
-                        //check if pangram
-                        let pangrams = '<%= pangrams %>';
-                        let pangramsarray = pangrams.split(',');
-                        let ifpangram = pangramsarray.includes(word);
-
-                        //CALCULATE POINTS AND DISPLAY
-                        let points = word.length; 
-                        let wordpoints = 0;
-
-                        if (points === 4) {
-                            wordpoints += 1;
-                        }
-                        else if (points > 4) {
-                            wordpoints += points;
-                        }
-
-                        if(ifpangram == true) {
-                            wordpoints += 7;
-                            
-                        }
-                        currentscore += wordpoints;
-                        //SHOW WORD INSIDE EXPANDABLE DIV 
-                        //get parent
-                        let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
-                        //create element
-                        let spanmake = document.createElement('span');
-                        spanmake.className = 'wordlistword';
-                        let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
-                        spanmake.textContent = capitalisedMatchedword;
-                        yourmatchedwords.sort();
-
-                        //CLEAR EXPANDABLE DIV WORDS
-                        ourmatchedwordsbelow.innerHTML = '';
-
-                        //our array of all matched words
-                      //  wordsarraytoarray.sort();
-                       // console.log(wordsarraytoarray,'matchingwords');
-                      //  wordsarraytoarray.forEach(function(element, index) {
-                        //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
-                      yourmatchedwords.forEach(function(element, index) {
-                        let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
-                        let span4div = document.createElement('div');
-                        span4div.className = 'yourmatchedwodsindiv';
-                        let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
-                        span4div.innerHTML = spanmake4;
-                        ourmatchedwordsbelow.appendChild(span4div);   
-                        });
-
-                        
-                   //     ourmatchedwordsbelow.appendChild(spanmake3div);
-                        ourmatchedwordsdiv.appendChild(spanmake);
-                    
-                   //CLEAR WORD AREA
-                   let lettersinbox = document.querySelectorAll('#letterstype span');          
-                            lettersinbox.forEach (function(element, index) {
-                            element.remove();
-                            });
-                    //IF PANGRAM 
-                        if(ifpangram == true) {
-                            //create span to display word on page
-                            newfunctionPoints(wordpoints, currentscore);
-                            return MessageM('Pangram!', wordpoints);
-                        }
-                    //ELSE IF NORMAL WORD MATCHED
-                        else {
-                           //create span to display word on page
-                            newfunctionPoints(wordpoints, currentscore);
-                            return MessageM('success',wordpoints);
-
-                            }
-
-
-                       
-                    }
-                
-               
-                return alertmessage = '';
-                }
-            }
-        
-    } 
-    }
 
     
    
@@ -165,22 +36,8 @@ export function validation(word, wordsarray) {
     
 
 //})
-let currentscore = 0;
-let currentpointslevel = '';
-//POINT CIRCLES RELATED
-let currentlevel = 'beginner';
-let currentlevelshorthand = 'beginner';
-let beginnercircle = document.querySelector('#beginner');
-beginnercircle.classList.add('circleactive');
-let numberhtmlelement = '<div class="numberpoint">0</div>';
-document.querySelector('#beginner').innerHTML = numberhtmlelement;
-
-let yourmatchedwords = [];
-let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv1');
 
 
-let alertdiv = document.querySelector('#alertdiv');
-let alertmessage = '';
 
 /**********  FUNCTIONS FOR ENTER  ***********/
 //get total points all words
