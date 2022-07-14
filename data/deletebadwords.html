@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arrayofgoodwords = {};
+      let arrayofbadwords = {};
+      let caughtwords = [];
+      const goodwordlist = "cleanlistnew57k.json";
+      const badwordlist = "caughtwords.json";
+      let deletebadwords = async () => {
+        let response = await fetch(goodwordlist);
+        let data = await response.json();
+
+        arrayofgoodwords = data.words;
+        console.log(arrayofgoodwords, "arrayofgoodwords");
+
+        let response2 = await fetch(badwordlist);
+        let data2 = await response2.json();
+        arrayofbadwords = data2.words;
+        console.log(arrayofbadwords, "arrayofbadwords");
+
+        //loop over the goodwordlist
+        for (let i = 0; i < arrayofgoodwords.length; i++) {
+          //loop over the badwordlist
+          for (let j = 0; j < arrayofbadwords.length; j++) {
+            //if the goodwordlist word is in the badwordlist
+            if (arrayofgoodwords[i] === arrayofbadwords[j]) {
+              //remove the word from the goodwordlist
+
+              //add it to array of caught words
+              caughtwords.push(arrayofgoodwords[i]);
+              //delete from arrayofgoodwords
+              arrayofgoodwords.splice(i, 1);
+
+              //save the word to a text file
+              /*   let text = arrayofgoodwords[i];
+              let textFile = null,
+                makeTextFile = function (text) {
+                  let data = new Blob([text], { type: "text/plain" });
+
+                  // If we are replacing a previously generated file we need to
+                  // manually revoke the object URL to avoid memory leaks.
+                  if (textFile !== null) {
+                    window.URL.revokeObjectURL(textFile);
+                  }
+
+                  textFile = window.URL.createObjectURL(data);
+                  return textFile;
+                }; */
+
+              /*     arrayofgoodwords.splice(i, 1);
+              //move to the next goodwordlist word
+              i--; */
+            }
+          }
+        }
+
+        /*   for (let i = 0; i < caughtwords.length; i++) {
+          console.log(caughtwords[i]);
+          //print on screen
+          document.write(caughtwords[i] + "<br>");
+        } */
+        console.log(arrayofgoodwords, "arrayofgoodwords");
+      };
+      deletebadwords();
+    </script>
+  </body>
+</html>

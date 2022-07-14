@@ -28,38 +28,63 @@ export function makestringfromletters() {
     return wordfromarray1;
 }
 export function validation(word, wordsarray, pangrams) {
+       
        // alert(`${word} + ${wordsarray} + ${pangrams}, word and wordsarray`);
        // let wordsarray = '<%=  allmatchingwordsa %>';
        // needs wordsarray
 
         //IF LESS THAN 4 CHARACTERS - MESSAGE
         let yourmatchedwords = [];
+        console.log(yourmatchedwords,   'yourmatchedwords');
      //   let pangrams = pagramparam;
         if(word.length < 4 ){
-            console.error(word.length, 'word length');
+            //console.error(word.length, 'word length');
             return MessageM('Word too short');
         }
         //IF MORE THAN 4 CHARACTERS
         else if(word.length > 3){  
             //MAKE SURE CENTRE LETTER IS INCLUDED
+            //TODO  SFKJASDF
             if(!word.includes(centerletter)) {
                 console.error('missing center letter');
                 return MessageM('Missing Center Letter');
             }
             //IF LETTER INCLUDED, CHECK IF WORD IS INCLUDED
             else {
-                //CHECK YOU HAVEN'T FOUND WORD ALREADY
-                if(yourmatchedwords.includes(word) == true) {
-                return MessageM('Already found!');
+                //HERE WHEN PROBLEMS START
+
+                //filter the yourmatchedwords array  
+                let checkifduplicate = yourmatchedwords.filter(function(element, index) {
+                    return element === word;
+                });
+                if(checkifduplicate.length !== 0) {
+                    //then it's fine , you haven't already found word                }
+                    return MessageM('Already found!');
                 }
+                //if(yourmatchedwords.includes(word) == true) {
                 else {
                 //CHECK IF WORD IS IN OUR LIST 
                     
                     //IF NOT A WORD
-                    if(!wordsarray.includes(word)) {
-                        console.log(wordsarray, 'WOOOOOOOORDSAWWAY');
+                    console.log(wordsarray, 'wordsarray');
+                    console.log(typeof wordsarray, 'typeof wordsarray');
+                    let checkifvalidword = wordsarray.filter(function(element, index) {
+                        return element === word;
+                    });
+
+                    if(checkifvalidword.length === 0) {
+                        //console.error(checkifvalidword, 'checkifvalidword');
                         return MessageM('Not a word');
                     }
+                    //IF WORD IS A WORD
+                  /*   else {
+                        //CHECK IF WORD IS A PANGRAM
+                        
+                    } */
+                  /*   if(!wordsarray.includes(word)) {
+                        console.log(wordsarray, 'WOOOOOOOORDSAWWAY');
+                        return MessageM('Not a word');
+                    } */
                     //IF IT'S IN OUR LIST, ADD IT TO ARRAY
                     else {
                         yourmatchedwords.push(word);
@@ -175,7 +200,7 @@ function maxpoints(pangrams1) {
 function returnCurrentLevel(ourscore) {
     let currentlevelstage = 0;
     console.log(ourscore,'ourscore');
-    let totalpoints = points(pangrams);
+    let totalpoints = maxpoints(pangrams);
     //console.log(totalpoints,' totalpoints');
     let beginner = 0;
     let goodstart =  Math.round(totalpoints * 0.0215);
@@ -449,4 +474,4 @@ function MessageM(message,wordpoints) {
             )
 
   
-    }
+}

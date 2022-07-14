@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <textarea name="text1" id="text1" cols="30" rows="10"></textarea>
+    <hr />
+    <textarea name="text2" id="text2" cols="30" rows="10"></textarea>
+
+    <a id="clickconvert" href="#">CLICK ME CONVERT TO JSON</a>
+
+    <script>
+      //make fetch request to get the bad words from the json file
+
+      const goodwordlist = "cleanlistnew57k.json";
+      const badwordlist = "caughtwords.json"; //OTHER FILE MISTAKE HERE
+
+      let convert = async () => {
+        let contents = document.getElementById("text1").value;
+        let contentsHtml = document.getElementById("text1").innerHTML;
+        let contentsHtmlText = document.getElementById("text1").innerText;
+        let contentsText = document.getElementById("text1").textContent;
+        console.log(contents, "contents");
+        console.log(typeof contents, "typeof contents");
+        //convert to array
+        let contentsArray = contents.split("\n");
+
+        //remove empty elements
+        let contentsArrayClean = contentsArray.filter(function (el) {
+          return el.trim() != "";
+        });
+        console.log(contentsArray, "contentsArray");
+        console.log(contentsArrayClean, "contentsArrayClean");
+
+        //convert to json
+        let contentsArrayCleanJson = JSON.stringify(contentsArrayClean);
+        console.log(contentsArrayCleanJson, "contentsArrayCleanJson");
+      };
+      //add event listener on clickconvert
+      document
+        .querySelector("#clickconvert")
+        .addEventListener("click", convert);
+    </script>
+  </body>
+</html>
