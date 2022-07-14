@@ -34,7 +34,7 @@ export function validation(word, wordsarray, pangrams) {
        // needs wordsarray
 
         //IF LESS THAN 4 CHARACTERS - MESSAGE
-        let yourmatchedwords = [];
+       
         console.log(yourmatchedwords,   'yourmatchedwords');
      //   let pangrams = pagramparam;
         if(word.length < 4 ){
@@ -68,6 +68,7 @@ export function validation(word, wordsarray, pangrams) {
                     //IF NOT A WORD
                     console.log(wordsarray, 'wordsarray');
                     console.log(typeof wordsarray, 'typeof wordsarray');
+
                     let checkifvalidword = wordsarray.filter(function(element, index) {
                         return element === word;
                     });

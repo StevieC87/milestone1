@@ -1,7 +1,7 @@
 <%- include('./includes/head.ejs') %>
 <link href="/css/spelling.css" rel="stylesheet">
 <script src="/js/shuffle.js" defer></script>
-<script src="/js/urmatchedwords.js" defer></script>
+
 <script src="/js/delete.js" defer></script>
 
 
@@ -21,6 +21,11 @@
     let pangrams = '<%= pangrams %>';
     //let pangrams = '<%= pangrams %>';
     let matchingwordstoarray = matchingwords.split(',');
+
+
+    let clickydiv = document.querySelector('#ourmatchedwordsdiv1');
+let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
+
 </script>
 
 <script type="module">
@@ -31,12 +36,14 @@
      validation(stringfromletters, matchingwordstoarray, pangrams);
   
      });
+     import { urmatchedwords } from '/js/urmatchedwords2.mjs';
+     clickydiv.addEventListener('click', e => {
+        urmatchedwords(urmatchedwords);
+        })
+     
     </script>
-    <script>
-   
- 
-    
-</script>
+    <script src="/js/urmatchedwords.js" defer></script>
+
 <script>
 
 
