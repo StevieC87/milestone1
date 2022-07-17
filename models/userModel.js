@@ -31,6 +31,22 @@ const UserSchema = new Schema({
         index: {unique: true},
         minlength: 8,
     },
+    activated : {
+        type: Boolean,
+        default: false,
+    },
+    /*CHECK THIS
+    activationToken: {
+        type: String,
+        default: null,
+    }, */
+    
+    //user create date
+    createdAt: {
+        type: Date,
+        default: Date.now,
+    }
+
 
 },
 {

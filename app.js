@@ -18,7 +18,7 @@ const errorController = require('./controllers/error');
 const app = express();
 
 //IMPORT ROUTE MODULES
-const shopRoutes = require('./routes/shop');
+const BeeRoutes = require('./routes/BeeRoutes');
 const adminRoutes = require('./routes/admin');
 const userRoutes = require('./routes/user');
 
@@ -49,8 +49,8 @@ app.use(auth.initialize);
 app.use(auth.session);
 app.use(auth.setUser);
 
-// SET ROUTE FOR EACH PATHS (/admin or /shop /user etc 
-app.use('/', shopRoutes);
+// SET ROUTE FOR EACH PATHS (/admin or /, /user etc 
+app.use('/', BeeRoutes);
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
 

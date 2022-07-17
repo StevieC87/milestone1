@@ -49,9 +49,13 @@ router.post('/signup', async (req, res, next) => {
            username: req.body.username,
            email: req.body.email,
            password: req.body.password,
+           activated: false,
        });
        const savedUser = await user.save();
-   
+       
+       //then send email here 
+
+
        if (savedUser) return res.redirect('/user/signup?success=true');
        return next(new Error('Failed to save user for unknown reasons'));
    }

@@ -2,13 +2,14 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 
-const shopController = require('../controllers/shop');
+
 const BeeController = require('../controllers/BeeController');
 const { Router } = require('express');
+const sendEmail = require('../util/sendEmail');
 
 // router.get('/', shopController.listProducts);
 
-router.post('/add-to-wishlist', shopController.addToWishlist);
+//router.post('/add-to-wishlist', shopController.addToWishlist);
 
 router.get('/spelling2', BeeController.spellingBee);
 router.get('/createbee', BeeController.newSpellingBeeform);
@@ -18,6 +19,14 @@ router.get('/getwordswithcenterletter', BeeController.centerlettermatch)
 //OFFICIAL CREATE
 router.post('/newgamepost?', BeeController.addNewGame);
 router.get('/play/:gameId?', BeeController.playGame);
+
+
+// HERE SEND EMAIL TEST
+router.get('/sendEmail', (req, res) => {
+  sendEmail();
+   res.send('ok');
+});
+
 
 
 //HERE FOR LOCAL TEST
