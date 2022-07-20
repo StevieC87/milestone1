@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
-const MONGODB_URI = 'mongodb+srv://stevieMASTERp455:Mypass1234@cluster0.rcdac.azure.mongodb.net/games?'
+
 const auth = require('./lib/auth');
 
 //process.env.MONGODB_URI
@@ -26,12 +26,12 @@ const userRoutes = require('./routes/user');
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-//
+//MONGOSTORE 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 const store = new MongoDBStore({
-    uri: MONGODB_URI,
+    uri: process.env.MONGOSTORE,
     collection: 'sessions'
 })
 
@@ -57,10 +57,10 @@ app.use('/user', userRoutes);
 /* 404 error handling */
 app.use(errorController.get404);
 
-app.listen(3000);
+//app.listen(3000);
 
- /* mongoose.connect(
-    MONGODB_URI
+  mongoose.connect(
+    process.env.MONGOSTORE
 )
     .then(result => {
         app.listen(3000);
@@ -69,7 +69,7 @@ app.listen(3000);
     .catch(err => {
         console.log(err);
     }
-    ); */
+    ); /**/
 
 
 //OLD mongoose.connect(process.env.MONGOCONNECT)
