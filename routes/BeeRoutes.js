@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const router = express.Router();
+const nodemailer = require('nodemailer');
 
 
 const BeeController = require('../controllers/BeeController');
@@ -23,7 +24,37 @@ router.get('/play/:gameId?', BeeController.playGame);
 
 // HERE SEND EMAIL TEST
 router.get('/sendEmail', (req, res) => {
-  sendEmail();
+  //sendEmail();
+  const emailData = {
+    from: "info@200ok.eu", // MAKE SURE THIS EMAIL IS YOUR GMAIL FOR WHICH YOU GENERATED APP PASSWORD
+    to: "thestevieme@gmail.com", // WHO SHOULD BE RECEIVING THIS EMAIL? IT SHOULD BE YOUR GMAIL
+    subject: "TEST NODEMAILER ",
+    text: ``,
+    html: `
+       
+    `,
+  };
+const transporter = nodemailer.createTransport({
+  host: "mail.200ok.eu",
+  port: 587,
+  secure: false, // upgrade later with STARTTLS
+  auth: {
+    user: "info@200ok.eu",
+    pass: "fakepassword2",
+  },
+    tls: {
+        rejectUnauthorized: false
+    }
+});
+  return transporter
+    .sendMail(emailData)
+    .then((info) => {
+      console.log(`Message sent: ${info.response}`);
+      return res.json({
+        success: true,
+      });
+    })
+    .catch((err) => console.log(`Problem sending email: ${err}`));
    res.send('ok');
 });
 
