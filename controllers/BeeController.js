@@ -73,7 +73,9 @@ exports.newgamepostmethod = (req, res, next) => {
 }
 
 exports.generate = async (req, res, next) => {
-   await BeeModel.generateword(word => {
+ 
+ 
+  await BeeModel.generateword(word => {
     console.log(word);
   //  BeeModel.getuniqueletters(word,worduniqueletters => {
      // res.send({word,worduniqueletters}); //res.send({word, definition}); 

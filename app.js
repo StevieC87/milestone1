@@ -61,7 +61,7 @@ app.use(errorController.get404);
 
   mongoose.connect(
     //process.env.MONGOSTORE
-    "mongodb+srv://stevieMASTERp455:Mypass1234@cluster0.rcdac.azure.mongodb.net/games?retryWrites=true&w=majority"
+    process.env.MONGOSTORE
 )
     .then(result => {
         app.listen(3000);
