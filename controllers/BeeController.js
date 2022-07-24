@@ -147,6 +147,7 @@ exports.addNewGame = (req, res, next) => {
     let ourcenterletter = bodya.hiddencentreletter;
     let ourremaining = bodya.remaining;
     let remainingletterarray = bodya.hiddenarrayremaining;
+    //let pangrams = bodya.hiddenpangrams;
     let remainingletterarraynew = remainingletterarray.split(',');
     const testArray = ['hello', 'world', 'test'];
 
@@ -164,7 +165,8 @@ exports.addNewGame = (req, res, next) => {
         remaining: ourremaining,
         centerletter: centreletter,
         allmatchingwordsa: matchingwordsarray,
-        gameid: gameid._id
+        gameid: gameid._id,
+        pangrams: pangramsarray
       });  
     })
 
@@ -277,7 +279,4 @@ exports.cronjobMidnightGame = (req, res, next) => {
       
   })
   .catch(err => console.log(err))
-
-
-
 }
