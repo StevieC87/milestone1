@@ -45,6 +45,10 @@ const UserSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
+    },
+    roleXYZ24: {
+        type: String,
+        default: 'registered',
     }
 
 

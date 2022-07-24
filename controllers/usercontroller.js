@@ -1,4 +1,4 @@
-// const UserModel = require("../models/userModel");
+const UserModel = require("../models/userModel");
 
 
 exports.login = (req, res, next) => {
@@ -19,6 +19,29 @@ exports.signup = (req, res, next) => {
     
 }
 
+exports.activateuser = (req, res, next) => {
+    //get the random string from the url
+    const randomString = req.params.randomString;
+    //find the user with the random string
+    UserModel.findOne({ activationrandomstring: randomString })
+    .then(user => {
+        //check if exists
+        if(!user){
+            console.log('no user with this random string');
+            return res.redirect('/');
+        }
+        //if exists, set activated to true
+        user.activated = true;  
+        user.save()
+        .then(result => {
+            console.log('user activated');
+            return res.redirect('/user/login');
+        })
+        .catch(err => {
+           console.log(err);
+        })
+    })
+}
 
 
 /* OLD DUNNO 
