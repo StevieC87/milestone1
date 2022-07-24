@@ -29,7 +29,7 @@ const getwordsFromFileReal = cb => {
 };
 
 module.exports = class SpellingBee {
-  constructor(word, centerletter, remaininglettersasArray, wordasArray, associatedwords, numberofwords) {
+  constructor(word, centerletter, remaininglettersasArray, wordasArray, associatedwords, numberofwords, dateplay) {
     //this.id = id; MAYBE but if save on mongoose i think 
     //it generates one BUT GOGOLE IT, BECAUSE I WANT INCREMENTAL
     this.word = word;
@@ -38,6 +38,7 @@ module.exports = class SpellingBee {
     this.wordasArray = wordasArray;
     this.associatedwords = associatedwords;
     this.numberofwords = numberofwords;
+    this.dateplay = '';
   }
 
   //dunno about the folliwingn - adapt to save 
@@ -222,4 +223,11 @@ module.exports = class SpellingBee {
       //newarray: newarraya, 
     } */
   
+    //get today's game by date
+    static gettodaysgame(cb) {
+
+    }
+
+
+
 };

@@ -26,7 +26,12 @@ const BeeSchema2 = new Schema({
   matchingwords2 : {
     type: Array,
     required: true
+  },
+  dateplay: {
+    type: String,
+    default: ''
   }
+
  
   
 })

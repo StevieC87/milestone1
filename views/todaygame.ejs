@@ -1,0 +1,153 @@
+<%- include('./includes/head.ejs') %>
+<link href="/css/spelling.css" rel="stylesheet">
+<script src="/js/shuffle.js" defer></script>
+
+<script src="/js/delete.js" defer></script>
+
+
+
+</head>
+
+<body>
+<%- include('./includes/nav.ejs') %>
+
+
+<%- include('./gameIncludes/game.ejs') %>
+<script>
+    let existingword1 = '<%= wordarray %>';
+// console.log('<%= wordarray %>','existingword1');
+    let matchingwords = '<%=allmatchingwordsa%>';
+    let centerletter = '<%= centerletter %>';
+    let pangrams = '<%= pangrams %>';
+    //let pangrams = '<%= pangrams %>';
+    let matchingwordstoarray = matchingwords.split(',');
+
+
+    let clickydiv = document.querySelector('#ourmatchedwordsdiv1');
+let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
+
+</script>
+
+<script type="module">
+    import { makestringfromletters, validation} from '/js/pointsnew.mjs';
+    document.querySelector('#enterb').addEventListener('click', e => {
+     e.preventDefault();
+     let stringfromletters = makestringfromletters();
+     validation(stringfromletters, matchingwordstoarray, pangrams);
+  
+     });
+     import { urmatchedwords } from '/js/urmatchedwords2.mjs';
+     clickydiv.addEventListener('click', e => {
+        urmatchedwords(urmatchedwords);
+        })
+     
+    </script>
+    <script src="/js/urmatchedwords.js" defer></script>
+
+<script>
+
+
+//related shuffle
+/* 
+let dataineed = {
+    'matchingwords': matchingwords,
+
+}
+ */
+
+
+//NOW WHEN WE CALL THE FUNCTIONS AFTER WE IMPORT THEM, WE NEED TO USE SOME THE ABOVE VARIABLES AS PARAMETERS 
+
+//MAYBE WE KEEP EVENT LISTENER HERE AND WE KEEP THE FUNCTION OUTSIDE
+
+</script>
+
+
+<script>
+//the other 14 in second div
+
+//remaining in third div etc maybe do it dybnamically
+    // use a for loop to do this? said copilot
+
+
+//let matchingwords = '<%=allmatchingwordsa%>';
+  ///  let matchingwordstoarray = matchingwords.split(',');
+
+//**********  CLICK ON POLYGONS **********
+
+
+console.log(centerletter,'centerletteris!!!!!!!!!!!!!!!!');
+
+let wordsarray = '<%=  allmatchingwordsa %>';
+document.addEventListener('click', e => {
+    let centerletteris = '<%=centerletter%>';
+        console.log(e, 'event');
+        console.log(e.target.tagName, 'e.target.tagName');
+        console.log(e.target.id, 'e.target.id');
+        let clicktag = e.target.tagName;
+        let clickclass = e.target.classList;
+        let clickid = e.target.id; 
+        let getnumberindex = clickid[clickid.length -1]
+       //this is also the array index
+        //now if we click on polygon
+        let clickidconcat = '#' + clickid;
+      //   if(clicktag == 'polygon' || clicktag == 'TEXT'){
+        if(clicktag == 'polygon' || clickclass.contains('letter')){
+                console.log('clicked', clicktag);
+       
+           let effecttarget =  document.querySelector(`#p${getnumberindex}`);
+
+            let newnumberonly = clickid.charAt(clickid.length-1);
+            effecttarget.classList.add('animate');
+            let wait = setTimeout(() => {
+                effecttarget.classList.remove('animate');
+            }, 300);   
+          
+           let letterindex = `outerletter${newnumberonly}`;
+           let letterindextexttag = document.querySelector(`#${letterindex}`);
+           let leterindextexttagLetter = letterindextexttag.textContent;
+         
+        let targetbox = document.querySelector('#letterstype');
+  //      let targetboxAddletter = targetbox.textContent = leterindextexttagLetter;
+    //    let targetboxtext = targetbox.textContent;
+
+            let spanmake = document.createElement('span');
+            spanmake.textContent = leterindextexttagLetter;
+            let parent = targetbox;
+            let contents = targetbox.childNodes;
+            let contentslength = targetbox.childNodes.length;
+            let findcontents = contents.forEach(function(element, index) {
+                console.log(element, index, 'element', 'index');
+            });
+            console.log(contents, 'contents');
+            console.log(centerletteris,'centerletteris');
+            console.log(leterindextexttagLetter, 'leterindextexttagLetter');
+            if(leterindextexttagLetter === centerletteris.toUpperCase()){
+                spanmake.className = 'orange wordletter';
+            }
+           
+       //     console.log(targetbox.innerHTML,'targetbox.innerHTML');
+            //console.log(targetbox.innerHTML.tagName,'tagName');
+          
+            else {
+                spanmake.className = 'blue wordletter';
+            }
+            const pointerline = document.querySelector('#pointerline');
+          pointerline.before(spanmake);
+        //   parent.appendChild(spanmake);
+
+    //    document.querySelector('#outerletter'+newnumberonly).classList.add('animate');
+//works   document.querySelector('#outerletter'+newnumberonly).classList.add('clicktransformtest');
+            //now we need to get the letter from the array
+        } //  document.querySelector
+    })
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

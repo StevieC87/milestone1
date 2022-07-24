@@ -1,4 +1,5 @@
 const BeeModel = require("../models/BeeModel");
+const BeeModelGame = require('../models/BeeModelgame');
 const Bee = require("../models/BeeModelgame");
 //const Wish = require("../models/wish");
 const fs = require('fs');
@@ -131,6 +132,7 @@ exports.addNewGame = (req, res, next) => {
       remaininglettersarray: remaininglettersarrayarray,
       pangrams:pangramsarray,
       matchingwords2: matchingwordsarray,
+      dateplay: ''
     });
  
     
@@ -220,4 +222,62 @@ exports.playGame = (req, res, next) => {
     });
   })
   .catch(err => console.log(err))
+}
+
+exports.todaysgame = (req, res, next) => {
+  let todaysdate = new Date();
+
+  //another way to get date in format yyyy-mm-dd
+  let todaysdateformatted = todaysdate.toISOString().slice(0,10);
+  let todaysdateformatted1 = '2022-07-24';
+  let todaysdateformatted2 = new Date('2022-07-24')
+BeeModelGame.findOne({ dateplay: todaysdateformatted1 })
+.then(beegame => {
+    //check if exists
+    if(!beegame){
+        console.log('no game');
+        return res.redirect('/404');
+    }
+    //if exists, get variables of game
+    let word = beegame.word;
+    let centreletter = beegame.centreletter;
+    let remaininglettersarray = beegame.remaininglettersarray;
+    let pangrams = beegame.pangrams;
+    let matchingwords2 = beegame.matchingwords2;
+  
+   return res.render('todaygame', {
+      pageTitle: 'Today Game',
+      path: '/',
+      word: word,
+      centerletter: centreletter,
+      wordarray : remaininglettersarray,
+      pangrams: pangrams,
+      allmatchingwordsa: matchingwords2
+    });    
+})
+}
+
+exports.cronjobMidnightGame = (req, res, next) => {
+  //todays date  in format yyyy-mm-dd
+  let todaysdate = new Date();
+  let todaysdateformatted = todaysdate.toISOString().slice(0,10);
+
+
+  const filter =  { dateplay: { $in: [null, '']   } };
+  const update = { dateplay: todaysdateformatted };
+  //query db with game with smallest id and empty dateplay
+  BeeModelGame.findOneAndUpdate(filter, update, { sort: { _id: 1 } })
+ /*  .sort({"_id" : 1}),
+    { dateplay: todaysdateformatted }
+    
+    ) */
+  .then(beegame => {
+      console.log('game updated');
+      console.error(beegame,'beegame');
+      
+  })
+  .catch(err => console.log(err))
+
+
+
 }

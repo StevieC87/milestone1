@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const dotetnv = require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+var cron = require('node-cron');
+
+const BeeController = require('./controllers/BeeController');
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -57,7 +60,14 @@ app.use('/user', userRoutes);
 /* 404 error handling */
 app.use(errorController.get404);
 
-//app.listen(3000);
+//cron job will add today's date 
+cron.schedule('5 0 * * *', () => {
+    console.log('running a task every midnight');
+    //find game without date and set date to today
+    BeeController.cronjobMidnightGame();
+
+  });
+// app.listen(3000);
 
   mongoose.connect(
     //process.env.MONGOSTORE
@@ -70,7 +80,7 @@ app.use(errorController.get404);
     .catch(err => {
         console.log(err);
     }
-    ); /**/
+    );
 
 
 //OLD mongoose.connect(process.env.MONGOCONNECT)

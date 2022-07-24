@@ -58,11 +58,11 @@ const transporter = nodemailer.createTransport({
    res.send('ok');
 });
 
-
+router.get('/cronjob', BeeController.cronjobMidnightGame);
 
 //HERE FOR LOCAL TEST
 
-let word = 'basketball';
+/* let word = 'basketball';
 let centreletter = 'k';
 let remaininglettersarray = ['b', 'a', 's', 'e', 't', 'l'];
 let pangrams = ["basketball","bleakest"];
@@ -119,19 +119,16 @@ let matchingwordsarray = [
     "task",
     "tasks",
     "teak"
-  ];
+  ]; */
 
-router.get('/', (req, res) => {
-    res.render('spelling2', {
-         pageTitle: 'Play local test Bee',
-         path: '/spelling2a',
-         word: word,
-         wordarray: remaininglettersarray,
-         centerletter: centreletter,
-         allmatchingwordsa: matchingwordsarray,
-         pangrams: pangrams
-    });       
-})
+
+
+router.get('/',  BeeController.todaysgame);
+   
+    //WE NEED HERE THE DATA FROM THE DATABASE
+    // we need the object from database with date today
+    
+  
 
 
 router.get('/howmanypangrams', BeeController.howmanypangrams);
