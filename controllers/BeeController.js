@@ -246,7 +246,11 @@ BeeModelGame.findOne({ dateplay: todaysdateformatted1 })
     let remaininglettersarray = beegame.remaininglettersarray;
     let pangrams = beegame.pangrams;
     let matchingwords2 = beegame.matchingwords2;
-  
+    let userid = '';
+    if(req.user) {
+      userid = req.user._id;
+    }
+     
    return res.render('todaygame', {
       pageTitle: 'Today Game',
       path: '/',
@@ -254,7 +258,9 @@ BeeModelGame.findOne({ dateplay: todaysdateformatted1 })
       centerletter: centreletter,
       wordarray : remaininglettersarray,
       pangrams: pangrams,
-      allmatchingwordsa: matchingwords2
+      allmatchingwordsa: matchingwords2,
+      userid: userid,
+      gamedate: todaysdateformatted
     });    
 })
 }

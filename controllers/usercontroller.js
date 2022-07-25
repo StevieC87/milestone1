@@ -1,5 +1,5 @@
 const UserModel = require("../models/userModel");
-
+const WordsFound = require("../models/wordsFoundModel");
 
 exports.login = (req, res, next) => {
     //function to get all products
@@ -42,7 +42,60 @@ exports.activateuser = (req, res, next) => {
         })
     })
 }
+exports.updatewords = (req, res, next) => {
 
+    //parse the body of the request
+    const body = req.body;
+    console.error(body, 'body');
+    
+    //get the user id from the body
+    const userid = body.userid;
+    //get the words found from the body
+    const yourmatchedwords = body.yourmatchedwords;
+    //get the game date from the body
+    const gamedate = body.gamedate;
+
+    //my own test variables
+    /* const userid = '1234';
+    const wordsFoundArray = ['hello', 'world', 'test'];
+    const gamedate = '2020-01-01';
+/*  */
+  /*   const wordsFoundArray = req.body.wordsFoundArray;
+    
+    const gamedate = req.body.gamedate;
+    const userid = req.body.userid;  */
+
+    //first find if one exists , if so replace
+    WordsFound.findOne({ userid: userid, gamedate: gamedate })
+    .then(wordsFound => {
+        if(wordsFound){
+            wordsFound.wordsFoundArray = yourmatchedwords;
+            wordsFound.save()
+            .then(result => {
+                console.log('words updated');
+                //return res.redirect('/');
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        else{
+            //if not, create a new one
+            const wordsFound = new WordsFound({ 
+                gamedate: gamedate,
+                userid: userid,
+                wordsFoundArray: yourmatchedwords
+            });
+            wordsFound.save()
+        }
+    })
+   
+    
+     .then(result => {
+        console.log('words found saved');
+       // return res.redirect('/');
+    })
+}
 
 /* OLD DUNNO 
 exports.registration = async (req, res, next) => {

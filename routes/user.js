@@ -122,6 +122,6 @@ router.get('/account', (req, res, next) => {
    res.render('/user/account', { user: req.user });
 }
 );
-
+router.post('/updatewords', userController.updatewords);
 
 module.exports = router;

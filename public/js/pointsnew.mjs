@@ -1,3 +1,4 @@
+
 let currentscore = 0;
 let currentpointslevel = '';
 //POINT CIRCLES RELATED
@@ -27,7 +28,7 @@ export function makestringfromletters() {
     //alert(wordfromarray1);
     return wordfromarray1;
 }
-export function validation(word, wordsarray, pangrams) {
+export function validation(word, wordsarray, pangrams, userid, gamedate) {
        
        // alert(`${word} + ${wordsarray} + ${pangrams}, word and wordsarray`);
        // let wordsarray = '<%=  allmatchingwordsa %>';
@@ -51,8 +52,6 @@ export function validation(word, wordsarray, pangrams) {
             }
             //IF LETTER INCLUDED, CHECK IF WORD IS INCLUDED
             else {
-                //HERE WHEN PROBLEMS START
-
                 //filter the yourmatchedwords array  
                 let checkifduplicate = yourmatchedwords.filter(function(element, index) {
                     return element === word;
@@ -89,7 +88,50 @@ export function validation(word, wordsarray, pangrams) {
                     //IF IT'S IN OUR LIST, ADD IT TO ARRAY
                     else {
                         yourmatchedwords.push(word);
-                       
+                        console.log(yourmatchedwords,'yourmatchedwords');
+
+                        // HERE WE SAVE TO LOCAL STORAGE
+                        localStorage.setItem('yourmatchedwords', JSON.stringify(yourmatchedwords));
+                        let testuserObject = {
+                            userid: userid,
+                            gamedate: gamedate,
+                            yourmatchedwords : yourmatchedwords
+                        }
+                        //stringify it
+                        let testuserObjectstring = JSON.stringify(testuserObject);
+                        console.log(testuserObjectstring, 'testuserObjectstring');
+                        //check if user is logged in 
+                       if(userid) {
+                            //then save to db with replace the whole array. 
+                            //if logged in do fetch post request
+                           
+                            fetch('/user/updatewords', {
+                                method: 'post',
+                               
+                                body: JSON.stringify({
+                                    userid: userid,
+                                    yourmatchedwords: yourmatchedwords,
+                                    gamedate: gamedate
+
+                                }),
+                                headers: {
+                                    //'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data, 'data');
+                            }
+                            )
+                            .catch(err => {
+                                console.log(err, 'err');
+                            })
+                       }
+                       else {
+                        //do nothin
+                       }
+                        
                         //check if pangram
                         
                         let pangramsarray = pangrams.split(',');

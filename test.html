@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>TEST FOR LOCAL STORAGE</h1>
+
+    <script>
+      const mymatchedwords = {
+        mymatchedwordsarray: [
+          "the",
+          "brown",
+          "fox",
+          "jumped",
+          "over",
+          "the",
+          "lazy",
+          "dog",
+        ],
+      };
+      //stringify our array
+      const mymatchedwordsstring = JSON.stringify(mymatchedwords);
+      sessionStorage.setItem("mywords", mymatchedwordsstring);
+      //get our string back out of session storage
+      const mywordsstring = sessionStorage.getItem("mywords");
+      //parse our string back into an array
+      const mywordsarray = JSON.parse(mywordsstring);
+      //print out our array
+      console.log(mywordsarray, "mywordsarray");
+    </script>
+  </body>
+</html>

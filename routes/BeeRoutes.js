@@ -65,7 +65,7 @@ const transporter = nodemailer.createTransport({
 router.get('/cronjob', BeeController.cronjobMidnightGame);
 
 
-
+//TODAY'S GAME
 router.get('/',  BeeController.todaysgame);
    
     //WE NEED HERE THE DATA FROM THE DATABASE

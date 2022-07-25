@@ -13,12 +13,15 @@
 
 
 <%- include('./gameIncludes/game.ejs') %>
+
 <script>
     let existingword1 = '<%= wordarray %>';
 // console.log('<%= wordarray %>','existingword1');
     let matchingwords = '<%=allmatchingwordsa%>';
     let centerletter = '<%= centerletter %>';
     let pangrams = '<%= pangrams %>';
+    let userid = '<%= userid %>';
+    let gamedate = '<%= gamedate %>';
     //let pangrams = '<%= pangrams %>';
     let matchingwordstoarray = matchingwords.split(',');
 
@@ -33,7 +36,7 @@ let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
     document.querySelector('#enterb').addEventListener('click', e => {
      e.preventDefault();
      let stringfromletters = makestringfromletters();
-     validation(stringfromletters, matchingwordstoarray, pangrams);
+     validation(stringfromletters, matchingwordstoarray, pangrams, userid, gamedate);
   
      });
      import { urmatchedwords } from '/js/urmatchedwords2.mjs';
