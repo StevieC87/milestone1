@@ -73,6 +73,7 @@ exports.updatewords = (req, res, next) => {
             wordsFound.save()
             .then(result => {
                 console.log('words updated');
+                return;
                 //return res.redirect('/');
             })
             .catch(err => {

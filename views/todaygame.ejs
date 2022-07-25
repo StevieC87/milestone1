@@ -44,11 +44,52 @@ let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
         urmatchedwords(urmatchedwords);
         })
      
+    
+
     </script>
     <script src="/js/urmatchedwords.js" defer></script>
 
 <script>
+//check if user has logged in
+// if hasn't loggedin 
+if(!userid) {
+   
+ //check localstorage for game with today's date
+    let today = new Date();
+    //to format date to yyyy-mm-dd
+    let datenow = today.toISOString().slice(0,10);
+    //another format for game date
 
+   // console.log(datenow,'datenow');
+   //date now to string
+    let datenowstring = datenow.toString();
+    console.log(datenowstring,'datenowstring');
+    //get game from localstorage
+    let game = localStorage.getItem('localstorageGame');
+    
+    if(game) {
+        //parse it 
+    let gameobject = JSON.parse(game);
+    let gameobjectdate = gameobject.gamedate;
+    // make it to string
+    let gameobjectdatestring = gameobjectdate.toString();
+    // console.log(gameobjectdatestring,'gameobjectdatestring');
+
+    console.log(gameobject,'gameobject');
+    console.log(gameobject.gamedate,'gamedate');
+    // check if game exists
+    
+        //check if today's date
+       if(gameobjectdatestring == datenowstring) {
+        alert('There are words you have already found today!');
+        console.log('There are words you have already found today!');
+       }
+       else {
+        console.log('no match');
+       }
+    }
+    
+}
 
 //related shuffle
 /* 
