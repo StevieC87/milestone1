@@ -15,6 +15,8 @@
 <%- include('./gameIncludes/game.ejs') %>
 
 <script>
+    
+let currentscore = 0;
     let existingword1 = '<%= wordarray %>';
 // console.log('<%= wordarray %>','existingword1');
     let matchingwords = '<%=allmatchingwordsa%>';
@@ -47,9 +49,74 @@ let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
     
 
     </script>
-    <script src="/js/urmatchedwords.js" defer></script>
 
+
+
+    
 <script>
+
+function pointsfromwords(yourmatchedwords) {
+    let wordpoints = 0;
+    let pangramsarray = pangrams.split(',');
+    let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
+    let ourmatchedwordsdiv = document.querySelector('#ourmatchedwordsdiv1');
+    let spanmake = {};
+    yourmatchedwords.forEach(function(worda, index) {
+                    //check if pangrams
+        let points = worda.length; 
+        let ifpangram = pangramsarray.includes(worda);
+    
+        if (points === 4) {
+            wordpoints += 1;
+        }
+        else if (points > 4) {
+            wordpoints += points;
+        }
+
+        if(ifpangram == true) {
+            wordpoints += 7;
+        }
+         //create element
+        spanmake = document.createElement('span');
+        spanmake.className = 'wordlistword';
+        let capitalisedMatchedword = worda.charAt(0).toUpperCase() + worda.slice(1);         
+        spanmake.textContent = capitalisedMatchedword;
+        });
+        currentscore += wordpoints;
+     //get parent
+    
+   
+    yourmatchedwords.sort();
+
+    //CLEAR EXPANDABLE DIV WORDS
+    ourmatchedwordsbelow.innerHTML = '';
+    
+    yourmatchedwords.forEach(function(element, index) {
+    let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
+    let span4div = document.createElement('div');
+    span4div.className = 'yourmatchedwodsindiv';
+    let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
+    span4div.innerHTML = spanmake4;
+    ourmatchedwordsbelow.appendChild(span4div);   
+    });
+
+    
+    ourmatchedwordsdiv.appendChild(spanmake);
+
+    
+   
+
+
+}
+
+
+
+
+
+
+
+
+
 //check if user has logged in
 // if hasn't loggedin 
 if(!userid) {
@@ -81,15 +148,24 @@ if(!userid) {
     
         //check if today's date
        if(gameobjectdatestring == datenowstring) {
-        alert('There are words you have already found today!');
+       // alert('There are words you have already found today!');
         console.log('There are words you have already found today!');
+        // get gameobject properties
+        yourmatchedwords = gameobject.yourmatchedwords;
+        console.log(yourmatchedwords,'yourmatchedwords');
+
+        
+         //CALCULATE POINTS AND DISPLAY
+         pointsfromwords(yourmatchedwords)
+       
+            }
+         
        }
        else {
         console.log('no match');
        }
     }
     
-}
 
 //related shuffle
 /* 
@@ -108,6 +184,9 @@ let dataineed = {
 
 
 <script>
+
+
+
 //the other 14 in second div
 
 //remaining in third div etc maybe do it dybnamically

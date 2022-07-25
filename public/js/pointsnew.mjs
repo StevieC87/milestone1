@@ -148,8 +148,11 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
                                 })
                             }
                         }
-                                              
-                        //check if pangram
+                                          
+                   
+
+                   function setupgame() {
+                             //check if pangram
                         
                         let pangramsarray = pangrams.split(',');
                         let ifpangram = pangramsarray.includes(word);
@@ -200,6 +203,10 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
                         
                    //     ourmatchedwordsbelow.appendChild(spanmake3div);
                         ourmatchedwordsdiv.appendChild(spanmake);
+
+                        }
+                        setupgame();
+                       
                     
                    //CLEAR WORD AREA
                    let lettersinbox = document.querySelectorAll('#letterstype span');          
@@ -534,4 +541,11 @@ function MessageM(message,wordpoints) {
             )
 
   
+}
+
+
+
+
+function getTotalscorefromwords(words) {
+    //DO THIS LATER
 }
