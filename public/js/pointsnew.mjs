@@ -29,7 +29,9 @@ export function makestringfromletters() {
     return wordfromarray1;
 }
 export function validation(word, wordsarray, pangrams, userid, gamedate) {
-       
+       //alert pangrams to string
+    let pangrams1 = pangrams.replaceAll(',', '');
+    
        // alert(`${word} + ${wordsarray} + ${pangrams}, word and wordsarray`);
        // let wordsarray = '<%=  allmatchingwordsa %>';
        // needs wordsarray
@@ -90,124 +92,16 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
                         yourmatchedwords.push(word);
                         console.log(yourmatchedwords,'yourmatchedwords');
 
-                      /*   let localstorageGame = {}
-                        localstorageGame.userid = userid;
-                        localstorageGame.gamedate = gamedate;
-                        localstorageGame.yourmatchedwords = yourmatchedwords;
- */
-                        // HERE WE SAVE TO LOCAL STORAGE
-
-                        //IF localstorage already exists 
-                        if(localStorage.getItem('localstorageGame') !== null) {
-                            //get the localstorageGame object
-                            let localstorageGame = JSON.parse(localStorage.getItem('localstorageGame'));
-                            //add the new word to the array
-                            localstorageGame.yourmatchedwords.push(word);
-                            //save the new array to localstorage
-                            localStorage.setItem('localstorageGame', JSON.stringify(localstorageGame));
-                        }
-                        //if localstorage doesn't exist
-                        else {  //create it and save it                      
-                            let localstorageGame = {
-                                userid: userid,
-                                gamedate: gamedate,
-                                yourmatchedwords : yourmatchedwords
-                            }
-                            //stringify it
-                            let localstorageGameStringified = JSON.stringify(localstorageGame);
-                            localStorage.setItem('localstorageGame',localstorageGameStringified);
-                            
-                            
-                            console.log(localstorageGameStringified, 'localstorageGameStringified');
-                            //check if user is logged in 
-                            if(userid) {
-                                //then save to db with replace the whole array. 
-                                //if logged in do fetch post request
-                            
-                                fetch('/user/updatewords', {
-                                    method: 'post',
-                                
-                                    body: JSON.stringify({
-                                        userid: userid,
-                                        yourmatchedwords: yourmatchedwords,
-                                        gamedate: gamedate
-
-                                    }),
-                                    headers: {
-                                        //'Accept': 'application/json',
-                                        'Content-Type': 'application/json'
-                                    },
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log(data, 'data');
-                                }
-                                )
-                                .catch(err => {
-                                    console.log(err, 'err');
-                                })
-                            }
-                        }
+                        //ALSO SAVE TO LOCAL STORAGE AND DB
+                        savetoLocalStorage(word);
                                           
+               
+                   const ifpangram = pangrams1.includes(word);
+                  const wordpoints = setupgame(pangrams, ifpangram, word);
+
                    
-
-                   function setupgame() {
-                             //check if pangram
-                        
-                        let pangramsarray = pangrams.split(',');
-                        let ifpangram = pangramsarray.includes(word);
-
-                        //CALCULATE POINTS AND DISPLAY
-                        let points = word.length; 
-                        let wordpoints = 0;
-
-                        if (points === 4) {
-                            wordpoints += 1;
-                        }
-                        else if (points > 4) {
-                            wordpoints += points;
-                        }
-
-                        if(ifpangram == true) {
-                            wordpoints += 7;
-                            
-                        }
-                        currentscore += wordpoints;
-                        //SHOW WORD INSIDE EXPANDABLE DIV 
-                        //get parent
-                        let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
-                        //create element
-                        let spanmake = document.createElement('span');
-                        spanmake.className = 'wordlistword';
-                        let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
-                        spanmake.textContent = capitalisedMatchedword;
-                        yourmatchedwords.sort();
-
-                        //CLEAR EXPANDABLE DIV WORDS
-                        ourmatchedwordsbelow.innerHTML = '';
-
-                        //our array of all matched words
-                      //  wordsarraytoarray.sort();
-                       // console.log(wordsarraytoarray,'matchingwords');
-                      //  wordsarraytoarray.forEach(function(element, index) {
-                        //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
-                      yourmatchedwords.forEach(function(element, index) {
-                        let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
-                        let span4div = document.createElement('div');
-                        span4div.className = 'yourmatchedwodsindiv';
-                        let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
-                        span4div.innerHTML = spanmake4;
-                        ourmatchedwordsbelow.appendChild(span4div);   
-                        });
-
-                        
-                   //     ourmatchedwordsbelow.appendChild(spanmake3div);
-                        ourmatchedwordsdiv.appendChild(spanmake);
-
-                        }
-                        setupgame();
                        
-                    
+                     /*     */
                    //CLEAR WORD AREA
                    let lettersinbox = document.querySelectorAll('#letterstype span');          
                             lettersinbox.forEach (function(element, index) {
@@ -237,7 +131,7 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
             }
         
     } 
-    }
+}
 
     /**********  FUNCTIONS FOR ENTER  ***********/
 //get total points all words
@@ -541,6 +435,126 @@ function MessageM(message,wordpoints) {
             )
 
   
+}
+
+
+
+
+function savetoLocalStorage(word) {
+    /*   let localstorageGame = {}
+    localstorageGame.userid = userid;
+    localstorageGame.gamedate = gamedate;
+    localstorageGame.yourmatchedwords = yourmatchedwords;
+    */
+    // HERE WE SAVE TO LOCAL STORAGE
+
+    //IF localstorage already exists, get array, add word, and replace it
+    if(localStorage.getItem('localstorageGame') !== null) {
+        //get the localstorageGame object
+        let localstorageGame = JSON.parse(localStorage.getItem('localstorageGame'));
+        //add the new word to the array
+        localstorageGame.yourmatchedwords.push(word);
+        //save the new array to localstorage
+        localStorage.setItem('localstorageGame', JSON.stringify(localstorageGame));
+    }
+    //if localstorage doesn't exist
+    else {  //create it and save it                      
+        let localstorageGame = {
+            userid: userid,
+            gamedate: gamedate,
+            yourmatchedwords : yourmatchedwords
+        }
+        //stringify it
+        let localstorageGameStringified = JSON.stringify(localstorageGame);
+        localStorage.setItem('localstorageGame',localstorageGameStringified);
+        
+        
+        console.log(localstorageGameStringified, 'localstorageGameStringified');
+        //check if user is logged in 
+        if(userid) {
+            //then save to db with replace the whole array. 
+            //if logged in do fetch post request
+        
+            fetch('/user/updatewords', {
+                method: 'post',
+            
+                body: JSON.stringify({
+                    userid: userid,
+                    yourmatchedwords: yourmatchedwords,
+                    gamedate: gamedate
+
+                }),
+                headers: {
+                    //'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data, 'data');
+            }
+            )
+            .catch(err => {
+                console.log(err, 'err');
+            })
+        }
+    }
+}
+
+
+//THIS I THINK 
+function setupgame(pangrams, ifpangram, word) {
+        //check if pangram
+    let pangramsarray = pangrams.split(',');
+    //let ifpangram = pangramsarray.includes(word);
+    //CALCULATE POINTS AND DISPLAY
+    let points = word.length; 
+    let wordpoints = 0;
+
+    if (points === 4) {
+    wordpoints += 1;
+    }
+    else if (points > 4) {
+    wordpoints += points;
+    }
+
+    if(ifpangram == true) {
+    wordpoints += 7;
+    
+    }
+    currentscore += wordpoints;
+    //SHOW WORD INSIDE EXPANDABLE DIV 
+    //get parent
+    let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
+    //create element
+    let spanmake = document.createElement('span');
+    spanmake.className = 'wordlistword';
+    let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
+    spanmake.textContent = capitalisedMatchedword;
+    yourmatchedwords.sort();
+
+    //CLEAR EXPANDABLE DIV WORDS
+    ourmatchedwordsbelow.innerHTML = '';
+
+    //our array of all matched words
+    //  wordsarraytoarray.sort();
+    // console.log(wordsarraytoarray,'matchingwords');
+    //  wordsarraytoarray.forEach(function(element, index) {
+    //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
+    yourmatchedwords.forEach(function(element, index) {
+    let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
+    let span4div = document.createElement('div');
+    span4div.className = 'yourmatchedwodsindiv';
+    let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
+    span4div.innerHTML = spanmake4;
+    ourmatchedwordsbelow.appendChild(span4div);   
+    });
+
+
+    //     ourmatchedwordsbelow.appendChild(spanmake3div);
+    ourmatchedwordsdiv.appendChild(spanmake);
+    return wordpoints;
+
 }
 
 

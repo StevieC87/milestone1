@@ -55,7 +55,7 @@ let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
     
 <script>
 
-function pointsfromwords(yourmatchedwords) {
+/* function pointsfromwords(yourmatchedwords) {
     let wordpoints = 0;
     let pangramsarray = pangrams.split(',');
     let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
@@ -107,7 +107,7 @@ function pointsfromwords(yourmatchedwords) {
    
 
 
-}
+//} */
 
 
 
@@ -118,9 +118,10 @@ function pointsfromwords(yourmatchedwords) {
 
 
 //check if user has logged in
-// if hasn't loggedin 
-if(!userid) {
-   
+
+//CHECK LOCAL STORAGE (whether user has logged in or not)
+
+/*    
  //check localstorage for game with today's date
     let today = new Date();
     //to format date to yyyy-mm-dd
@@ -136,35 +137,33 @@ if(!userid) {
     
     if(game) {
         //parse it 
-    let gameobject = JSON.parse(game);
-    let gameobjectdate = gameobject.gamedate;
-    // make it to string
-    let gameobjectdatestring = gameobjectdate.toString();
-    // console.log(gameobjectdatestring,'gameobjectdatestring');
-
-    console.log(gameobject,'gameobject');
-    console.log(gameobject.gamedate,'gamedate');
-    // check if game exists
-    
-        //check if today's date
-       if(gameobjectdatestring == datenowstring) {
-       // alert('There are words you have already found today!');
-        console.log('There are words you have already found today!');
-        // get gameobject properties
-        yourmatchedwords = gameobject.yourmatchedwords;
-        console.log(yourmatchedwords,'yourmatchedwords');
-
+        let gameobject = JSON.parse(game);
         
-         //CALCULATE POINTS AND DISPLAY
-         pointsfromwords(yourmatchedwords)
-       
-            }
-         
-       }
-       else {
-        console.log('no match');
-       }
-    }
+        //get gamedate and compared to date of current game
+        //get gamedate 
+        let gameobjectdate = gameobject.gamedate;
+        // make it to string
+        let gameobjectdatestring = gameobjectdate.toString();
+        //console.log(gameobject,'gameobject');
+        //console.log(gameobject.gamedate,'gamedate');
+        //check if today's date
+        if(gameobjectdatestring == datenowstring) {
+            console.log('There are words you have already found today!');
+            // get gameobject properties
+            yourmatchedwords = gameobject.yourmatchedwords;
+            console.log(yourmatchedwords,'yourmatchedwords');
+
+            
+            //CALCULATE POINTS AND DISPLAY
+           // pointsfromwords(yourmatchedwords)
+        
+                }
+            
+        }
+        else {
+            console.log('no match');
+        }
+ */
     
 
 //related shuffle

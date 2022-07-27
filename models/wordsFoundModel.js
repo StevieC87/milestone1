@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const WordsFound = new Schema({
  
-    gamedate: {
+  gamedate: {
     type: String,
    // required: true
   },
