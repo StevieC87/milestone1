@@ -273,12 +273,9 @@ exports.cronjobMidnightGame = (req, res, next) => {
 
   const filter =  { dateplay: { $in: [null, '']   } };
   const update = { dateplay: todaysdateformatted };
-  //query db with game with smallest id and empty dateplay
+  //query db with game with smallest id and an empty dateplay
   BeeModelGame.findOneAndUpdate(filter, update, { sort: { _id: 1 } })
- /*  .sort({"_id" : 1}),
-    { dateplay: todaysdateformatted }
-    
-    ) */
+ 
   .then(beegame => {
       console.log('game updated');
       console.error(beegame,'beegame');

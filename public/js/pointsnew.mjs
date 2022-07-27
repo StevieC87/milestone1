@@ -440,69 +440,8 @@ function MessageM(message,wordpoints) {
 
 
 
-function savetoLocalStorage(word) {
-    /*   let localstorageGame = {}
-    localstorageGame.userid = userid;
-    localstorageGame.gamedate = gamedate;
-    localstorageGame.yourmatchedwords = yourmatchedwords;
-    */
-    // HERE WE SAVE TO LOCAL STORAGE
-
-    //IF localstorage already exists, get array, add word, and replace it
-    if(localStorage.getItem('localstorageGame') !== null) {
-        //get the localstorageGame object
-        let localstorageGame = JSON.parse(localStorage.getItem('localstorageGame'));
-        //add the new word to the array
-        localstorageGame.yourmatchedwords.push(word);
-        //save the new array to localstorage
-        localStorage.setItem('localstorageGame', JSON.stringify(localstorageGame));
-    }
-    //if localstorage doesn't exist
-    else {  //create it and save it                      
-        let localstorageGame = {
-            userid: userid,
-            gamedate: gamedate,
-            yourmatchedwords : yourmatchedwords
-        }
-        //stringify it
-        let localstorageGameStringified = JSON.stringify(localstorageGame);
-        localStorage.setItem('localstorageGame',localstorageGameStringified);
-        
-        
-        console.log(localstorageGameStringified, 'localstorageGameStringified');
-        //check if user is logged in 
-        if(userid) {
-            //then save to db with replace the whole array. 
-            //if logged in do fetch post request
-        
-            fetch('/user/updatewords', {
-                method: 'post',
-            
-                body: JSON.stringify({
-                    userid: userid,
-                    yourmatchedwords: yourmatchedwords,
-                    gamedate: gamedate
-
-                }),
-                headers: {
-                    //'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data, 'data');
-            }
-            )
-            .catch(err => {
-                console.log(err, 'err');
-            })
-        }
-    }
-}
 
 
-//THIS I THINK 
 function setupgame(pangrams, ifpangram, word) {
         //check if pangram
     let pangramsarray = pangrams.split(',');
@@ -562,4 +501,66 @@ function setupgame(pangrams, ifpangram, word) {
 
 function getTotalscorefromwords(words) {
     //DO THIS LATER
+}
+
+
+function savetoLocalStorage(word) {
+    /*   let localstorageGame = {}
+    localstorageGame.userid = userid;
+    localstorageGame.gamedate = gamedate;
+    localstorageGame.yourmatchedwords = yourmatchedwords;
+    */
+    // HERE WE SAVE TO LOCAL STORAGE
+
+    //IF localstorage already exists, get array, add word, and replace it
+    if(localStorage.getItem('localstorageGame') !== null) {
+        //get the localstorageGame object
+        let localstorageGame = JSON.parse(localStorage.getItem('localstorageGame'));
+        //add the new word to the array
+        localstorageGame.yourmatchedwords.push(word);
+        //save the new array to localstorage
+        localStorage.setItem('localstorageGame', JSON.stringify(localstorageGame));
+    }
+    //if localstorage doesn't exist
+    else {  //create it and save it                      
+        let localstorageGame = {
+            userid: userid,
+            gamedate: gamedate,
+            yourmatchedwords : yourmatchedwords
+        }
+        //stringify it
+        let localstorageGameStringified = JSON.stringify(localstorageGame);
+        localStorage.setItem('localstorageGame',localstorageGameStringified);
+        
+        
+        console.log(localstorageGameStringified, 'localstorageGameStringified');
+        //check if user is logged in 
+        if(userid) {
+            //then save to db with replace the whole array. 
+            //if logged in do fetch post request
+        
+            fetch('/user/updatewords', {
+                method: 'post',
+            
+                body: JSON.stringify({
+                    userid: userid,
+                    yourmatchedwords: yourmatchedwords,
+                    gamedate: gamedate
+
+                }),
+                headers: {
+                    //'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data, 'data');
+            }
+            )
+            .catch(err => {
+                console.log(err, 'err');
+            })
+        }
+    }
 }

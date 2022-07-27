@@ -61,10 +61,10 @@ app.use('/user', userRoutes);
 app.use(errorController.get404);
 
 //cron job will add today's date 
-cron.schedule('* * * * *', () => {
-    console.log('running a task every minute');
+cron.schedule('5 0 * * *', () => {
+  //  console.log('running a task at 23 30');
     //find game without date and set date to today
-    //BeeController.cronjobMidnightGame();
+    BeeController.cronjobMidnightGame();
 
   });
 // app.listen(3000);
