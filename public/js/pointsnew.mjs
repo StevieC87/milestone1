@@ -97,7 +97,7 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
                         
                         //this is wrong here               
                         const ifpangram = pangrams1.includes(word);
-                        const wordpoints = setupgame(pangrams, ifpangram, word);
+                        const wordpoints = countpointsforOneWord(pangrams, ifpangram, word);
 
                    //CLEAR WORD AREA
                    let lettersinbox = document.querySelectorAll('#letterstype span');          
@@ -234,8 +234,8 @@ function returnCurrentLevel(ourscore) {
     return {currentpointslevel, currentlevelstage, currentlevelshorthand};
 }
 
-function newfunctionPoints(wordpoints, currentscore) {
-   
+function newfunctionPoints(currentscore) {
+//OLD function newfunctionPoints(wordpoints, currentscore) { 
   //  let totalpointsare = points(pangrams);
     let currentpointslevel = '';
  /*    console.log(goodstart, 'goodstartrounded');
@@ -433,31 +433,44 @@ function MessageM(message,wordpoints) {
 }
 
 
-function setupgame(pangrams, ifpangram, word) {
-        //check if pangram
-    let pangramsarray = pangrams.split(',');
-    //let ifpangram = pangramsarray.includes(word);
+function countpointsforOneWord(pangrams, ifpangram, word) {
+    //check if pangram
+    const checkifpangram = checkIfPangram(pangrams, word);
     //CALCULATE POINTS AND DISPLAY
     let points = word.length; 
     let wordpoints = 0;
 
     if (points === 4) {
-    wordpoints += 1;
+        wordpoints += 1;
     }
     else if (points > 4) {
-    wordpoints += points;
+        wordpoints += points;
     }
-
-    if(ifpangram == true) {
-    wordpoints += 7;
-    
+    if (checkifpangram === true) {
+        wordpoints += 7;
     }
-
-    
     currentscore += wordpoints;
- //   displaywordsinExpDiv()
+    // displaywordsinExpDiv()
     return wordpoints;
+}
 
+//CHECK IF A WORD IS A PANGRAM 
+function checkIfPangram(pangrams, word) {
+    //for each loop
+    
+    //make pangrams array split ,
+    let pangramsarray = pangrams.split(',');
+
+
+
+    console.log(pangrams,'pangrams1!!!!!11111111!!!!!!!!!!');
+    //compare it witih list of pangras
+    pangramsarray.forEach(function(pangram, index) {
+        if(word === pangram) {
+           //it's worth 4 points
+           return true;
+        }
+    })
 }
 
 
@@ -526,7 +539,13 @@ export function getfromLocalStorage() {
         let localstorageGame = JSON.parse(localStorage.getItem('localstorageGame'));
         console.log(localstorageGame, 'localstorageGame !!!!!!!!!!!!!!!');
         //HERE EDIT LATER IF DATABASE IS NEWER - BUT IT SHOULDNT BE - YES IF OTHER DEVICE
-        yourmatchedwords = localstorageGame.yourmatchedwords;
+        let localstorageWordArray = localstorageGame.yourmatchedwords;
+        
+        const userpoints = getTotalscorefromwords(localstorageWordArray);
+
+        //THEN I WOULD HAVE TO SHOW THE POINTS
+
+        yourmatchedwords = localstorageWordArray;  //check this maybe double check - curiosity
         //THEN DISPLAY THEM IN THE EXPANDABLE DIV
         //get parent
         let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
@@ -536,8 +555,18 @@ export function getfromLocalStorage() {
         ourmatchedwordsbelow.innerHTML = '';
         displaywordsinExpDiv();
     }
+}// ===========================================================================
+function getTotalscorefromwords(localstorageWordArray) {
+    let points = 0;
+    localstorageWordArray.forEach((word, index) => {
+        let ifpangram = checkIfPangram(pangrams, word)
+        let wordpoints =  countpointsforOneWord(pangrams, ifpangram, word);
+        points += wordpoints;
+    })
+    newfunctionPoints(points);
+    return points;
+    
 }
-
 // ===========================================================================
 // THIS HERE WORKS - DISPLAY ALL THE WORDS IN THE BEGINNING
 function displaywordsinExpDiv() {
@@ -565,11 +594,6 @@ function showinExpDivNewWord(word) {
         includetoExpDivClosed(word);
     });   
 }
- 
-
-
-
-
 function includetoExpDivOpen(word) { 
     //here do in closed expendable div
     let spanmake = document.createElement('span');
@@ -588,43 +612,8 @@ function includetoExpDivClosed(word) {
     span4div.innerHTML = spanmake4;
     ourmatchedwordsbelow.appendChild(span4div);   
 }
-// ===========================================================================
-
-//THESE FUNCTIONS ARE FOR WHEN WORD FOUND - SHOW IN EXPANDABLE DIV , both open and closed 
-//THESE TWO FUNCTIONS I WILL REPLACE
-        //for single word when find
-    /*     function displayfoundwordinExpdivClosed(word) {
-            //get parent
-            //here do in closed expendable div
-            let spanmake = document.createElement('span');
-            spanmake.className = 'wordlistword';
-            let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
-            spanmake.textContent = capitalisedMatchedword;
-            ourmatchedwordsdiv.appendChild(spanmake);
-
-        }
-
-        function displayfoundwordinExpdivOpen(word) {
-            //now first we want to include it to the array of words in the expendable div, sort it and then display it
-
-            
-            //here make in OPEN expendable div
-            let capitalisedword = word.charAt(0).toUpperCase() + word.slice(1); 
-            let span4div = document.createElement('div');
-            span4div.className = 'yourmatchedwodsindiv';
-            let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
-            span4div.innerHTML = spanmake4;
-            ourmatchedwordsbelow.appendChild(span4div);   
-        }
- */
 
 // ===========================================================================
-
-
-
-function getTotalscorefromwords(words) {
-    //DO THIS LATER
-}
 
 
 // ===========================================================================
