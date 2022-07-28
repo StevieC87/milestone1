@@ -1,28 +1,28 @@
 let clickydiv = document.querySelector('#ourmatchedwordsdiv1');
 let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
+let wrap = document.querySelector('#ourmatchedwordsdivouter');
+let divtoincludein = document.querySelector('#youhavefounddiv');
 //if click the div with the arrow, expand and show list of words 
 clickydiv.addEventListener('click', e => {
+
+  alert('clicked');
   //only if you have found words expand
   if(yourmatchedwords.length >= 1) {
     //expand
     clickyouter.classList.toggle('clickydivexpand');
     clickyouter.classList.toggle('overflowscroll');//divtoincludein.className.toggle('d-none');
+ 
 
-    let wrap = document.querySelector('#ourmatchedwordsdivouter');
-    let divtoincludein = document.querySelector('#youhavefounddiv');
-
-    if (wrap.classList.contains('clickydivexpand')) {
-       //alert('open')
-      divtoincludein.classList.remove('d-none');
+    if(wrap.classList.contains('clickydivexpand')) {
+      alert('open');
+      //divtoincludein.classList.remove('d-none');
 
     }
     else {
-      //alert('close')
+     alert('close')
       //divtoincludein.classList.remove('d-block');
-      divtoincludein.classList.add('d-none');
+     // divtoincludein.classList.add('d-none');
     }
-
-
     //hide game
     document.querySelector('#letterstype').classList.toggle('d-none');
     document.querySelector('#outerdiv').classList.toggle('d-none');
@@ -41,19 +41,15 @@ clickydiv.addEventListener('click', e => {
 
     //create the 'you have found x words message'
     //let creatediv   = document.createElement('div');
-
  
     //creatediv.id = 'youfoundxwordsdiv';
     let texttoadd = `<span>You have found ${numberofwordsyoufound} word${plural}</span>`;
-    divtoincludein.innerHTML = texttoadd;
+    zdivtoincludein.innerHTML = texttoadd;
     //
     // let parenthere = document.querySelector('#ourmatchedwordsdiv1');
     //parenthere.appendChild(creatediv);
 
   }
-  
-
- 
   
 })
 
