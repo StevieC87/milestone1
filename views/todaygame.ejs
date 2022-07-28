@@ -34,7 +34,7 @@ let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
 </script>
 
 <script type="module">
-    import { makestringfromletters, validation} from '/js/pointsnew.mjs';
+    import { makestringfromletters, validation, getfromLocalStorage} from '/js/pointsnew.mjs';
     document.querySelector('#enterb').addEventListener('click', e => {
      e.preventDefault();
      let stringfromletters = makestringfromletters();
@@ -46,7 +46,7 @@ let clickyouter = document.querySelector('#ourmatchedwordsdivouter');
         urmatchedwords(urmatchedwords);
         })
      
-    
+    getfromLocalStorage(); 
 
     </script>
 

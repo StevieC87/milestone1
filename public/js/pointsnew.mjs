@@ -108,17 +108,23 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
                             element.remove();
                             });
                     //IF PANGRAM 
-                        if(ifpangram == true) {
+                       
                             //create span to display word on page
                             newfunctionPoints(wordpoints, currentscore);
-                            return MessageM('Pangram!', wordpoints);
-                        }
-                    //ELSE IF NORMAL WORD MATCHED
-                        else {
+                           
+
                            //create span to display word on page
                             newfunctionPoints(wordpoints, currentscore);
+                            showinExpDivNewWord(word);
+                         //   displayfoundwordinExpdivClosed(word);
+                           // displayfoundwordinExpdivOpen(word);
+                            if(ifpangram == true) {
+                            return MessageM('Pangram!', wordpoints);
+                            }
+                            else {
                             return MessageM('success',wordpoints);
-
+                            }
+                            
                             }
 
 
@@ -131,7 +137,7 @@ export function validation(word, wordsarray, pangrams, userid, gamedate) {
             }
         
     } 
-}
+
 
     /**********  FUNCTIONS FOR ENTER  ***********/
 //get total points all words
@@ -438,10 +444,6 @@ function MessageM(message,wordpoints) {
 }
 
 
-
-
-
-
 function setupgame(pangrams, ifpangram, word) {
         //check if pangram
     let pangramsarray = pangrams.split(',');
@@ -461,56 +463,18 @@ function setupgame(pangrams, ifpangram, word) {
     wordpoints += 7;
     
     }
+
+    
     currentscore += wordpoints;
-    //SHOW WORD INSIDE EXPANDABLE DIV 
-    //get parent
-    let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
-    //create element
-    let spanmake = document.createElement('span');
-    spanmake.className = 'wordlistword';
-    let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
-    spanmake.textContent = capitalisedMatchedword;
-    yourmatchedwords.sort();
-
-    //CLEAR EXPANDABLE DIV WORDS
-    ourmatchedwordsbelow.innerHTML = '';
-
-    //our array of all matched words
-    //  wordsarraytoarray.sort();
-    // console.log(wordsarraytoarray,'matchingwords');
-    //  wordsarraytoarray.forEach(function(element, index) {
-    //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
-    yourmatchedwords.forEach(function(element, index) {
-    let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);   
-    let span4div = document.createElement('div');
-    span4div.className = 'yourmatchedwodsindiv';
-    let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
-    span4div.innerHTML = spanmake4;
-    ourmatchedwordsbelow.appendChild(span4div);   
-    });
-
-
-    //     ourmatchedwordsbelow.appendChild(spanmake3div);
-    ourmatchedwordsdiv.appendChild(spanmake);
+ //   displaywordsinExpDiv()
     return wordpoints;
 
 }
 
 
-
-
-function getTotalscorefromwords(words) {
-    //DO THIS LATER
-}
-
+// ===========================  LOCAL STORAGE STUFF  ================================
 
 function savetoLocalStorage(word) {
-    /*   let localstorageGame = {}
-    localstorageGame.userid = userid;
-    localstorageGame.gamedate = gamedate;
-    localstorageGame.yourmatchedwords = yourmatchedwords;
-    */
-    // HERE WE SAVE TO LOCAL STORAGE
 
     //IF localstorage already exists, get array, add word, and replace it
     if(localStorage.getItem('localstorageGame') !== null) {
@@ -563,4 +527,148 @@ function savetoLocalStorage(word) {
             })
         }
     }
+}
+
+export function getfromLocalStorage() {
+  //  
+    //if localstorage exists, get array, add word, and replace it
+    if(localStorage.getItem('localstorageGame') !== null) {
+        //get the localstorageGame object
+     
+        let localstorageGame = JSON.parse(localStorage.getItem('localstorageGame'));
+        console.log(localstorageGame, 'localstorageGame !!!!!!!!!!!!!!!');
+        //HERE EDIT LATER IF DATABASE IS NEWER - BUT IT SHOULDNT BE - YES IF OTHER DEVICE
+
+        //(copilot code) - HERE WE TAKE THE ARRAY from localstorage and put it into yourmatchedwords - so that it can be used in the game - and also in the database
+
+        yourmatchedwords = localstorageGame.yourmatchedwords;
+        //THEN DISPLAY THEM IN THE EXPANDABLE DIV
+        //get parent
+        let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
+        //create element
+  /*       let spanmake = document.createElement('span');
+        spanmake.className = 'wordlistword';
+        let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);
+        spanmake.textContent = capitalisedMatchedword; */
+        yourmatchedwords.sort();
+        //CLEAR EXPANDABLE DIV WORDS
+        ourmatchedwordsbelow.innerHTML = '';
+
+        displaywordsinExpDiv();
+        //our array of all matched words
+        //  wordsarraytoarray.sort();
+        // console.log(wordsarraytoarray,'matchingwords');
+        //  wordsarraytoarray.forEach(function(element, index) {
+        //OUR ARRAY OF MATCHED WORDS - LOOP AND APPEND
+      /*   yourmatchedwords.forEach(function(element, index) {
+        let capitalisedword = element.charAt(0).toUpperCase() + element.slice(1);
+        
+        let ourmatchedwordsdiv1 = document.querySelector('#ourmatchedwordsdiv1');
+
+        //also append it to ourmatchedwordsdiv1
+        let wordinexpendabledivClosed = document.createElement('div');
+        wordinexpendabledivClosed.className = 'wordinexpendabledivClosed';
+        let spanInExpDivC = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
+        wordinexpendabledivClosed.innerHTML = spanInExpDivC;
+      //  ourmatchedwordsdiv1.appendChild(wordinexpendabledivClosed);
+
+
+        let span4div = document.createElement('div');
+        span4div.className = 'yourmatchedwodsindiv';
+        let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
+        span4div.innerHTML = spanmake4;
+        ourmatchedwordsbelow.appendChild(span4div);
+        }); */
+    }
+}
+    //HERE I NEED TO DO2 FUNCTIONS - ONE FOR BEGINNING, WHERE IT'S ALOOP, FOR EACH
+    //FOR EACH WORD, 
+
+
+// ===========================================================================
+//THIS HERE WORKS - DISPLAY ALL THE WORDS IN THE BEGINNING
+function displaywordsinExpDiv() {
+    let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
+    //create element
+    //CLEAR EXPANDABLE DIV WORDS
+    ourmatchedwordsbelow.innerHTML = '';
+
+    yourmatchedwords.sort();
+    yourmatchedwords.forEach(function(word, index) {
+        includetoExpDivOpen(word);
+        includetoExpDivClosed(word);
+    });   
+}
+
+
+// function to replace the other two 
+
+function showinExpDivNewWord(word) {
+    let ourmatchedwordsbelow = document.querySelector('#ourmatchedwordsbelow');
+    ourmatchedwordsbelow.innerHTML = '';
+    yourmatchedwords.sort();
+    yourmatchedwords.forEach(function(word, index) {
+        includetoExpDivOpen(word);
+        includetoExpDivClosed(word);
+    });   
+}
+ 
+
+
+// ===========================================================================
+
+function includetoExpDivOpen(word) { 
+    //here do in closed expendable div
+    let spanmake = document.createElement('span');
+    spanmake.className = 'wordlistword';
+    let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
+    spanmake.textContent = capitalisedMatchedword;
+    ourmatchedwordsdiv.appendChild(spanmake);
+
+}
+function includetoExpDivClosed(word) { 
+    //here make in OPEN expendable div
+    let capitalisedword = word.charAt(0).toUpperCase() + word.slice(1);  
+    let span4div = document.createElement('div');
+    span4div.className = 'yourmatchedwodsindiv';
+    let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
+    span4div.innerHTML = spanmake4;
+    ourmatchedwordsbelow.appendChild(span4div);   
+}
+// ===========================================================================
+
+//THESE FUNCTIONS ARE FOR WHEN WORD FOUND - SHOW IN EXPANDABLE DIV , both open and closed 
+//THESE TWO FUNCTIONS I WILL REPLACE
+        //for single word when find
+        function displayfoundwordinExpdivClosed(word) {
+            //get parent
+            //here do in closed expendable div
+            let spanmake = document.createElement('span');
+            spanmake.className = 'wordlistword';
+            let capitalisedMatchedword = word.charAt(0).toUpperCase() + word.slice(1);         
+            spanmake.textContent = capitalisedMatchedword;
+            ourmatchedwordsdiv.appendChild(spanmake);
+
+        }
+
+        function displayfoundwordinExpdivOpen(word) {
+            //now first we want to include it to the array of words in the expendable div, sort it and then display it
+
+            
+            //here make in OPEN expendable div
+            let capitalisedword = word.charAt(0).toUpperCase() + word.slice(1); 
+            let span4div = document.createElement('div');
+            span4div.className = 'yourmatchedwodsindiv';
+            let spanmake4 = `<span class="yourmatchedwordsin">${capitalisedword}</span></br><hr>`;
+            span4div.innerHTML = spanmake4;
+            ourmatchedwordsbelow.appendChild(span4div);   
+        }
+
+
+// ===========================================================================
+
+
+
+function getTotalscorefromwords(words) {
+    //DO THIS LATER
 }
